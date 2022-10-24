@@ -1,6 +1,6 @@
 package models;
 
-public class Course {
+public class AdditionalMaterials {
     static int counter;
     private int id;
 
