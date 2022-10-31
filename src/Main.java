@@ -10,6 +10,8 @@ public class Main {
         lecture2.printId();
         Lecture lecture3 = new Lecture();
         lecture1.printId();
+        Lecture lecture4 = new Lecture();
+        lecture4.printId();
 
         System.out.println("Лічильник прийме знаачення = " + Lecture.counter);
     }
