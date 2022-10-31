@@ -9,7 +9,11 @@ public class Main {
         Lecture lecture2 = new Lecture();
         lecture2.printId();
         Lecture lecture3 = new Lecture();
-        lecture1.printId();
+        lecture3.printId();
+        Lecture lecture4 = new Lecture();
+        lecture4.printId();
+        Lecture lecture5 = new Lecture();
+        lecture5.printId();
 
         System.out.println("Лічильник прийме знаачення = " + Lecture.counter);
     }
