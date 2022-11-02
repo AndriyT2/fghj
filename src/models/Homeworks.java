@@ -4,10 +4,10 @@ public class Homeworks {
     static int counter;
     private int id;
 
-    public void printId() {
+    public int findId() {
 
         ++counter;
         id = counter;
-        System.out.println(id);
+        return id;
     }
 }

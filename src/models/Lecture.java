@@ -6,10 +6,10 @@ public class Lecture {
     private Homeworks homeworks;
     private AdditionalMaterials additionalMaterials;
 
-    public void printId() {
+    public int findId() {
 
         ++counter;
         id = counter;
-        System.out.println("ID = " + id);
+        return id;
     }
 }

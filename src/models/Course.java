@@ -8,10 +8,10 @@ public class Course {
     private Lecture lecture;
 
 
-    public void printId() {
+    public int findId() {
 
         ++counter;
         id = counter;
-        System.out.println(id);
+        return id;
     }
 }
