@@ -5,6 +5,7 @@ public class Lecture {
     private int id;
     private Homeworks homeworks;
     private AdditionalMaterials additionalMaterials;
+    public int idCourse;
 
     public int findId() {
 
