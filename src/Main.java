@@ -5,15 +5,15 @@ import models.Teacher;
 public class Main {
     public static void main(String[] args) {
         Lecture lecture1 = new Lecture();
-        lecture1.printId();
+        lecture1.findId();
         Lecture lecture2 = new Lecture();
-        lecture2.printId();
+        lecture2.findId();
         Lecture lecture3 = new Lecture();
-        lecture3.printId();
+        lecture3.findId();
         Lecture lecture4 = new Lecture();
-        lecture4.printId();
+        lecture4.findId();
         Lecture lecture5 = new Lecture();
-        lecture5.printId();
+        lecture5.findId();
 
         System.out.println("Лічильник прийме знаачення = " + Lecture.counter);
     }
