@@ -1,6 +1,6 @@
 import models.Course;
 import models.Lecture;
-import models.Teacher;
+import service.CourseService;
 
 public class Main {
     public static void main(String[] args) {
@@ -16,5 +16,11 @@ public class Main {
         lecture5.findId();
 
         System.out.println("Лічильник прийме знаачення = " + Lecture.counter);
+
+        System.out.println("================================================================================");
+
+        CourseService course1 = new CourseService();
+        course1.createCourse().findId();
+
     }
 }
