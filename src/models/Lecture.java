@@ -7,6 +7,7 @@ public class Lecture {
     private AdditionalMaterials additionalMaterials;
     public int idCourse;
 
+    public Lecture () { }
     public Lecture (int idCourse) {
         this.idCourse = idCourse;
     }
