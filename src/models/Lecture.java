@@ -7,6 +7,10 @@ public class Lecture {
     private AdditionalMaterials additionalMaterials;
     public int idCourse;
 
+    public Lecture (int idCourse) {
+        this.idCourse = idCourse;
+    }
+
     public int findId() {
 
         ++counter;
