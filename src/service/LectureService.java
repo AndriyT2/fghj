@@ -6,11 +6,8 @@ public class LectureService {
         return new Lecture();
     }
 
-    public Lecture createLecture(String ... nameLecture) {
-        for (int i = 0; i < nameLecture.length; i++) {
-            Lecture nameLecture = new Lecture();
-        }
-        return nameLecture;
+    public Lecture createLecture(int idCourse) {
+       return new Lecture(idCourse);
 
     }
 }
