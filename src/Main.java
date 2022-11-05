@@ -1,6 +1,7 @@
 import models.Course;
 import models.Lecture;
 import service.CourseService;
+import service.LectureService;
 
 public class Main {
     public static void main(String[] args) {
@@ -20,7 +21,19 @@ public class Main {
         System.out.println("================================================================================");
 
         CourseService course1 = new CourseService();
-        course1.createCourse().findId();
+        int idCourse1 = course1.createCourse().findId();
+        LectureService lecture6 = new LectureService();
+        lecture6.createLecture(idCourse1);
+        LectureService lecture7 = new LectureService();
+        lecture7.createLecture(idCourse1);
+        LectureService lecture8 = new LectureService();
+        lecture8.createLecture(idCourse1);
+        LectureService lecture9 = new LectureService();
+        lecture9.createLecture(idCourse1);
+        LectureService lecture10 = new LectureService();
+        lecture10.createLecture(idCourse1);
+        LectureService lecture11 = new LectureService();
+        lecture11.createLecture(idCourse1);
 
     }
 }

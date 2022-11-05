@@ -9,6 +9,7 @@ public class Lecture {
 
     public Lecture () { }
     public Lecture (int idCourse) {
+
         this.idCourse = idCourse;
     }
 
