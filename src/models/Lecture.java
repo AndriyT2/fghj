@@ -1,11 +1,15 @@
 package models;
 
 public class Lecture {
-    public static int counter;
+    private static int counter;
     private int id;
     private Homeworks homeworks;
     private AdditionalMaterials additionalMaterials;
-    public int idCourse;
+    int idCourse;
+
+    public int getIdCourse() {
+        return idCourse;
+    }
 
     public Lecture () { }
     public Lecture (int idCourse) {
@@ -13,10 +17,13 @@ public class Lecture {
         this.idCourse = idCourse;
     }
 
-    public int findId() {
-
+         public int getId() {
         ++counter;
         id = counter;
         return id;
+    }
+
+    public static int getCounter() {
+        return counter;
     }
 }

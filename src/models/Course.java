@@ -8,10 +8,13 @@ public class Course {
     private Lecture lecture;
 
 
-    public int findId() {
-
+    public int getId() {
         ++counter;
         id = counter;
         return id;
+    }
+
+    public static int getCounter() {
+        return counter;
     }
 }

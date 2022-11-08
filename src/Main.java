@@ -1,4 +1,3 @@
-import models.Course;
 import models.Lecture;
 import service.CourseService;
 import service.LectureService;
@@ -11,50 +10,50 @@ public class Main {
         System.out.println();
 
         Lecture lecture1 = new Lecture();
-        lecture1.findId();
+        lecture1.getId();
         Lecture lecture2 = new Lecture();
-        lecture2.findId();
+        lecture2.getId();
         Lecture lecture3 = new Lecture();
-        lecture3.findId();
+        lecture3.getId();
         Lecture lecture4 = new Lecture();
-        lecture4.findId();
+        lecture4.getId();
         Lecture lecture5 = new Lecture();
-        lecture5.findId();
+        lecture5.getId();
 
-        System.out.println("Лічильник прийме знаачення = " + Lecture.counter);
+        System.out.println("Лічильник прийме знаачення = " + Lecture.getCounter());
 
         System.out.println();
         System.out.println("=====================  Лекція 6. Методи.  ===========================================================");
         System.out.println();
 
         CourseService course1 = new CourseService();
-        int idCourse1 = course1.createCourse().findId();
+        int idCourse1 = course1.createCourse().getId();
 
         LectureService lecture1C1 = new LectureService();
         lecture1C1.createLecture(idCourse1);
-        int idLecture1C1 = lecture1C1.createLecture(idCourse1).findId();
+        int idLecture1C1 = lecture1C1.createLecture(idCourse1).getId();
 
         LectureService lecture2C1 = new LectureService();
         lecture2C1.createLecture(idCourse1);
-        int idLecture2C1 = lecture2C1.createLecture(idCourse1).findId();
+        int idLecture2C1 = lecture2C1.createLecture(idCourse1).getId();
 
         LectureService lecture3C1 = new LectureService();
         lecture3C1.createLecture(idCourse1);
-        int idLecture3C1 = lecture3C1.createLecture(idCourse1).findId();
+        int idLecture3C1 = lecture3C1.createLecture(idCourse1).getId();
 
         LectureService lecture4C1 = new LectureService();
         lecture4C1.createLecture(idCourse1);
-        int idLecture4C1 = lecture4C1.createLecture(idCourse1).findId();
+        int idLecture4C1 = lecture4C1.createLecture(idCourse1).getId();
 
         LectureService lecture5C1 = new LectureService();
         lecture5C1.createLecture(idCourse1);
-        int idLecture5C1 = lecture5C1.createLecture(idCourse1).findId();
+        int idLecture5C1 = lecture5C1.createLecture(idCourse1).getId();
 
         LectureService lecture6C1 = new LectureService();
         lecture6C1.createLecture(idCourse1);
-        int idLecture6C1 = lecture5C1.createLecture(idCourse1).findId();
+        int idLecture6C1 = lecture5C1.createLecture(idCourse1).getId();
 
-        System.out.println("Id курсу 6-ї лекції приймає значення = " + lecture6C1.createLecture(idCourse1).idCourse);
+        System.out.println("Id курсу 6-ї лекції приймає значення = " + lecture6C1.createLecture(idCourse1).getIdCourse());
 
         LecturesCounter totalLecturesHomework6 = new LecturesCounter();
         int  totalLecturesHomework6Task4 = totalLecturesHomework6.lecturesCounter(lecture1C1, lecture2C1, lecture3C1, lecture4C1, lecture5C1, lecture6C1);
@@ -65,7 +64,7 @@ public class Main {
     }
 
     private static class LecturesCounter {
-        public int lecturesCounter (LectureService ... lectureName) {
+         int lecturesCounter (LectureService ... lectureName) {
             return lectureName.length;
         }
     }
