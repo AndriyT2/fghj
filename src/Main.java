@@ -1,6 +1,9 @@
+import models.Course;
 import models.Lecture;
 import service.CourseService;
 import service.LectureService;
+
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
@@ -59,13 +62,24 @@ public class Main {
         int  totalLecturesHomework6Task4 = totalLecturesHomework6.lecturesCounter(lecture1C1, lecture2C1, lecture3C1, lecture4C1, lecture5C1, lecture6C1);
         System.out.println("Загальна кількість створених лекцій = " + totalLecturesHomework6Task4);
 
+        System.out.println();
+        System.out.println("=====================  Лекція 7. Розгалуження.  ===========================================================");
+        System.out.println();
 
+        CourseService course2 = new CourseService();
+//        course2.createCourseScanner();
+//        System.out.println(course2.createCourse().getId());
+
+        course2.askCourseScanner();
 
     }
+
+
 
     private static class LecturesCounter {
          int lecturesCounter (LectureService ... lectureName) {
             return lectureName.length;
         }
     }
+
 }
