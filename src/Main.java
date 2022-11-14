@@ -65,7 +65,6 @@ public class Main {
 
         CourseService course2 = new CourseService();
         course2.courseScanner();
-//        System.out.println(course2.courseScanner().getId());
 
         System.out.println();
         System.out.println("=====================");

@@ -21,18 +21,22 @@ public class LectureService {
             if (lectureScannerAsk.equals("Ні") | lectureScannerAsk.equals("ні") | lectureScannerAsk.equals("No") | lectureScannerAsk.equals("no")) {
 
                 System.out.println("Ви відмовилися створювати нову лекцію!");
+
                 return "Ви відмовилися створювати нову лекцію!";
 
             } else if (lectureScannerAsk.equals("Так") | lectureScannerAsk.equals("так") | lectureScannerAsk.equals("Yes") | lectureScannerAsk.equals("yes")) {
 
-                createLecture(idCourse);
-                String lecture1H7Id = String.valueOf(createLecture().getIdCourse());
-                System.out.println(lecture1H7Id);
+                Lecture lecture1H7 = new Lecture(idCourse);
+                String lecture1H7Id = String.valueOf(lecture1H7.getIdCourse());
+                System.out.println("Створена нова лекція. Значення Id курсу для данної лекуції становить: " + lecture1H7Id + ".");
+
                 return lecture1H7Id;
 
             } else {
-                System.out.println("Ви ввели некоректну відповідь. Почніть з самого спочатку!");
-                return "Ви ввели некоректну відповідь. Почніть з самого спочатку!";
+
+                System.out.println("Ви ввели некоректну відповідь. Почніть з самого початку!");
+
+                return "Ви ввели некоректну відповідь. Почніть з самого початку!";
             }
     }
 
