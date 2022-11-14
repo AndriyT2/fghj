@@ -65,13 +65,21 @@ public class Main {
 
         CourseService course2 = new CourseService();
         course2.courseScanner();
-        System.out.println(course2.courseScanner().getId());
+//        System.out.println(course2.courseScanner().getId());
 
-        LectureService lectureService = new LectureService();
+        System.out.println();
+        System.out.println("=====================");
+        System.out.println();
+
+        LectureService lecture1H7 = new LectureService();
+        lecture1H7.lectureScanner(course2.getCourseIdScanner());
 
 
     }
 
+
+
+        //=====================  Лекція 6. Методи.  ===========================================================
 
 
     private static class LecturesCounter {

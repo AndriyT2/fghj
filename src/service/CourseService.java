@@ -9,6 +9,10 @@ public class CourseService {
     }
     public Course createCourse(String courseName) {return new Course(courseName);}
 
+    public int getCourseIdScanner() {
+        return courseScanner().getId();
+    }
+
     public Course courseScanner () {
         String answer = askCourseScanner();
        return createCourse(answer);
@@ -34,6 +38,7 @@ public class CourseService {
             courseName = courseName;
 
         } else {
+            System.out.println("Ви ввели некоректну відповідь. Почніть з самого спочатку!");
             return "Ви ввели некоректну відповідь. Почніть з самого спочатку!";
         }
 
@@ -61,6 +66,7 @@ public class CourseService {
             return courseParameter;
 
         } else {
+            System.out.println("Ви ввели некоректну відповідь. Почніть з самого спочатку!");
             return "Ви ввели некоректну відповідь. Почніть з самого спочатку!";
         }
 
