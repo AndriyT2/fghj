@@ -7,8 +7,14 @@ public class CourseService {
     public Course createCourse() {
         return new Course();
     }
+    public Course createCourse(String courseName) {return new Course(courseName);}
 
-    public String askCourseScanner() {
+    public Course courseScanner () {
+        String answer = askCourseScanner();
+       return createCourse(answer);
+    }
+
+    private String askCourseScanner() {
 
         Scanner courseScanner = new Scanner(System.in);
         System.out.println("Введіть назву курсу:");
@@ -25,7 +31,7 @@ public class CourseService {
             courseName = courseNameNew;
 
         } else if (courseNameAnswer.equals("Так") | courseNameAnswer.equals("так") | courseNameAnswer.equals("Yes") | courseNameAnswer.equals("yes")) {
-           courseName = courseName;
+            courseName = courseName;
 
         } else {
             return "Ви ввели некоректну відповідь. Почніть з самого спочатку!";
@@ -51,8 +57,8 @@ public class CourseService {
 
             System.out.println("Введіть значення для вибраного параметру.");
             String courseParameterValue = courseScanner.next();
-            System.out.println(courseParameterValue);
-            return "courseParameter";
+            System.out.println(courseName + courseParameter + courseParameterValue);
+            return courseParameter;
 
         } else {
             return "Ви ввели некоректну відповідь. Почніть з самого спочатку!";

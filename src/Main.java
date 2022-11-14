@@ -1,9 +1,6 @@
-import models.Course;
 import models.Lecture;
 import service.CourseService;
 import service.LectureService;
-
-import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
@@ -67,10 +64,11 @@ public class Main {
         System.out.println();
 
         CourseService course2 = new CourseService();
-//        course2.createCourseScanner();
-//        System.out.println(course2.createCourse().getId());
+        course2.courseScanner();
+        System.out.println(course2.courseScanner().getId());
 
-        course2.askCourseScanner();
+        LectureService lectureService = new LectureService();
+
 
     }
 
@@ -81,5 +79,8 @@ public class Main {
             return lectureName.length;
         }
     }
+
+
+
 
 }
