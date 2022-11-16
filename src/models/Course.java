@@ -15,6 +15,15 @@ public class Course {
     public Course(String courseName) {
         this.courseName = courseName;
     }
+
+    public Course(String courseName, String teacher, String student, String lecture) {
+        this.courseName = courseName;
+        this.teacher = new Teacher(teacher);
+        this.student = new Student(student);
+        this.lecture = new Lecture(lecture);
+
+    }
+
     public int getId() {
         ++counter;
         id = counter;

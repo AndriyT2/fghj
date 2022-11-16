@@ -59,16 +59,14 @@ public class Main {
         int  totalLecturesHomework6Task4 = totalLecturesHomework6.lecturesCounter(lecture1C1, lecture2C1, lecture3C1, lecture4C1, lecture5C1, lecture6C1);
         System.out.println("Загальна кількість створених лекцій = " + totalLecturesHomework6Task4);
 
-        System.out.println();
-        System.out.println("=====================  Лекція 7. Розгалуження.  ===========================================================");
-        System.out.println();
+
+        System.out.println("\n=====================  Лекція 7. Розгалуження.  ===========================================================\n");
+
 
         CourseService course2 = new CourseService();
         course2.courseScanner();
 
-        System.out.println();
-        System.out.println("=====================");
-        System.out.println();
+         System.out.println("\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
 
         LectureService lecture1H7 = new LectureService();
         lecture1H7.lectureScanner(course2.getCourseIdScanner());
