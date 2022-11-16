@@ -14,6 +14,8 @@ public class Course {
     public Course(){};
     public Course(String courseName) {
         this.courseName = courseName;
+        System.out.println("1");
+        System.out.println(courseName);
     }
 
     public Course(String courseName, String teacher, String student, String lecture) {
@@ -21,6 +23,7 @@ public class Course {
         this.teacher = new Teacher(teacher);
         this.student = new Student(student);
         this.lecture = new Lecture(lecture);
+        System.out.println("2");
 
     }
 

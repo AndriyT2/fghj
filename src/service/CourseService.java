@@ -70,7 +70,6 @@ public class CourseService {
                     "\n3 Лекція.");
 
             int courseParameterNumber = courseScanner.nextInt();
-            courseScanner.close();
 
             System.out.println("Тепер введіть значення для вибраного параметру:");
             Scanner courseScanner1 = new Scanner(System.in);
@@ -97,7 +96,7 @@ public class CourseService {
                 System.out.println("Ви ввели некоректну відповідь. Почніть з самого початку!");
                 return "Error 3";
             }
-
+            System.out.println(courseName + ", " +courseParameter);
             return courseName + ", " +courseParameter;
 
         } else {
