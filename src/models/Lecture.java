@@ -16,6 +16,7 @@ public class Lecture {
 
     public Lecture (String name) {
         this.name = name;
+        System.out.println(name);
     }
     public String getName() { return name;}
 

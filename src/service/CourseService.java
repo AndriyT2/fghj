@@ -18,7 +18,22 @@ public class CourseService {
 
     public Course courseScanner () {
         String answer = askCourseScanner();
-       return createCourse(answer);
+
+        Scanner courseScanner2 = new Scanner(answer);
+        courseScanner2.useDelimiter(",");
+
+        String courseName = courseScanner2.next();
+        String courseParameterNumber = courseScanner2.next();
+        String courseParameter = courseScanner2.next();
+
+        if (courseParameterNumber.equals("1")) {
+            return createCourse(courseName, courseParameter, null, null);
+        } else if (courseParameterNumber.equals("2")) {
+            return createCourse(courseName, null, courseParameter, null);
+        }  else {
+        return createCourse(courseName, null, null, courseParameter);
+        }
+
     }
 
     private String askCourseScanner() {
@@ -72,6 +87,7 @@ public class CourseService {
             int courseParameterNumber = courseScanner.nextInt();
 
             System.out.println("Тепер введіть значення для вибраного параметру:");
+
             Scanner courseScanner1 = new Scanner(System.in);
             String courseParameterValue = courseScanner1.nextLine();
 
@@ -79,15 +95,15 @@ public class CourseService {
                 case 1:
                     System.out.println("Ви вибрали параметр: вчитель. " +
                             "\nЗначення для цього параметру:" + courseParameterValue);
-                    yield courseParameterValue + ", null, null";
+                    yield courseParameterValue;
                 case 2:
                     System.out.println("Ви вибрали параметр: студент." +
                             "\nЗначення для цього параметру:" + courseParameterValue);
-                    yield "null, " + courseParameterValue + ", null";
+                    yield courseParameterValue;
                 case 3:
                     System.out.println("Ви вибрали параметр: лекція." +
                             "\nЗначення для цього параметру:" + courseParameterValue);
-                    yield "null, null, " + courseParameterValue;
+                    yield  courseParameterValue;
                 default:
                     yield  "Error 3";
             };
@@ -96,8 +112,8 @@ public class CourseService {
                 System.out.println("Ви ввели некоректну відповідь. Почніть з самого початку!");
                 return "Error 3";
             }
-            System.out.println(courseName + ", " +courseParameter);
-            return courseName + ", " +courseParameter;
+
+            return courseName + "," + courseParameterNumber + "," + courseParameter;
 
         } else {
 
