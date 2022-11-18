@@ -1,9 +1,14 @@
 package models;
 
 public class Teacher {
+
     static int counter;
     private int id;
     private String name;
+
+    public void setName (String name) {
+        this.name = name;
+    }
 
     public int getId() {
         ++counter;

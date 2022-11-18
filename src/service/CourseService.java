@@ -19,21 +19,28 @@ public class CourseService {
     public Course courseScanner () {
         String answer = askCourseScanner();
 
-        Scanner courseScanner2 = new Scanner(answer);
-        courseScanner2.useDelimiter(",");
+        if (answer.contains(String.valueOf(','))) {
 
-        String courseName = courseScanner2.next();
-        String courseParameterNumber = courseScanner2.next();
-        String courseParameter = courseScanner2.next();
+            Scanner courseScanner2 = new Scanner(answer);
+            courseScanner2.useDelimiter(",");
 
-        if (courseParameterNumber.equals("1")) {
-            return createCourse(courseName, courseParameter, null, null);
-        } else if (courseParameterNumber.equals("2")) {
-            return createCourse(courseName, null, courseParameter, null);
-        }  else {
-        return createCourse(courseName, null, null, courseParameter);
+            String courseName1 = courseScanner2.next();
+            String courseParameterNumber1 = courseScanner2.next();
+            String courseParameter1 = courseScanner2.next();
+
+            if (courseParameterNumber1.equals("1")) {
+                Course course2 = new Course(courseName1);
+                course2.setTeacher(courseParameter1);
+                return createCourse(courseName1);
+            } else if (courseParameterNumber1.equals("2")) {
+                return createCourse(courseName1, "unavailable", courseParameter1, "unavailable");
+            }  else {
+                return createCourse(courseName1, null, null, courseParameter1);
+            }
+
+        } else {
+           return createCourse(answer);
         }
-
     }
 
     private String askCourseScanner() {

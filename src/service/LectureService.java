@@ -28,7 +28,7 @@ public class LectureService {
 
                 Lecture lecture1H7 = new Lecture(idCourse);
                 String lecture1H7Id = String.valueOf(lecture1H7.getIdCourse());
-                System.out.println("Створена нова лекція. Значення Id курсу для данної лекуції становить: " + lecture1H7Id + ".");
+                System.out.println("Створена нова лекція. Значення Id курсу для даної лекції становить: " + lecture1H7Id + ".");
 
                 return lecture1H7Id;
 
