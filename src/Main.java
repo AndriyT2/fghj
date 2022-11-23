@@ -64,13 +64,12 @@ public class Main {
 
 
         CourseService course2 = new CourseService();
-        course2.courseScanner();
+        int courseScannerId = course2.courseScanner().getId();
 
          System.out.println("\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
 
         LectureService lecture1H7 = new LectureService();
-        lecture1H7.lectureScanner(course2.getCourseIdScanner());
-
+        lecture1H7.lectureScanner(courseScannerId);
 
     }
 

@@ -22,7 +22,7 @@ public class Teacher {
     public Teacher () { };
     public Teacher (String name) {
         this.name = name;
-        System.out.println(name);
+//        System.out.println(name);
     }
 
     public String getName() { return name;}
