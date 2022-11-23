@@ -12,33 +12,33 @@ public class CourseService {
         return new Course(courseName, teacher, student, lecture);
     }
 
-    public int getCourseIdScanner() {
-        return courseScanner().getId();
-    }
+
 
     public Course courseScanner () {
         String answer = askCourseScanner();
 
-        if (answer.contains(String.valueOf(','))) {
+        if (answer.contains(String.valueOf('#'))) {
 
             Scanner courseScanner2 = new Scanner(answer);
-            courseScanner2.useDelimiter(",");
+            courseScanner2.useDelimiter("#");
 
             String courseName1 = courseScanner2.next();
             String courseParameterNumber1 = courseScanner2.next();
             String courseParameter1 = courseScanner2.next();
 
+            System.out.println("Ви створили курс:" + courseName1);
+
             if (courseParameterNumber1.equals("1")) {
-                Course course2 = new Course(courseName1);
-                course2.setTeacher(courseParameter1);
-                return createCourse(courseName1);
+                return createCourse(courseName1, courseParameter1,"unavailable", "unavailable");
             } else if (courseParameterNumber1.equals("2")) {
                 return createCourse(courseName1, "unavailable", courseParameter1, "unavailable");
             }  else {
-                return createCourse(courseName1, null, null, courseParameter1);
+                return createCourse(courseName1, "unavailable", "unavailable", courseParameter1);
             }
 
         } else {
+
+           System.out.println("Ви створили курс:" + answer);
            return createCourse(answer);
         }
     }
@@ -120,13 +120,13 @@ public class CourseService {
                 return "Error 3";
             }
 
-            return courseName + "," + courseParameterNumber + "," + courseParameter;
+            return courseName + "#" + courseParameterNumber + "#" + courseParameter;
 
         } else {
 
             System.out.println("Ви ввели некоректну відповідь. Почніть з самого початку!");
 
-            return "Error 3";
+            return "Error 4";
         }
 
     }
