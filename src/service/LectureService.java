@@ -14,6 +14,7 @@ public class LectureService {
     }
 
     public void lectureScanner(int idCourse) {
+            int totalLectures = 0;
             Scanner lectureScanner = new Scanner(System.in);
             System.out.println("Чи бажаєте створити нову лекцію? [Так/Ні]");
 
@@ -27,6 +28,7 @@ public class LectureService {
 
                 Lecture lecture1H7 = new Lecture(idCourse);
                 String lecture1H7Id = String.valueOf(lecture1H7.getIdCourse());
+                totalLectures++;
 
                 System.out.println("Створена нова лекція. Значення Id курсу для даної лекції становить: " + lecture1H7Id + ".");
 
@@ -41,6 +43,7 @@ public class LectureService {
 
                     Lecture lecture2H7 = new Lecture(idCourse);
                     int lecture2H7Id = lecture2H7.getIdCourse();
+                    totalLectures++;
 
                     System.out.println("Створена додаткова лекція. Значення Id курсу для даної лекції становить: " + lecture2H7Id + ".");
                 } else {
@@ -52,7 +55,7 @@ public class LectureService {
 
                 System.out.println("Ви ввели некоректну відповідь. Почніть з самого початку!");
             }
-
+            System.out.println("Загальна кількість створених лекцій складає - " + totalLectures + " штук(и).");
     }
 
 }
