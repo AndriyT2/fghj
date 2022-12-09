@@ -18,7 +18,7 @@ public class LectureService {
             Scanner lectureScanner = new Scanner(System.in);
             System.out.println("Чи бажаєте створити нову лекцію? [Так/Ні]");
 
-            String lectureScannerAsk1 = lectureScanner.nextLine();
+        String lectureScannerAsk1 = lectureScanner.nextLine();
 
             if (lectureScannerAsk1.equals("Ні") | lectureScannerAsk1.equals("ні") | lectureScannerAsk1.equals("No") | lectureScannerAsk1.equals("no")) {
 
@@ -55,7 +55,9 @@ public class LectureService {
 
                 System.out.println("Ви ввели некоректну відповідь. Почніть з самого початку!");
             }
+
             System.out.println("Загальна кількість створених лекцій складає - " + totalLectures + " штук(и).");
+            lectureScanner.close();
     }
 
 }
