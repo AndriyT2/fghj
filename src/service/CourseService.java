@@ -123,7 +123,7 @@ public class CourseService {
                 System.out.println("Ви ввели некоректну відповідь. Почніть з самого початку!");
                 return "Error 3";
             }
-            courseScanner.close();
+
             return courseName + "#" + courseParameterNumber + "#" + courseParameter;
 
         } else {

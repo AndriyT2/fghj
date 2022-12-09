@@ -71,6 +71,9 @@ public class Main {
         LectureService lecture1H7 = new LectureService();
         lecture1H7.lectureScanner(courseScannerId);
 
+        CourseService course3 = new CourseService();
+        int courseScannerId1 = course3.courseScanner().getId();
+
     }
 
 
