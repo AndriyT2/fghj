@@ -26,6 +26,8 @@ public class CourseService {
             String courseParameterNumber1 = courseScanner2.next();
             String courseParameter1 = courseScanner2.next();
 
+            courseScanner2.close();
+
             System.out.println("Ви створили курс:" + courseName1);
 
             if (courseParameterNumber1.equals("1")) {
@@ -45,7 +47,7 @@ public class CourseService {
 
     private String askCourseScanner() {
 
-        Scanner courseScanner = new Scanner(System.in);
+       try (Scanner courseScanner = new Scanner(System.in)) {
         System.out.println("Введіть назву курсу:");
         String courseName = courseScanner.nextLine();
         System.out.println("Ви впевнені, що хочете назвати курсу наступним чином: " + courseName + " ?");
@@ -95,38 +97,41 @@ public class CourseService {
 
             System.out.println("Тепер введіть значення для вибраного параметру:");
 
-            Scanner courseScanner1 = new Scanner(System.in);
-            String courseParameterValue = courseScanner1.nextLine();
+              try (Scanner courseScanner1 = new Scanner(System.in)) {
+                  String courseParameterValue = courseScanner1.nextLine();
 
-            String courseParameter = switch (courseParameterNumber) {
-                case 1:
-                    System.out.println("Ви вибрали параметр: вчитель. " +
-                            "\nЗначення для цього параметру:" + courseParameterValue);
-                    yield courseParameterValue;
-                case 2:
-                    System.out.println("Ви вибрали параметр: студент." +
-                            "\nЗначення для цього параметру:" + courseParameterValue);
-                    yield courseParameterValue;
-                case 3:
-                    System.out.println("Ви вибрали параметр: лекція." +
-                            "\nЗначення для цього параметру:" + courseParameterValue);
-                    yield  courseParameterValue;
-                default:
-                    yield  "Error 3";
-            };
 
-            if (courseParameter.equals("Error 3")) {
+                  String courseParameter = switch (courseParameterNumber) {
+                      case 1:
+                          System.out.println("Ви вибрали параметр: вчитель. " +
+                                  "\nЗначення для цього параметру:" + courseParameterValue);
+                          yield courseParameterValue;
+                      case 2:
+                          System.out.println("Ви вибрали параметр: студент." +
+                                  "\nЗначення для цього параметру:" + courseParameterValue);
+                          yield courseParameterValue;
+                      case 3:
+                          System.out.println("Ви вибрали параметр: лекція." +
+                                  "\nЗначення для цього параметру:" + courseParameterValue);
+                          yield courseParameterValue;
+                      default:
+                          yield "Error 3";
+                  };
+
+                  if (courseParameter.equals("Error 3")) {
+                      System.out.println("Ви ввели некоректну відповідь. Почніть з самого початку!");
+                      return "Error 3";
+                  }
+//            courseScanner.close();
+//            courseScanner1.close();
+                  return courseName + "#" + courseParameterNumber + "#" + courseParameter;
+              }
+            } else{
+
                 System.out.println("Ви ввели некоректну відповідь. Почніть з самого початку!");
-                return "Error 3";
+
+                return "Error 4";
             }
-
-            return courseName + "#" + courseParameterNumber + "#" + courseParameter;
-
-        } else {
-
-            System.out.println("Ви ввели некоректну відповідь. Почніть з самого початку!");
-
-            return "Error 4";
         }
 
     }
