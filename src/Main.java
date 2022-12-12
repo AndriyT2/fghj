@@ -71,6 +71,12 @@ public class Main {
         LectureService lecture1H7 = new LectureService();
         lecture1H7.lectureScanner(courseScannerId);
 
+
+        System.out.println("\n=====================  Лекція 8. Цикли.  ===========================================================\n");
+
+        LectureService lecture1H8 = new LectureService();
+        lecture1H8.lectureScannerLoop();
+
     }
 
 
