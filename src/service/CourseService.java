@@ -17,6 +17,7 @@ public class CourseService {
     }
 
 
+
     public Course courseScanner() {
         String answer = askCourseScanner();
 

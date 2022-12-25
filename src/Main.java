@@ -1,4 +1,5 @@
 import models.Lecture;
+import repository.LectureRepository;
 import service.CourseService;
 import service.LectureService;
 
@@ -76,6 +77,8 @@ public class Main {
 
         LectureService lecture1H8 = new LectureService();
         lecture1H8.lectureScannerLoop();
+
+
 
     }
 

@@ -103,4 +103,10 @@ public class LectureService {
         }
 
     }
+
+    public void lecturesArrayShove(Lecture[] lectures) {
+        for (Lecture lecture:lectures) {
+            System.out.println("Значення ID для лекції " + lecture + " буде приймати значення " + lecture.getId());
+        }
+    }
 }
