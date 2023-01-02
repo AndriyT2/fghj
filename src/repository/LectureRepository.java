@@ -43,14 +43,27 @@ public class LectureRepository {
 
     public void addLecture(Lecture[] array1, Lecture lecture) {
 
+        int emtiCellIndex = -1;
+
         for (int i = 0; i < array1.length; i++) {
             if (array1[i] == null) {
-                array1[i] = lecture;
+                emtiCellIndex = i;
+                array1[emtiCellIndex] = lecture;
+                setLecturesArray(array1);
+
+                break;
 
             } else {
                 Lecture[] array2 = increaseArray(array1);
-                array2[array2.length - 1] = lecture;
-                setLecturesArray(array2);
+                for (int j = 0; j < array2.length; j++) {
+                    if (array2[j] == null) {
+                        emtiCellIndex = j;
+                        array2[emtiCellIndex] = lecture;
+                        setLecturesArray(array2);
+                        break;
+                    }
+
+                }
             }
 
         }

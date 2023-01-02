@@ -1,6 +1,9 @@
 package service;
+import models.Course;
 import models.Lecture;
+import repository.LectureRepository;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class LectureService {
@@ -11,6 +14,7 @@ public class LectureService {
 
     public Lecture createLecture(int idCourse) {
         return new Lecture(idCourse);
+
     }
 
     public void lectureScanner(int idCourse) {
@@ -105,8 +109,55 @@ public class LectureService {
     }
 
     public void lecturesArrayShove(Lecture[] lectures) {
-        for (Lecture lecture:lectures) {
+        for (Lecture lecture : lectures) {
+            if (lecture == null) continue;
+//        for (int i = 0; i < lectures.length; i++) {
+//            if (lectures[i].equals(null)) continue;
             System.out.println("Значення ID для лекції " + lecture + " буде приймати значення " + lecture.getId());
         }
+    }
+
+    public void lecturesArrayCreator () {
+
+        LectureRepository lectureRepository2 = new LectureRepository(3);
+        System.out.println(Arrays.toString(lectureRepository2.getLecturesArray()));
+
+        CourseService course = new CourseService();
+        Course course1H9 = course.createCourse();
+        int idCourse1H9 = course1H9.getId();
+        System.out.println("Значення ID для курсу - " + idCourse1H9);
+
+        Lecture lecture1H9 = createLecture(idCourse1H9);
+
+        Lecture lecture2H9 = createLecture(idCourse1H9);
+
+        lectureRepository2.addLecture(lectureRepository2.getLecturesArray(), lecture1H9);
+        System.out.println(Arrays.toString(lectureRepository2.getLecturesArray()));
+
+        lectureRepository2.addLecture(lectureRepository2.getLecturesArray(), lecture2H9);
+        System.out.println(Arrays.toString(lectureRepository2.getLecturesArray()));
+
+
+        while (true) {
+
+            Scanner lectureScannerLoop = new Scanner(System.in);
+            System.out.println("Чи бажаєте створити нову лекцію? [Y/N]");
+            String lectureScannerLoopAsk1 = lectureScannerLoop.nextLine();
+
+            if (lectureScannerLoopAsk1.equalsIgnoreCase("n")) {
+                System.out.println("Ви відмовилися створювати нову лекцію!");
+                break;
+
+            } else if (lectureScannerLoopAsk1.equalsIgnoreCase("y")) {
+                lectureRepository2.addLecture(lectureRepository2.getLecturesArray(), createLecture(idCourse1H9));
+                System.out.println(Arrays.toString(lectureRepository2.getLecturesArray()));
+
+            } else {
+            System.out.println("Ви ввели некоректну відповідь. Почніть з самого початку!");
+            break;}
+
+        }
+
+        lecturesArrayShove(lectureRepository2.getLecturesArray());
     }
 }

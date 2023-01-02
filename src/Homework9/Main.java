@@ -1,4 +1,4 @@
-package Homework9;
+package homework9;
 
 import models.Course;
 import models.Lecture;

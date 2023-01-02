@@ -78,8 +78,10 @@ public class Main {
         LectureService lecture1H8 = new LectureService();
         lecture1H8.lectureScannerLoop();
 
+        System.out.println("\n=====================  Лекція 9. Масиви.  ===========================================================\n");
 
-
+        LectureService homework9 = new LectureService();
+        homework9.lecturesArrayCreator();
     }
 
 

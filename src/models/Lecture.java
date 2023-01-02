@@ -2,7 +2,7 @@ package models;
 
 public class Lecture {
     private static int counter;
-    private int id;
+    private final int id;
     private String name;
     private Homeworks homeworks;
     private AdditionalMaterials additionalMaterials;
@@ -12,23 +12,27 @@ public class Lecture {
         return idCourse;
     }
 
-    public Lecture () { }
+    public Lecture () {
+        ++counter;
+        this.id = counter;
+    }
 
     public Lecture (String name) {
+        ++counter;
+        this.id = counter;
         this.name = name;
 //        System.out.println(name);
     }
     public String getName() { return name;}
 
     public Lecture (int idCourse) {
-
+        ++counter;
+        this.id = counter;
         this.idCourse = idCourse;
     }
 
          public int getId() {
-        ++counter;
-        id = counter;
-        return id;
+            return id;
     }
 
     public static int getCounter() {
