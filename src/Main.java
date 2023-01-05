@@ -29,6 +29,7 @@ public class Main {
 
         CourseService course1 = new CourseService();
         int idCourse1 = course1.createCourse().getId();
+        System.out.println(idCourse1);
 
         LectureService lecture1C1 = new LectureService();
         lecture1C1.createLecture(idCourse1);

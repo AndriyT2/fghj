@@ -1,5 +1,6 @@
 package service;
 import models.Course;
+import models.ModelsSuper;
 
 import java.util.Scanner;
 
@@ -69,7 +70,7 @@ public class CourseService {
         } else if (courseNameAnswer.equals("Так") | courseNameAnswer.equals("так") |
                 courseNameAnswer.equals("Yes") | courseNameAnswer.equals("yes")) {
 
-            courseName = courseName;
+//            Course name stay without changes (courseName = courseName;)
 
         } else {
 

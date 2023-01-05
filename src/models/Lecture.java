@@ -1,8 +1,7 @@
 package models;
 
-public class Lecture {
-    private static int counter;
-    private final int id;
+public class Lecture extends ModelsSuper{
+
     private String name;
     private Homeworks homeworks;
     private AdditionalMaterials additionalMaterials;
@@ -13,29 +12,19 @@ public class Lecture {
     }
 
     public Lecture () {
-        ++counter;
-        this.id = counter;
+        super();
     }
 
     public Lecture (String name) {
-        ++counter;
-        this.id = counter;
+        this();
         this.name = name;
-//        System.out.println(name);
     }
+
     public String getName() { return name;}
 
     public Lecture (int idCourse) {
-        ++counter;
-        this.id = counter;
+        this();
         this.idCourse = idCourse;
     }
 
-         public int getId() {
-            return id;
-    }
-
-    public static int getCounter() {
-        return counter;
-    }
 }

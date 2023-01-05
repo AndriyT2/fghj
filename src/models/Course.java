@@ -1,9 +1,7 @@
 package models;
 
-public class Course {
-    static int counter;
+public class Course extends ModelsSuper {
     private String courseName;
-    private int id;
     private Teacher teacher;
     private Student student;
     private Lecture lecture;
@@ -12,10 +10,11 @@ public class Course {
     return courseName;
     }
 
-    public Course(){};
+    public Course() {
+        super();
+}
     public Course(String courseName) {
         this.courseName = courseName;
-//        System.out.println("short course");
     }
 
     public Course(String courseName, String teacher, String student, String lecture) {
@@ -23,18 +22,9 @@ public class Course {
         this.teacher = new Teacher(teacher);
         this.student = new Student(student);
         this.lecture = new Lecture(lecture);
-//        System.out.println("long course");
     }
 
-    public int getId() {
-        ++counter;
-        id = counter;
-        return id;
-    }
 
-    public static int getCounter() {
-        return counter;
-    }
 
 
 

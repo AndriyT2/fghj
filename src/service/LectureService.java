@@ -1,6 +1,7 @@
 package service;
 import models.Course;
 import models.Lecture;
+import models.ModelsSuper;
 import repository.LectureRepository;
 
 import java.util.Arrays;
@@ -111,8 +112,6 @@ public class LectureService {
     public void lecturesArrayShove(Lecture[] lectures) {
         for (Lecture lecture : lectures) {
             if (lecture == null) continue;
-//        for (int i = 0; i < lectures.length; i++) {
-//            if (lectures[i].equals(null)) continue;
             System.out.println("Значення ID для лекції " + lecture + " буде приймати значення " + lecture.getId());
         }
     }
@@ -120,7 +119,7 @@ public class LectureService {
     public void lecturesArrayCreator () {
 
         LectureRepository lectureRepository2 = new LectureRepository(3);
-        System.out.println(Arrays.toString(lectureRepository2.getLecturesArray()));
+        System.out.println(Arrays.toString(lectureRepository2.getArraySuper()));
 
         CourseService course = new CourseService();
         Course course1H9 = course.createCourse();
@@ -131,33 +130,32 @@ public class LectureService {
 
         Lecture lecture2H9 = createLecture(idCourse1H9);
 
-        lectureRepository2.addLecture(lectureRepository2.getLecturesArray(), lecture1H9);
-        System.out.println(Arrays.toString(lectureRepository2.getLecturesArray()));
+        lectureRepository2.add(lecture1H9);
+        lectureRepository2.getAll();
 
-        lectureRepository2.addLecture(lectureRepository2.getLecturesArray(), lecture2H9);
-        System.out.println(Arrays.toString(lectureRepository2.getLecturesArray()));
-
+        lectureRepository2.add(lecture2H9);
+        lectureRepository2.getAll();
 
         while (true) {
 
-            Scanner lectureScannerLoop = new Scanner(System.in);
-            System.out.println("Чи бажаєте створити нову лекцію? [Y/N]");
-            String lectureScannerLoopAsk1 = lectureScannerLoop.nextLine();
+                Scanner modelsSuper1 = new Scanner(System.in);
+                System.out.println("Чи бажаєте створити новий елемент? [Y/N]");
+                String modelSuperAsk1 = modelsSuper1.nextLine();
 
-            if (lectureScannerLoopAsk1.equalsIgnoreCase("n")) {
-                System.out.println("Ви відмовилися створювати нову лекцію!");
-                break;
+                if (modelSuperAsk1.equalsIgnoreCase("n")) {
+                    System.out.println("Ви відмовилися створювати новий елемент!");
+                    break;
 
-            } else if (lectureScannerLoopAsk1.equalsIgnoreCase("y")) {
-                lectureRepository2.addLecture(lectureRepository2.getLecturesArray(), createLecture(idCourse1H9));
-                System.out.println(Arrays.toString(lectureRepository2.getLecturesArray()));
+                } else if (modelSuperAsk1.equalsIgnoreCase("y")) {
 
-            } else {
-            System.out.println("Ви ввели некоректну відповідь. Почніть з самого початку!");
-            break;}
+                    lectureRepository2.add(new ModelsSuper());
+                    lectureRepository2.getAll();
+                } else {
+                    System.out.println("Ви ввели некоректну відповідь. Почніть з самого початку!");
+                    break;
+                }
 
-        }
-
-        lecturesArrayShove(lectureRepository2.getLecturesArray());
+            }
+        lectureRepository2.getAll();
     }
 }
