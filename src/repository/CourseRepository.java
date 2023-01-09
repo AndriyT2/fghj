@@ -5,9 +5,7 @@ import models.Course;
 public class CourseRepository extends RepositorySuper {
 
 
-    public CourseRepository() {
-        super();
-    }
+    public CourseRepository() {  }
 
     public CourseRepository(int initCapacity) {
         super(initCapacity);

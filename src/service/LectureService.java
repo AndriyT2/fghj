@@ -2,6 +2,7 @@ package service;
 import models.Course;
 import models.Lecture;
 import models.ModelsSuper;
+import repository.CourseRepository;
 import repository.LectureRepository;
 
 import java.util.Arrays;
@@ -18,6 +19,10 @@ public class LectureService {
 
     }
 
+    public Lecture createLecture(int idCourse, int idTeacher) {
+        return new Lecture(idCourse, idTeacher);
+
+    }
     public void lectureScanner(int idCourse) {
         int totalLectures = 0;
         Scanner lectureScanner = new Scanner(System.in);
@@ -118,11 +123,17 @@ public class LectureService {
 
     public void lecturesArrayCreator () {
 
+        CourseRepository courseRepository2 = new CourseRepository();
+        courseRepository2.getAll();
+
         LectureRepository lectureRepository2 = new LectureRepository(3);
         System.out.println(Arrays.toString(lectureRepository2.getArraySuper()));
 
         CourseService course = new CourseService();
         Course course1H9 = course.createCourse();
+        courseRepository2.add(course1H9);
+        courseRepository2.getAll();
+
         int idCourse1H9 = course1H9.getId();
         System.out.println("Значення ID для курсу - " + idCourse1H9);
 
@@ -140,15 +151,15 @@ public class LectureService {
 
                 Scanner modelsSuper1 = new Scanner(System.in);
                 System.out.println("Чи бажаєте створити новий елемент? [Y/N]");
-                String modelSuperAsk1 = modelsSuper1.nextLine();
+                String modelSuperAsk2 = modelsSuper1.nextLine();
 
-                if (modelSuperAsk1.equalsIgnoreCase("n")) {
+                if (modelSuperAsk2.equalsIgnoreCase("n")) {
                     System.out.println("Ви відмовилися створювати новий елемент!");
                     break;
 
-                } else if (modelSuperAsk1.equalsIgnoreCase("y")) {
+                } else if (modelSuperAsk2.equalsIgnoreCase("y")) {
 
-                    lectureRepository2.add(new ModelsSuper());
+                    lectureRepository2.add(new Lecture(idCourse1H9));
                     lectureRepository2.getAll();
                 } else {
                     System.out.println("Ви ввели некоректну відповідь. Почніть з самого початку!");
@@ -157,5 +168,70 @@ public class LectureService {
 
             }
         lectureRepository2.getAll();
+    }
+
+   private int askAboutTeacher() {
+     Scanner ask = new Scanner(System.in);
+     int ansver = ask.nextInt();
+     ask.nextLine();
+     return ansver;
+   };
+    public void lecturesArrayCreatorWithTeacher () {
+
+        Scanner modelsSuper1 = new Scanner(System.in);
+
+        CourseRepository courseRepository2 = new CourseRepository();
+        courseRepository2.getAll();
+
+        LectureRepository lectureRepository2 = new LectureRepository(2);
+        System.out.println(Arrays.toString(lectureRepository2.getArraySuper()));
+
+        CourseService course = new CourseService();
+        Course course1H10 = course.createCourse();
+        courseRepository2.add(course1H10);
+        courseRepository2.getAll();
+
+        int idCourse1H10 = course1H10.getId();
+        System.out.println("Значення ID для курсу - " + idCourse1H10);
+
+        System.out.println("Введіть значення ID вчителя.");
+        int idTeacher = modelsSuper1.nextInt();
+        modelsSuper1.nextLine();
+
+
+        Lecture lecture1H10 = createLecture(idCourse1H10, idTeacher);
+
+        Lecture lecture2H10 = createLecture(idCourse1H10, idTeacher);
+
+        lectureRepository2.add(lecture1H10);
+        lectureRepository2.getAll();
+
+        lectureRepository2.add(lecture2H10);
+        lectureRepository2.getAll();
+
+        while (true) {
+
+            System.out.println("Чи бажаєте створити новий елемент? [Y/N]");
+            String modelSuperAsk2 = modelsSuper1.nextLine();
+
+            if (modelSuperAsk2.equalsIgnoreCase("n")) {
+                System.out.println("Ви відмовилися створювати новий елемент!");
+                break;
+
+            } else if (modelSuperAsk2.equalsIgnoreCase("y")) {
+
+                lectureRepository2.add(new Lecture(idCourse1H10, idTeacher));
+                lectureRepository2.getAll();
+            } else {
+                System.out.println("Ви ввели некоректну відповідь. Почніть з самого початку!");
+                break;
+            }
+
+        }
+        lectureRepository2.getAll();
+    }
+
+    public void getAllInfoLecture (int id) {
+
     }
 }

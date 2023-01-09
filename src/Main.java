@@ -2,6 +2,7 @@ import models.Lecture;
 import repository.LectureRepository;
 import service.CourseService;
 import service.LectureService;
+import service.PersonService;
 
 public class Main {
     public static void main(String[] args) {
@@ -83,6 +84,12 @@ public class Main {
 
         LectureService homework9 = new LectureService();
         homework9.lecturesArrayCreator();
+
+        System.out.println("\n=====================  Лекція 11. ENUM.  ===========================================================\n");
+
+        PersonService homework11 = new PersonService();
+        homework11.addPerson();
+
     }
 
 
