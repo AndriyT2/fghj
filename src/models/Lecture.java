@@ -5,10 +5,17 @@ public class Lecture extends ModelsSuper{
     private String name;
     private Homeworks homeworks;
     private AdditionalMaterials additionalMaterials;
-    int idCourse;
+    private int idCourse;
+    private int personId;
+
+    private int idTeacher;
 
     public int getIdCourse() {
         return idCourse;
+    }
+
+    public int getPersonId() {
+        return personId;
     }
 
     public Lecture () {
@@ -27,4 +34,9 @@ public class Lecture extends ModelsSuper{
         this.idCourse = idCourse;
     }
 
+    public Lecture (int idCourse, int idTeacher) {
+        this();
+        this.idCourse = idCourse;
+        this.idTeacher = idTeacher;
+    }
 }
