@@ -1,10 +1,20 @@
 package repository;
 
+import models.Person;
+
 public class PersonRepository extends  RepositorySuper {
-    public PersonRepository() {
+
+    private static PersonRepository instance;
+
+    private PersonRepository() {
+        this.arraySuper = new Person[STANDARD_CAPACITY];
     }
 
-    public PersonRepository(int initCapacity) {
-        super(initCapacity);
+        public static PersonRepository getInstance() {
+        if (instance == null) {
+            instance = new PersonRepository();
+        }
+        return instance;
     }
+
 }

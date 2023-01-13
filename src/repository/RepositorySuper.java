@@ -5,16 +5,8 @@ import models.ModelsSuper;
 import java.util.Arrays;
 
 public class RepositorySuper {
-    private ModelsSuper[] arraySuper;
-    private final int STANDARD_CAPACITY = 7;
-
-
-//    private static RepositorySuper instance;
-//
-//    private RepositorySuper() {
-//        this.arraySuper = new ModelsSuper[STANDARD_CAPACITY];
-//    }
-
+   ModelsSuper[] arraySuper;
+    final int STANDARD_CAPACITY = 7;
 
 
     public RepositorySuper() {
@@ -82,13 +74,6 @@ public class RepositorySuper {
     public ModelsSuper[] getArraySuper() {
         return arraySuper;
     }
-
-//    public static RepositorySuper getInstance() {
-//        if (instance == null) {
-//            instance = new RepositorySuper();
-//        }
-//        return instance;
-//    }
 
 
 }

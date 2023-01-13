@@ -18,4 +18,7 @@ public class ModelsSuper {
     public int getId() {
         return id;
     }
+
+
+
 }

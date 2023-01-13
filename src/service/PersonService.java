@@ -1,6 +1,5 @@
 package service;
 
-import models.ModelsSuper;
 import models.Person;
 import models.Role;
 import repository.PersonRepository;
@@ -13,7 +12,7 @@ public class PersonService {
         while (true) {
 
             Scanner scanner = new Scanner(System.in);
-            System.out.println("Чи бажаєте створити новий елемент? [Y/N]");
+            System.out.println("Чи бажаєте створити новий елемент Person? [Y/N]");
             String ask = scanner.nextLine();
 
             if (ask.equalsIgnoreCase("n")) {
@@ -22,7 +21,8 @@ public class PersonService {
 
             } else if (ask.equalsIgnoreCase("y")) {
 
-                PersonRepository personRepository = new PersonRepository();
+                PersonRepository personRepository = PersonRepository.getInstance();
+                PersonRepository.getInstance().getAll();
 
                 int ask1;
 
@@ -38,14 +38,15 @@ public class PersonService {
                         System.out.println("Ви створили нового студента.");
                         Person personS = new Person(Role.STUDENT);
                         personRepository.add(personS);
+                        personRepository.getAll();
                         break;
 
                     case 2:
                         System.out.println("Ви створили нового вчителя.");
                         Person personT = new Person(Role.TEACHER);
                         personRepository.add(personT);
+                        personRepository.getAll();
                         break;
-
                 }
 
             } else {

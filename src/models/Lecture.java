@@ -18,6 +18,10 @@ public class Lecture extends ModelsSuper{
         return personId;
     }
 
+    public void setPersonId(int personId) {
+        this.personId = personId;
+    }
+
     public Lecture () {
         super();
     }
@@ -38,5 +42,11 @@ public class Lecture extends ModelsSuper{
         this();
         this.idCourse = idCourse;
         this.idTeacher = idTeacher;
+    }
+
+    public Lecture lectureWithTeacher (int personId) {
+        Lecture lecture = new Lecture();
+        lecture.setPersonId(personId);
+        return lecture;
     }
 }

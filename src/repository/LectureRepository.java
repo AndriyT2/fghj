@@ -1,18 +1,28 @@
 package repository;
 
 import models.Lecture;
+import models.Person;
 
 import java.util.Arrays;
 
 public class LectureRepository extends RepositorySuper {
 
 
-//    public LectureRepository() { super(); }
+        private static LectureRepository instance;
 
-    public LectureRepository() { }
+        private LectureRepository() {
+            this.arraySuper = new Lecture[STANDARD_CAPACITY];
+        }
 
-    public LectureRepository(int initCapacity) { super(initCapacity); }
-}
+        public static LectureRepository getInstance() {
+            if (instance == null) {
+                instance = new LectureRepository();
+            }
+            return instance;
+        }
+
+    }
+
 
 
 

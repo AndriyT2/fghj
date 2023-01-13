@@ -1,13 +1,22 @@
 package repository;
 
 import models.Course;
+import models.Lecture;
 
 public class CourseRepository extends RepositorySuper {
 
 
-    public CourseRepository() {  }
+    private static CourseRepository instance;
 
-    public CourseRepository(int initCapacity) {
-        super(initCapacity);
+    private CourseRepository() {
+        this.arraySuper = new Course[STANDARD_CAPACITY];
     }
+
+    public static CourseRepository getInstance() {
+        if (instance == null) {
+            instance = new CourseRepository();
+        }
+        return instance;
+    }
+
 }

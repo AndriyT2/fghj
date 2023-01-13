@@ -1,13 +1,15 @@
 package models;
 
 public class Person extends ModelsSuper {
-   public Person () { super();}
 
-    public Person(Enum role) { super();
-       this.role = role;
-   }
     private int courseId;
     private Enum role;
+
+    public Person () { super();}
+
+    public Person(Enum role) {
+       this.role = role;
+   }
 
 
 
@@ -19,5 +21,13 @@ public class Person extends ModelsSuper {
 
     public Enum getRole() {
         return role;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "courseId=" + courseId +
+                ", role=" + role +
+                '}';
     }
 }

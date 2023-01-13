@@ -1,6 +1,6 @@
 package service;
+
 import models.Course;
-import models.ModelsSuper;
 
 import java.util.Scanner;
 
@@ -93,10 +93,11 @@ public class CourseService {
         } else if (courseParametersAnswer.equals("Так") | courseParametersAnswer.equals("так") |
                 courseParametersAnswer.equals("Yes") | courseParametersAnswer.equals("yes")) {
 
-            System.out.println("Введіть порядковий номер одного з наступних додаткових параметрів, що бажаєте додати:" +
-                    "\n1 Вчитель;" +
-                    "\n2 Студент;" +
-                    "\n3 Лекція.");
+            System.out.println("""
+                    Введіть порядковий номер одного з наступних додаткових параметрів, що бажаєте додати:
+                    1 Вчитель;
+                    2 Студент;
+                    3 Лекція.""");
 
             int courseParameterNumber = courseScanner.nextInt();
             courseScanner.nextLine();

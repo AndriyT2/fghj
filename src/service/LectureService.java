@@ -1,9 +1,8 @@
 package service;
-import models.Course;
-import models.Lecture;
-import models.ModelsSuper;
+import models.*;
 import repository.CourseRepository;
 import repository.LectureRepository;
+import repository.PersonRepository;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -15,7 +14,12 @@ public class LectureService {
     }
 
     public Lecture createLecture(int idCourse) {
-        return new Lecture(idCourse);
+        return new Lecture();
+
+    }
+
+    public Lecture createLectureWithTeacher(int idPerson) {
+        return new Lecture().lectureWithTeacher(idPerson);
 
     }
 
@@ -77,7 +81,7 @@ public class LectureService {
         int maxValueIdCourse = 3;
         int minValueIdCourse = 1;
 
-        for (int i = 0; true; i++) {
+        while (true){
 
             Scanner lectureScannerLoop = new Scanner(System.in);
             System.out.println("Чи бажаєте створити нову лекцію? [Y/N]");
@@ -123,10 +127,10 @@ public class LectureService {
 
     public void lecturesArrayCreator () {
 
-        CourseRepository courseRepository2 = new CourseRepository();
+        CourseRepository courseRepository2 = CourseRepository.getInstance();
         courseRepository2.getAll();
 
-        LectureRepository lectureRepository2 = new LectureRepository(3);
+        LectureRepository lectureRepository2 = LectureRepository.getInstance();
         System.out.println(Arrays.toString(lectureRepository2.getArraySuper()));
 
         CourseService course = new CourseService();
@@ -170,68 +174,126 @@ public class LectureService {
         lectureRepository2.getAll();
     }
 
-   private int askAboutTeacher() {
-     Scanner ask = new Scanner(System.in);
-     int ansver = ask.nextInt();
-     ask.nextLine();
-     return ansver;
-   };
-    public void lecturesArrayCreatorWithTeacher () {
+    public void lecturesCreatorWithTeacher () {
 
         Scanner modelsSuper1 = new Scanner(System.in);
 
-        CourseRepository courseRepository2 = new CourseRepository();
-        courseRepository2.getAll();
-
-        LectureRepository lectureRepository2 = new LectureRepository(2);
-        System.out.println(Arrays.toString(lectureRepository2.getArraySuper()));
-
-        CourseService course = new CourseService();
-        Course course1H10 = course.createCourse();
-        courseRepository2.add(course1H10);
-        courseRepository2.getAll();
-
-        int idCourse1H10 = course1H10.getId();
-        System.out.println("Значення ID для курсу - " + idCourse1H10);
-
-        System.out.println("Введіть значення ID вчителя.");
-        int idTeacher = modelsSuper1.nextInt();
-        modelsSuper1.nextLine();
-
-
-        Lecture lecture1H10 = createLecture(idCourse1H10, idTeacher);
-
-        Lecture lecture2H10 = createLecture(idCourse1H10, idTeacher);
-
-        lectureRepository2.add(lecture1H10);
-        lectureRepository2.getAll();
-
-        lectureRepository2.add(lecture2H10);
-        lectureRepository2.getAll();
-
         while (true) {
 
-            System.out.println("Чи бажаєте створити новий елемент? [Y/N]");
+            System.out.println("Чи бажаєте створити нову лекцію? [Y/N]");
             String modelSuperAsk2 = modelsSuper1.nextLine();
 
             if (modelSuperAsk2.equalsIgnoreCase("n")) {
-                System.out.println("Ви відмовилися створювати новий елемент!");
+                System.out.println("Ви відмовилися створювати нову лекцію!");
                 break;
 
             } else if (modelSuperAsk2.equalsIgnoreCase("y")) {
 
-                lectureRepository2.add(new Lecture(idCourse1H10, idTeacher));
-                lectureRepository2.getAll();
+                    System.out.println("Чи бажаєте додати вчителя з наступного списку? [Y/N]");
+
+                    int maxTeacherId = 0;
+                    int totalTeacher = 0;
+                    for (ModelsSuper person: PersonRepository.getInstance().getArraySuper()) {
+                        Person p = (Person) person;
+                        if (p == null) { break;
+                        } else if (p.getRole().equals(Role.TEACHER)) {
+                            ++totalTeacher;
+                            System.out.print(person);
+                            System.out.println(" - маэ значкння ID = " + p.getId());
+                            if (maxTeacherId < p.getId()) {maxTeacherId = p.getId();}
+                        }
+                        if (totalTeacher == 0) {
+                            System.out.println("Жодний вчитель ще не був доданий до списку!\nВставити код з пропозицією створення нового вчителя чи лекції без вчителя!");
+                        }
+                    }
+
+                    String modelSuperAsk3 = modelsSuper1.nextLine();
+
+                    if (modelSuperAsk3.equalsIgnoreCase("n")) {
+
+                        System.out.println("Чи бажаєте додати нового вчителя? [Y/N]");
+
+                        String modelSuperAsk4 = modelsSuper1.nextLine();
+
+                        if (modelSuperAsk4.equalsIgnoreCase("n")) {
+                            System.out.println("Ви створили лекцію без вчителя! [Y/N]");
+                            LectureRepository.getInstance().getAll();
+                            LectureRepository.getInstance().add(new Lecture());
+                            LectureRepository.getInstance().getAll();
+
+                        } else if (modelSuperAsk4.equalsIgnoreCase("y")) {
+                            System.out.println("Створена лекція з новим вчителем! [Y/N]");
+                            PersonRepository.getInstance().getAll();
+                            Person teacherH11 = new Person(Role.TEACHER);
+                            PersonRepository.getInstance().add(teacherH11);
+                            PersonRepository.getInstance().getAll();
+                            LectureRepository.getInstance().getAll();
+                            Lecture lectureH11 = new LectureService().createLectureWithTeacher(teacherH11.getId());
+                            LectureRepository.getInstance().add(lectureH11);
+                            LectureRepository.getInstance().getAll();
+
+
+
+
+                        } else {
+                            System.out.println("Ви ввели некоректну відповідь. Почніть з самого початку!");
+                            break;
+                        }
+
+
+                     } else if (modelSuperAsk3.equalsIgnoreCase("y")) {
+
+                       int ask5;
+                        do {
+                            System.out.println("Введіть значення ID з представленного списку для вибраного вчителя!");
+                            int modelSuperAsk5 = modelsSuper1.nextInt();
+                            modelsSuper1.nextLine();
+                            ask5 = modelSuperAsk5;
+                        } while (ask5<0 || ask5>maxTeacherId);
+
+                        LectureRepository.getInstance().getAll();
+                        Lecture lectureH11 = new LectureService().createLectureWithTeacher(ask5);
+                        LectureRepository.getInstance().add(lectureH11);
+                        LectureRepository.getInstance().getAll();
+                        System.out.println("ID створенної лекції - " + lectureH11.getId());
+
+                    } else {
+                        System.out.println("Ви ввели некоректну відповідь. Почніть з самого початку!");
+                        break;
+                    }
+
+
             } else {
                 System.out.println("Ви ввели некоректну відповідь. Почніть з самого початку!");
                 break;
             }
 
         }
-        lectureRepository2.getAll();
     }
 
-    public void getAllInfoLecture (int id) {
+    public void getAllInfoLecture () {
+        Scanner getAllInfoLecture = new Scanner(System.in);
+        System.out.println("Введіть значення ID лекції");
+        int idLectureFromTask = getAllInfoLecture.nextInt();
+        getAllInfoLecture.nextLine();
+        int search = -1;
+        Lecture lectureFromTask = null;
+        for (ModelsSuper lecture:
+             LectureRepository.getInstance().getArraySuper()) {
+            if(lecture == null) {continue;}
+            if (lecture.getId() == idLectureFromTask) {
+                search = 1;
+               lectureFromTask = (Lecture) lecture;
+            }
+        }
+        if (search<0) {
+            System.out.println("Лекції з таким ID не існує!");
+//            Тут повинен буте break, але він не добавляється!
+        }
 
+        System.out.println("Значення ID для заданної лекції - " + lectureFromTask.getId());
+        System.out.println("Значення IDCourse для заданної лекції - " + lectureFromTask.getIdCourse());
+        System.out.println("Значення PersonId для заданної лекції - " + lectureFromTask.getPersonId());
+        System.out.println("Значення Name для заданної лекції - " + lectureFromTask.getName());
     }
 }
