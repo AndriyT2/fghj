@@ -1,4 +1,5 @@
 import models.Lecture;
+import repository.LectureRepository;
 import service.CourseService;
 import service.LectureService;
 import service.PersonService;
@@ -76,9 +77,22 @@ public class Main {
 
         PersonService homework11P = new PersonService();
         homework11P.addPerson();
-        LectureService homework11L = new LectureService();
-        homework11L.lecturesCreatorWithTeacher();
-        homework11L.getAllInfoLecture();
+//        LectureService homework11L = new LectureService();
+//        homework11L.lecturesCreatorWithTeacher();
+//        homework11L.getAllInfoLecture();
+
+        System.out.println("\n=====================  Лекція 12. String.  ===========================================================\n");
+
+        PersonService homework12 = new PersonService();
+//        homework12.setPhone(18);
+//        homework12.setFirstname(18);
+//        homework12.setLastname(18);
+//        homework12.setEmail(18);
+        CourseService homework12C = new CourseService();
+//        homework12C.setCourseName(15);
+        LectureService homework12L = new LectureService();
+        homework12L.setDescription(17);
+
 
     }
 

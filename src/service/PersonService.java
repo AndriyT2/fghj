@@ -1,7 +1,10 @@
 package service;
 
+import models.Course;
+import models.ModelsSuper;
 import models.Person;
 import models.Role;
+import repository.CourseRepository;
 import repository.PersonRepository;
 
 import java.util.Scanner;
@@ -55,5 +58,84 @@ public class PersonService {
             }
 
         }
+    }
+    public void setPhone (int idPerson) {
+        PersonRepository.getInstance().exist(idPerson);
+        PersonRepository.getInstance().getAll();
+        System.out.println("Введіть номер телефона в наступному форматі: +ххххххххххх.");
+        Scanner scannerP = new Scanner(System.in);
+        String phone = scannerP.nextLine();
+        String phoneNorm = phone.trim();
+//       +12343454556;
+        boolean result = phoneNorm.matches("(\\+*)\\d{11}");
+        while (!result){
+            System.out.println("Ви ввели некоректний телефон!\nВведіть новий телефон!");
+            phone = scannerP.nextLine();
+            phoneNorm = phone.trim();
+            result = phoneNorm.matches("(\\+*)\\d{11}");
+        }
+        System.out.println("Номер телефона:  " + phoneNorm);
+        ModelsSuper person = PersonRepository.getInstance().getById(idPerson);
+        Person person1 = (Person) person;
+        person1.setPhone(phoneNorm);
+    }
+    public void setFirstname (int idPerson) {
+        PersonRepository.getInstance().exist(idPerson);
+        PersonRepository.getInstance().getAll();
+        System.out.println("Введіть необхідне ім'я!");
+        Scanner scannerP = new Scanner(System.in);
+        String firstname = scannerP.nextLine();
+        String firstnameNorm = firstname.trim();
+        boolean result = firstnameNorm.matches("^([A-Za-z][A-Za-z\\-\\']{1,50})|([А-ЯIЇҐЄа-яіїґє][А-ЯIЇҐЄа-яіїґє\\-\\']{1,50})$");
+        while (!result){
+            System.out.println("Ви ввели некоректне ім'я!\nВведіть ім'я знову!");
+            firstname = scannerP.nextLine();
+            firstnameNorm = firstname.trim();
+            result = firstnameNorm.matches("^([A-Za-z][A-Za-z\\-\\']{1,50})|([А-ЯIЇҐЄа-яіїґє][А-ЯIЇҐЄа-яіїґє\\-\\']{1,50})$");
+        }
+        System.out.println("Ім'я:  " + firstnameNorm);
+        ModelsSuper person = PersonRepository.getInstance().getById(idPerson);
+        Person person1 = (Person) person;
+        person1.setFirstname(firstnameNorm);
+    }
+
+    public void setLastname (int idPerson) {
+        PersonRepository.getInstance().exist(idPerson);
+        PersonRepository.getInstance().getAll();
+        System.out.println("Введіть необхідне прізвище!");
+        Scanner scannerP = new Scanner(System.in);
+        String lastname = scannerP.nextLine();
+        String lastnameNorm = lastname.trim();
+        boolean result = lastnameNorm.matches("^([A-Za-z][A-Za-z\\-\\']{1,100})|([А-ЯIЇҐЄа-яіїґє][А-ЯIЇҐЄа-яіїґє\\-\\']{1,100})$");
+        while (!result){
+            System.out.println("Ви ввели некоректне прізвище!\nВведіть прізвище знову!");
+            lastname = scannerP.nextLine();
+            lastnameNorm = lastname.trim();
+            result = lastnameNorm.matches("^([A-Za-z][A-Za-z\\-\\']{1,100})|([А-ЯIЇҐЄа-яіїґє][А-ЯIЇҐЄа-яіїґє\\-\\']{1,100})$");
+        }
+        System.out.println("Прізвище:  " + lastnameNorm);
+        ModelsSuper person = PersonRepository.getInstance().getById(idPerson);
+        Person person1 = (Person) person;
+        person1.setLastname(lastnameNorm);
+    }
+
+    public void setEmail (int idPerson) {
+        PersonRepository.getInstance().exist(idPerson);
+        PersonRepository.getInstance().getAll();
+        System.out.println("Введіть необхідну поштову скриньку!");
+        Scanner scannerP = new Scanner(System.in);
+        String email = scannerP.nextLine();
+        String emailNorm = email.trim();
+        boolean result = emailNorm.matches("^([a-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,6})$");
+        while (!result){
+            System.out.println("Ви ввели некоректну поштову скриньку!\nВведіть поштову скриньку!");
+            email = scannerP.nextLine();
+            emailNorm = email.trim();
+            result = emailNorm.matches("^([a-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,6})$");
+        }
+        System.out.println("Поштова скринька:  " + emailNorm);
+        ModelsSuper person = PersonRepository.getInstance().getById(idPerson);
+        Person person1 = (Person) person;
+        person1.setEmail(emailNorm);
     }
 }

@@ -202,10 +202,11 @@ public class LectureService {
                             System.out.println(" - маэ значкння ID = " + p.getId());
                             if (maxTeacherId < p.getId()) {maxTeacherId = p.getId();}
                         }
-                        if (totalTeacher == 0) {
-                            System.out.println("Жодний вчитель ще не був доданий до списку!\nВставити код з пропозицією створення нового вчителя чи лекції без вчителя!");
-                        }
                     }
+
+                if (totalTeacher == 0) {
+                    System.out.println("Жодний вчитель ще не був доданий до списку!\nВставити код з пропозицією створення нового вчителя чи лекції без вчителя!");
+                }
 
                     String modelSuperAsk3 = modelsSuper1.nextLine();
 
@@ -216,13 +217,13 @@ public class LectureService {
                         String modelSuperAsk4 = modelsSuper1.nextLine();
 
                         if (modelSuperAsk4.equalsIgnoreCase("n")) {
-                            System.out.println("Ви створили лекцію без вчителя! [Y/N]");
+                            System.out.println("Ви створили лекцію без вчителя!");
                             LectureRepository.getInstance().getAll();
                             LectureRepository.getInstance().add(new Lecture());
                             LectureRepository.getInstance().getAll();
 
                         } else if (modelSuperAsk4.equalsIgnoreCase("y")) {
-                            System.out.println("Створена лекція з новим вчителем! [Y/N]");
+                            System.out.println("Створена лекція з новим вчителем!");
                             PersonRepository.getInstance().getAll();
                             Person teacherH11 = new Person(Role.TEACHER);
                             PersonRepository.getInstance().add(teacherH11);
@@ -273,27 +274,68 @@ public class LectureService {
 
     public void getAllInfoLecture () {
         Scanner getAllInfoLecture = new Scanner(System.in);
-        System.out.println("Введіть значення ID лекції");
-        int idLectureFromTask = getAllInfoLecture.nextInt();
-        getAllInfoLecture.nextLine();
+
         int search = -1;
         Lecture lectureFromTask = null;
-        for (ModelsSuper lecture:
-             LectureRepository.getInstance().getArraySuper()) {
-            if(lecture == null) {continue;}
-            if (lecture.getId() == idLectureFromTask) {
-                search = 1;
-               lectureFromTask = (Lecture) lecture;
+        do {
+            System.out.println("Введіть існуюче значення ID лекції");
+            int idLectureFromTask = getAllInfoLecture.nextInt();
+            getAllInfoLecture.nextLine();
+            for (ModelsSuper lecture :
+                    LectureRepository.getInstance().getArraySuper()) {
+                if (lecture == null) {
+                    continue;
+                }
+                if (lecture.getId() == idLectureFromTask) {
+                    search = 1;
+                    lectureFromTask = (Lecture) lecture;
+                }
             }
-        }
-        if (search<0) {
-            System.out.println("Лекції з таким ID не існує!");
-//            Тут повинен буте break, але він не добавляється!
-        }
+        } while (search<0);
 
         System.out.println("Значення ID для заданної лекції - " + lectureFromTask.getId());
         System.out.println("Значення IDCourse для заданної лекції - " + lectureFromTask.getIdCourse());
         System.out.println("Значення PersonId для заданної лекції - " + lectureFromTask.getPersonId());
         System.out.println("Значення Name для заданної лекції - " + lectureFromTask.getName());
+    }
+
+    public void setDescription (int idLecture) {
+        LectureRepository.getInstance().exist(idLecture);
+        LectureRepository.getInstance().getAll();
+        System.out.println("Введіть опис лекції!");
+        Scanner scannerP = new Scanner(System.in);
+        String description = scannerP.nextLine();
+        String descriptionNorm = description.trim();
+        boolean result = descriptionNorm.matches("^[A-Za-zА-ЯIЇҐЄа-яіїґє\\-\\'\\d\\s\\.]{1,400}$");
+        while (!result){
+            System.out.println("Ви ввели некоректний опис лекції!\nВведіть опис лекції знову!");
+            description = scannerP.nextLine();
+            descriptionNorm = description.trim();
+            result = descriptionNorm.matches("^[A-Za-zА-ЯIЇҐЄа-яіїґє\\-\\'\\d\\s\\.]{1,400}$");
+        }
+        System.out.println("Опис лекції:  " + descriptionNorm);
+        ModelsSuper lecture = LectureRepository.getInstance().getById(idLecture);
+        Lecture lecture1 = (Lecture) lecture;
+        lecture1.setDescription(descriptionNorm);
+    }
+
+    public void setName (int idLecture) {
+        LectureRepository.getInstance().exist(idLecture);
+        LectureRepository.getInstance().getAll();
+        System.out.println("Введіть назву лекції!");
+        Scanner scannerP = new Scanner(System.in);
+        String lectureName = scannerP.nextLine();
+        String lectureNameNorm = lectureName.trim();
+        boolean result = lectureNameNorm.matches("^[A-Za-zА-ЯIЇҐЄа-яіїґє\\-\\'\\d\\s\\.]{1,200}$");
+        while (!result){
+            System.out.println("Ви ввели некоректну назву лекції!\nВведіть назву лекції знову!");
+            lectureName = scannerP.nextLine();
+            lectureNameNorm = lectureName.trim();
+            result = lectureNameNorm.matches("^[A-Za-zА-ЯIЇҐЄа-яіїґє\\-\\'\\d\\s\\.]{1,200}$");
+        }
+        System.out.println("Назва лекції:  " + lectureNameNorm);
+        ModelsSuper lecture = LectureRepository.getInstance().getById(idLecture);
+        Lecture lecture1 = (Lecture) lecture;
+        lecture1.setName(lectureNameNorm);
     }
 }

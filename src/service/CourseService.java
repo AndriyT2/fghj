@@ -1,6 +1,10 @@
 package service;
 
 import models.Course;
+import models.ModelsSuper;
+import models.Person;
+import repository.CourseRepository;
+import repository.PersonRepository;
 
 import java.util.Scanner;
 
@@ -135,6 +139,26 @@ public class CourseService {
 
             return "Error 4";
         }
+    }
+
+    public void setCourseName (int idCourse) {
+        CourseRepository.getInstance().exist(idCourse);
+        CourseRepository.getInstance().getAll();
+        System.out.println("Введіть назву курсу!");
+        Scanner scannerP = new Scanner(System.in);
+        String сourseName = scannerP.nextLine();
+        String сourseNameNorm = сourseName.trim();
+        boolean result = сourseNameNorm.matches("^[A-Za-zА-ЯIЇҐЄа-яіїґє\\-\\'\\d\\s\\.]{1,200}$");
+        while (!result){
+            System.out.println("Ви ввели некоректну назву курсу!\nВведіть назва курсу знову!");
+            сourseName = scannerP.nextLine();
+            сourseNameNorm = сourseName.trim();
+            result = сourseNameNorm.matches("^[A-Za-zА-ЯIЇҐЄа-яіїґє\\-\\'\\d\\s\\.]{1,200}$");
+        }
+        System.out.println("Назва курсу:  " + сourseNameNorm);
+        ModelsSuper course = CourseRepository.getInstance().getById(idCourse);
+        Course course1 = (Course) course;
+        course1.setCourseName(сourseNameNorm);
     }
 
 }

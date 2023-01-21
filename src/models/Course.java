@@ -6,6 +6,10 @@ public class Course extends ModelsSuper {
     private Student student;
     private Lecture lecture;
 
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
+
     public String getCourseName() {
     return courseName;
     }

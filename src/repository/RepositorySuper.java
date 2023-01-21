@@ -49,15 +49,39 @@ public class RepositorySuper {
 
     public void getAll() { System.out.println(Arrays.toString(arraySuper)); }
 
-    public void getById (int id) {
+    private ModelsSuper getById(ModelsSuper modelsSuper) {
+        return modelsSuper;
+    }
+
+   public void exist(int id) {
+        boolean result = false;
+       for (ModelsSuper modelsSuper : arraySuper) {
+           if(modelsSuper == null) {continue;}
+           if (modelsSuper.getId() == id) {
+               result = true;
+           }
+       }
+       if (result) {
+               System.out.println("Елемент з таким ID існує!");
+           } else {
+               System.out.println("Елемент з таким ID не існує!");
+           }
+       }
+
+    public ModelsSuper getById (int id) {             //You must be careful with this method!
+        ModelsSuper result = null;
         for (ModelsSuper modelsSuper:arraySuper) {
             if (modelsSuper.getId()==id) {
-                System.out.println(modelsSuper);
+               result = modelsSuper;
                 break;
             }
-            System.out.println("Елемента з таким ID не існує!");
+
+
+            //System.out.println("Елемента з таким ID не існує!");
         }
+        return result;
     }
+
 
     public void deleteById (int id) {
         for (int i = 0; i < arraySuper.length; i++) {
