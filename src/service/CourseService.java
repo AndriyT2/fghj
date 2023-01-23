@@ -1,10 +1,7 @@
 package service;
 
 import models.Course;
-import models.ModelsSuper;
-import models.Person;
 import repository.CourseRepository;
-import repository.PersonRepository;
 
 import java.util.Scanner;
 
@@ -156,9 +153,8 @@ public class CourseService {
             result = сourseNameNorm.matches("^[A-Za-zА-ЯIЇҐЄа-яіїґє\\-\\'\\d\\s\\.]{1,200}$");
         }
         System.out.println("Назва курсу:  " + сourseNameNorm);
-        ModelsSuper course = CourseRepository.getInstance().getById(idCourse);
-        Course course1 = (Course) course;
-        course1.setCourseName(сourseNameNorm);
+        Course course = CourseRepository.getInstance().get(idCourse);
+        course.setCourseName(сourseNameNorm);
     }
 
 }

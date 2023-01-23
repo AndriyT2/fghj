@@ -314,7 +314,7 @@ public class LectureService {
             result = descriptionNorm.matches("^[A-Za-zА-ЯIЇҐЄа-яіїґє\\-\\'\\d\\s\\.]{1,400}$");
         }
         System.out.println("Опис лекції:  " + descriptionNorm);
-        ModelsSuper lecture = LectureRepository.getInstance().getById(idLecture);
+        ModelsSuper lecture = LectureRepository.getInstance().get(idLecture);
         Lecture lecture1 = (Lecture) lecture;
         lecture1.setDescription(descriptionNorm);
     }
@@ -334,8 +334,7 @@ public class LectureService {
             result = lectureNameNorm.matches("^[A-Za-zА-ЯIЇҐЄа-яіїґє\\-\\'\\d\\s\\.]{1,200}$");
         }
         System.out.println("Назва лекції:  " + lectureNameNorm);
-        ModelsSuper lecture = LectureRepository.getInstance().getById(idLecture);
-        Lecture lecture1 = (Lecture) lecture;
-        lecture1.setName(lectureNameNorm);
+        Lecture lecture = LectureRepository.getInstance().get(idLecture);
+        lecture.setName(lectureNameNorm);
     }
 }

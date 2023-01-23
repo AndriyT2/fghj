@@ -5,7 +5,7 @@ import models.Person;
 
 import java.util.Arrays;
 
-public class LectureRepository extends RepositorySuper {
+public class LectureRepository extends RepositorySuper<Lecture> {
 
 
         private static LectureRepository instance;

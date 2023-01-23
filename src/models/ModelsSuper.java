@@ -1,12 +1,12 @@
 package models;
 
-public class ModelsSuper {
+public class ModelsSuper <E> {
 
     private static int counter;
 
     private final int id;
 
-    public ModelsSuper() {
+    public <E> ModelsSuper() {
         ++counter;
         this.id = counter;
     }
