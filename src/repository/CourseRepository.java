@@ -1,9 +1,8 @@
 package repository;
 
 import models.Course;
-import models.Lecture;
 
-public class CourseRepository extends RepositorySuper {
+public class CourseRepository extends RepositorySuper<Course> {
 
 
     private static CourseRepository instance;
@@ -18,5 +17,6 @@ public class CourseRepository extends RepositorySuper {
         }
         return instance;
     }
+
 
 }

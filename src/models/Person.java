@@ -1,6 +1,6 @@
 package models;
 
-public class Person extends ModelsSuper {
+public class Person extends ModelsSuper<Person> {
 
     private int courseId;
     private String firstname;

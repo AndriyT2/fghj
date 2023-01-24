@@ -2,7 +2,7 @@ package repository;
 
 import models.Person;
 
-public class PersonRepository extends  RepositorySuper {
+public class PersonRepository extends  RepositorySuper<Person> {
 
     private static PersonRepository instance;
 

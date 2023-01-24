@@ -1,10 +1,7 @@
 package service;
 
-import models.Course;
-import models.ModelsSuper;
 import models.Person;
 import models.Role;
-import repository.CourseRepository;
 import repository.PersonRepository;
 
 import java.util.Scanner;
@@ -35,21 +32,19 @@ public class PersonService {
                     scanner.nextLine();
                 } while (ask1 < 1 | ask1 > 2);
 
-                switch (ask1) {
+                if (ask1 == 1) {
+                    System.out.println("Ви створили нового студента.");
+                    Person personS = new Person(Role.STUDENT);
+                    personRepository.add(personS);
+                    personRepository.getAll();
+                    break;
 
-                    case 1:
-                        System.out.println("Ви створили нового студента.");
-                        Person personS = new Person(Role.STUDENT);
-                        personRepository.add(personS);
-                        personRepository.getAll();
-                        break;
-
-                    case 2:
-                        System.out.println("Ви створили нового вчителя.");
-                        Person personT = new Person(Role.TEACHER);
-                        personRepository.add(personT);
-                        personRepository.getAll();
-                        break;
+                } else {
+                    System.out.println("Ви створили нового вчителя.");
+                    Person personT = new Person(Role.TEACHER);
+                    personRepository.add(personT);
+                    personRepository.getAll();
+                    break;
                 }
 
             } else {
@@ -75,9 +70,8 @@ public class PersonService {
             result = phoneNorm.matches("(\\+*)\\d{11}");
         }
         System.out.println("Номер телефона:  " + phoneNorm);
-        ModelsSuper person = PersonRepository.getInstance().getById(idPerson);
-        Person person1 = (Person) person;
-        person1.setPhone(phoneNorm);
+        Person person = PersonRepository.getInstance().get(idPerson);
+        person.setPhone(phoneNorm);
     }
     public void setFirstname (int idPerson) {
         PersonRepository.getInstance().exist(idPerson);
@@ -94,9 +88,8 @@ public class PersonService {
             result = firstnameNorm.matches("^([A-Za-z][A-Za-z\\-\\']{1,50})|([А-ЯIЇҐЄа-яіїґє][А-ЯIЇҐЄа-яіїґє\\-\\']{1,50})$");
         }
         System.out.println("Ім'я:  " + firstnameNorm);
-        ModelsSuper person = PersonRepository.getInstance().getById(idPerson);
-        Person person1 = (Person) person;
-        person1.setFirstname(firstnameNorm);
+        Person person = PersonRepository.getInstance().get(idPerson);
+        person.setFirstname(firstnameNorm);
     }
 
     public void setLastname (int idPerson) {
@@ -114,9 +107,8 @@ public class PersonService {
             result = lastnameNorm.matches("^([A-Za-z][A-Za-z\\-\\']{1,100})|([А-ЯIЇҐЄа-яіїґє][А-ЯIЇҐЄа-яіїґє\\-\\']{1,100})$");
         }
         System.out.println("Прізвище:  " + lastnameNorm);
-        ModelsSuper person = PersonRepository.getInstance().getById(idPerson);
-        Person person1 = (Person) person;
-        person1.setLastname(lastnameNorm);
+        Person person = PersonRepository.getInstance().get(idPerson);
+        person.setLastname(lastnameNorm);
     }
 
     public void setEmail (int idPerson) {
@@ -134,8 +126,7 @@ public class PersonService {
             result = emailNorm.matches("^([a-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,6})$");
         }
         System.out.println("Поштова скринька:  " + emailNorm);
-        ModelsSuper person = PersonRepository.getInstance().getById(idPerson);
-        Person person1 = (Person) person;
-        person1.setEmail(emailNorm);
+        Person person = PersonRepository.getInstance().get(idPerson);
+        person.setEmail(emailNorm);
     }
 }

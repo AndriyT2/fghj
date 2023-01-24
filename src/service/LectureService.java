@@ -193,14 +193,13 @@ public class LectureService {
 
                     int maxTeacherId = 0;
                     int totalTeacher = 0;
-                    for (ModelsSuper person: PersonRepository.getInstance().getArraySuper()) {
-                        Person p = (Person) person;
-                        if (p == null) { break;
-                        } else if (p.getRole().equals(Role.TEACHER)) {
+                    for (Person person: PersonRepository.getInstance().getArraySuper()) {
+                        if (person == null) { break;
+                        } else if (person.getRole().equals(Role.TEACHER)) {
                             ++totalTeacher;
                             System.out.print(person);
-                            System.out.println(" - маэ значкння ID = " + p.getId());
-                            if (maxTeacherId < p.getId()) {maxTeacherId = p.getId();}
+                            System.out.println(" - маэ значкння ID = " + person.getId());
+                            if (maxTeacherId < person.getId()) {maxTeacherId = person.getId();}
                         }
                     }
 
@@ -281,14 +280,14 @@ public class LectureService {
             System.out.println("Введіть існуюче значення ID лекції");
             int idLectureFromTask = getAllInfoLecture.nextInt();
             getAllInfoLecture.nextLine();
-            for (ModelsSuper lecture :
+            for (Lecture lecture :
                     LectureRepository.getInstance().getArraySuper()) {
                 if (lecture == null) {
                     continue;
                 }
                 if (lecture.getId() == idLectureFromTask) {
                     search = 1;
-                    lectureFromTask = (Lecture) lecture;
+                    lectureFromTask = lecture;
                 }
             }
         } while (search<0);
@@ -314,9 +313,8 @@ public class LectureService {
             result = descriptionNorm.matches("^[A-Za-zА-ЯIЇҐЄа-яіїґє\\-\\'\\d\\s\\.]{1,400}$");
         }
         System.out.println("Опис лекції:  " + descriptionNorm);
-        ModelsSuper lecture = LectureRepository.getInstance().getById(idLecture);
-        Lecture lecture1 = (Lecture) lecture;
-        lecture1.setDescription(descriptionNorm);
+        Lecture lecture = LectureRepository.getInstance().get(idLecture);
+        lecture.setDescription(descriptionNorm);
     }
 
     public void setName (int idLecture) {
@@ -334,8 +332,7 @@ public class LectureService {
             result = lectureNameNorm.matches("^[A-Za-zА-ЯIЇҐЄа-яіїґє\\-\\'\\d\\s\\.]{1,200}$");
         }
         System.out.println("Назва лекції:  " + lectureNameNorm);
-        ModelsSuper lecture = LectureRepository.getInstance().getById(idLecture);
-        Lecture lecture1 = (Lecture) lecture;
-        lecture1.setName(lectureNameNorm);
+        Lecture lecture = LectureRepository.getInstance().get(idLecture);
+        lecture.setName(lectureNameNorm);
     }
 }

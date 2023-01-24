@@ -1,9 +1,10 @@
 package models;
 
-public class Lecture extends ModelsSuper{
+public class Lecture extends ModelsSuper<Lecture> {
 
     private String name;
     private String description;
+    private Homework[] homeworkArray;
 
     public void setName(String name) {
         this.name = name;
@@ -17,7 +18,7 @@ public class Lecture extends ModelsSuper{
         return description;
     }
 
-    private Homeworks homeworks;
+    private Homework homework;
     private AdditionalMaterials additionalMaterials;
     private int idCourse;
     private int personId;
