@@ -2,7 +2,10 @@ package service;
 
 import models.Course;
 import repository.CourseRepository;
+import utility.EntityNotFoundException;
+import utility.SetParameterException;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class CourseService {
@@ -74,10 +77,7 @@ public class CourseService {
 //            Course name stay without changes (courseName = courseName;)
 
         } else {
-
-            System.out.println("Ви ввели некоректну відповідь. Почніть з самого спочатку!");
-
-            return "Error 1";
+            throw new RuntimeException("Ви ввели некоректну відповідь. Почніть з самого початку!");
         }
 
         System.out.println("Чи бажаєте додати додаткові параметри для курсу?");
@@ -120,25 +120,18 @@ public class CourseService {
                             "\nЗначення для цього параметру:" + courseParameterValue);
                     yield courseParameterValue;
                 default:
-                    yield "Error 3";
+                    yield "Ви ввели некоректну відповідь. Почніть з самого спочатку!";
             };
 
-            if (courseParameter.equals("Error 3")) {
-                System.out.println("Ви ввели некоректну відповідь. Почніть з самого початку!");
-                return "Error 3";
-            }
 
             return courseName + "#" + courseParameterNumber + "#" + courseParameter;
 
         } else {
-
-            System.out.println("Ви ввели некоректну відповідь. Почніть з самого початку!");
-
-            return "Error 4";
+            throw new RuntimeException("Ви ввели некоректну відповідь. Почніть з самого початку!");
         }
     }
 
-    public void setCourseName (int idCourse) {
+    public void setCourseName (int idCourse) throws EntityNotFoundException {
         CourseRepository.getInstance().exist(idCourse);
         CourseRepository.getInstance().getAll();
         System.out.println("Введіть назву курсу!");
@@ -146,11 +139,15 @@ public class CourseService {
         String courseName = scannerP.nextLine();
         String courseNameNorm = courseName.trim();
         boolean result = courseNameNorm.matches("^[A-Za-zА-ЯIЇҐЄа-яіїґє\\-\\'\\d\\s\\.]{1,200}$");
-        while (!result){
-            System.out.println("Ви ввели некоректну назву курсу!\nВведіть назва курсу знову!");
-            courseName = scannerP.nextLine();
-            courseNameNorm = courseName.trim();
-            result = courseNameNorm.matches("^[A-Za-zА-ЯIЇҐЄа-яіїґє\\-\\'\\d\\s\\.]{1,200}$");
+        while (!result) {
+            try {
+                throw new SetParameterException("Ви ввели некоректну назву курсу!");
+            } catch (SetParameterException e) {
+                System.err.println("Введіть назва курсу знову у правильному форматі!");
+                courseName = scannerP.nextLine();
+                courseNameNorm = courseName.trim();
+                result = courseNameNorm.matches("^[A-Za-zА-ЯIЇҐЄа-яіїґє\\-\\'\\d\\s\\.]{1,200}$");
+            }
         }
         System.out.println("Назва курсу:  " + courseNameNorm);
         Course course = CourseRepository.getInstance().get(idCourse);

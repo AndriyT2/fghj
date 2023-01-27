@@ -1,6 +1,7 @@
 package repository;
 
 import models.ModelsSuper;
+import utility.EntityNotFoundException;
 
 import java.util.Arrays;
 
@@ -57,18 +58,21 @@ public abstract class RepositorySuper <E extends ModelsSuper> implements Reposit
            }
        }
 
-    public E get(int index) {             //You must be careful with this method! / Rename from getById
-        E result = null;
-        for (E modelsSuper:arraySuper) {
-            if (modelsSuper.getId()== index) {
-               result = modelsSuper;
-                break;
-            }
+    public E get(int index) throws EntityNotFoundException {             // Rename from getById
+       try {
+           for (E modelsSuper : arraySuper) {
+               if (modelsSuper.getId() == index) {
+                   return modelsSuper;
+               } else {
+                   throw new EntityNotFoundException("Елемента з таким індексом не існує!");
+               }
+           }
+       } catch (NullPointerException e) {
+           System.err.println("Ви звернулися до пустого масиву!");
+           e.printStackTrace();
+       }
 
-
-            //System.out.println("Елемента з таким ID не існує!");
-        }
-        return result;
+        return null;
     }
 
 

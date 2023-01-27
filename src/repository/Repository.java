@@ -1,6 +1,7 @@
 package repository;
 
 import models.ModelsSuper;
+import utility.EntityNotFoundException;
 
 public interface Repository<E extends ModelsSuper> {
 
@@ -9,7 +10,7 @@ public interface Repository<E extends ModelsSuper> {
     void add(E element);
     void add(int index, E element);
     void getAll();
-    E get(int index);
+    E get(int index) throws EntityNotFoundException;
     void remove (int index);
 
 }

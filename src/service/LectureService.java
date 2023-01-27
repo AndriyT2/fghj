@@ -3,6 +3,8 @@ import models.*;
 import repository.CourseRepository;
 import repository.LectureRepository;
 import repository.PersonRepository;
+import utility.EntityNotFoundException;
+import utility.SetParameterException;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -66,8 +68,8 @@ public class LectureService {
             }
 
         } else {
+            throw new RuntimeException();
 
-            System.out.println("Ви ввели некоректну відповідь. Почніть з самого початку!");
         }
 
         System.out.println("Загальна кількість створених лекцій складає - " + totalLectures + " штук(и).");
@@ -111,7 +113,7 @@ public class LectureService {
                 System.out.println("Ви створили " + totalLecturesLoop +"-у лекцію з Id курсу = " + IdCourseLoop);
 
             } else {
-                System.out.println("Ви ввели некоректну відповідь. Почніть з самого початку!");
+                throw new RuntimeException();
             }
 
         }
@@ -166,8 +168,7 @@ public class LectureService {
                     lectureRepository2.add(new Lecture(idCourse1H9));
                     lectureRepository2.getAll();
                 } else {
-                    System.out.println("Ви ввели некоректну відповідь. Почніть з самого початку!");
-                    break;
+                   throw new RuntimeException();
                 }
 
             }
@@ -236,8 +237,7 @@ public class LectureService {
 
 
                         } else {
-                            System.out.println("Ви ввели некоректну відповідь. Почніть з самого початку!");
-                            break;
+                            throw new RuntimeException();
                         }
 
 
@@ -258,14 +258,12 @@ public class LectureService {
                         System.out.println("ID створенної лекції - " + lectureH11.getId());
 
                     } else {
-                        System.out.println("Ви ввели некоректну відповідь. Почніть з самого початку!");
-                        break;
+                        throw new RuntimeException();
                     }
 
 
             } else {
-                System.out.println("Ви ввели некоректну відповідь. Почніть з самого початку!");
-                break;
+                throw new RuntimeException();
             }
 
         }
@@ -298,38 +296,46 @@ public class LectureService {
         System.out.println("Значення Name для заданної лекції - " + lectureFromTask.getName());
     }
 
-    public void setDescription (int idLecture) {
+    public void setDescription (int idLecture) throws EntityNotFoundException {
         LectureRepository.getInstance().exist(idLecture);
         LectureRepository.getInstance().getAll();
         System.out.println("Введіть опис лекції!");
         Scanner scannerP = new Scanner(System.in);
         String description = scannerP.nextLine();
         String descriptionNorm = description.trim();
-        boolean result = descriptionNorm.matches("^[A-Za-zА-ЯIЇҐЄа-яіїґє\\-\\'\\d\\s\\.]{1,400}$");
-        while (!result){
-            System.out.println("Ви ввели некоректний опис лекції!\nВведіть опис лекції знову!");
-            description = scannerP.nextLine();
-            descriptionNorm = description.trim();
-            result = descriptionNorm.matches("^[A-Za-zА-ЯIЇҐЄа-яіїґє\\-\\'\\d\\s\\.]{1,400}$");
+        boolean result = descriptionNorm.matches("^[A-Za-zА-ЯIЇҐЄа-яіїґє\\-'\\d\\s.]{1,400}$");
+        while (!result) {
+            try {
+                throw new SetParameterException("Ви ввели некоректний опис лекції!");
+            } catch (SetParameterException e) {
+                System.err.println("Введіть опис лекції знову!");
+                description = scannerP.nextLine();
+                descriptionNorm = description.trim();
+                result = descriptionNorm.matches("^[A-Za-zА-ЯIЇҐЄа-яіїґє\\-'\\d\\s.]{1,400}$");
+            }
         }
         System.out.println("Опис лекції:  " + descriptionNorm);
         Lecture lecture = LectureRepository.getInstance().get(idLecture);
         lecture.setDescription(descriptionNorm);
     }
 
-    public void setName (int idLecture) {
+    public void setName (int idLecture) throws EntityNotFoundException {
         LectureRepository.getInstance().exist(idLecture);
         LectureRepository.getInstance().getAll();
         System.out.println("Введіть назву лекції!");
         Scanner scannerP = new Scanner(System.in);
         String lectureName = scannerP.nextLine();
         String lectureNameNorm = lectureName.trim();
-        boolean result = lectureNameNorm.matches("^[A-Za-zА-ЯIЇҐЄа-яіїґє\\-\\'\\d\\s\\.]{1,200}$");
-        while (!result){
-            System.out.println("Ви ввели некоректну назву лекції!\nВведіть назву лекції знову!");
-            lectureName = scannerP.nextLine();
-            lectureNameNorm = lectureName.trim();
-            result = lectureNameNorm.matches("^[A-Za-zА-ЯIЇҐЄа-яіїґє\\-\\'\\d\\s\\.]{1,200}$");
+        boolean result = lectureNameNorm.matches("^[A-Za-zА-ЯIЇҐЄа-яіїґє\\-'\\d\\s.]{1,200}$");
+        while (!result) {
+            try {
+                throw new SetParameterException("Ви ввели некоректну назву лекції!");
+            } catch (SetParameterException e) {
+                System.err.println("Введіть назву лекції знову у правильному форматі!");
+                lectureName = scannerP.nextLine();
+                lectureNameNorm = lectureName.trim();
+                result = lectureNameNorm.matches("^[A-Za-zА-ЯIЇҐЄа-яіїґє\\-'\\d\\s.]{1,200}$");
+            }
         }
         System.out.println("Назва лекції:  " + lectureNameNorm);
         Lecture lecture = LectureRepository.getInstance().get(idLecture);

@@ -1,11 +1,12 @@
 import models.Lecture;
-import repository.LectureRepository;
+import repository.CourseRepository;
 import service.CourseService;
 import service.LectureService;
 import service.PersonService;
+import utility.EntityNotFoundException;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws EntityNotFoundException {
 
         System.out.println();
         System.out.println("=====================  Лекція 5. Git - планування релізів.  =========================================");
@@ -16,6 +17,7 @@ public class Main {
         Lecture lecture3 = new Lecture();
         Lecture lecture4 = new Lecture();
         Lecture lecture5 = new Lecture();
+
 
         System.out.println("Лічильник прийме знаачення = " + Lecture.getCounter());
 
@@ -87,11 +89,12 @@ public class Main {
 //        homework12.setPhone(18);
 //        homework12.setFirstname(18);
 //        homework12.setLastname(18);
-//        homework12.setEmail(18);
+        homework12.setEmail(18);
         CourseService homework12C = new CourseService();
 //        homework12C.setCourseName(15);
         LectureService homework12L = new LectureService();
-        homework12L.setDescription(17);
+        homework12L.setDescription(18);
+
 
 
     }
