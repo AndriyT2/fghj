@@ -4,7 +4,7 @@ public abstract class ModelsSuper <E> {
 
     private static int counter;
 
-    private final int id;
+    private final Integer id;
 
     public <E> ModelsSuper() {
         ++counter;

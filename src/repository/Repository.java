@@ -3,7 +3,7 @@ package repository;
 import models.ModelsSuper;
 import utility.EntityNotFoundException;
 
-public interface Repository<E extends ModelsSuper> {
+public interface Repository<E extends ModelsSuper<E>> {
 
     int size();
     boolean isEmpty();
@@ -12,5 +12,6 @@ public interface Repository<E extends ModelsSuper> {
     void getAll();
     E get(int index) throws EntityNotFoundException;
     void remove (int index);
+    void findAll();
 
 }

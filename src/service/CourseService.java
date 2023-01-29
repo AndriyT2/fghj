@@ -138,7 +138,7 @@ public class CourseService {
         Scanner scannerP = new Scanner(System.in);
         String courseName = scannerP.nextLine();
         String courseNameNorm = courseName.trim();
-        boolean result = courseNameNorm.matches("^[A-Za-zА-ЯIЇҐЄа-яіїґє\\-\\'\\d\\s\\.]{1,200}$");
+        boolean result = courseNameNorm.matches("^[A-Za-zА-ЯIЇҐЄа-яіїґє\\-'\\d\\s.]{1,200}$");
         while (!result) {
             try {
                 throw new SetParameterException("Ви ввели некоректну назву курсу!");
@@ -146,7 +146,7 @@ public class CourseService {
                 System.err.println("Введіть назва курсу знову у правильному форматі!");
                 courseName = scannerP.nextLine();
                 courseNameNorm = courseName.trim();
-                result = courseNameNorm.matches("^[A-Za-zА-ЯIЇҐЄа-яіїґє\\-\\'\\d\\s\\.]{1,200}$");
+                result = courseNameNorm.matches("^[A-Za-zА-ЯIЇҐЄа-яіїґє\\-'\\d\\s.]{1,200}$");
             }
         }
         System.out.println("Назва курсу:  " + courseNameNorm);

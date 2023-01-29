@@ -1,9 +1,6 @@
 package repository;
 
 import models.Lecture;
-import models.Person;
-
-import java.util.Arrays;
 
 public class LectureRepository extends RepositorySuper<Lecture> {
 

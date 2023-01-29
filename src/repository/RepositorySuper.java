@@ -2,10 +2,12 @@ package repository;
 
 import models.ModelsSuper;
 import utility.EntityNotFoundException;
+import utility.SimpleIteration;
 
 import java.util.Arrays;
+import java.util.NoSuchElementException;
 
-public abstract class RepositorySuper <E extends ModelsSuper> implements Repository<E>{
+public abstract class RepositorySuper <E extends ModelsSuper<E>> implements Repository<E>{
 
    E[] arraySuper;
     final int STANDARD_CAPACITY = 7;
@@ -31,9 +33,11 @@ public abstract class RepositorySuper <E extends ModelsSuper> implements Reposit
         }
     }
 
-    public void add(int index, E element) {    //This method can destroy the logic of other methods!
+    public void add(int index, E element) {
         if (index > (arraySuper.length - 1)) {
-            arraySuper = Arrays.copyOf(arraySuper, index);
+            throw new ArrayIndexOutOfBoundsException();
+        } else if (arraySuper[index]==null & arraySuper[index-1]==null) {
+            throw new NoSuchElementException();
         }
         arraySuper[index] = element;
     }
@@ -42,7 +46,7 @@ public abstract class RepositorySuper <E extends ModelsSuper> implements Reposit
     public void getAll() { System.out.println(Arrays.toString(arraySuper)); }
 
 
-   public void exist(int id) {
+    public void exist(int id) {
         boolean result = false;
        for (E modelsSuper : arraySuper) {
            if(modelsSuper == null) {continue;}
@@ -53,26 +57,24 @@ public abstract class RepositorySuper <E extends ModelsSuper> implements Reposit
        }
        if (result) {
                System.out.println("Елемент з таким ID існує!");
-           } else {
+       } else {
                System.out.println("Елемент з таким ID не існує!");
-           }
        }
+    }
 
     public E get(int index) throws EntityNotFoundException {             // Rename from getById
        try {
            for (E modelsSuper : arraySuper) {
                if (modelsSuper.getId() == index) {
                    return modelsSuper;
-               } else {
-                   throw new EntityNotFoundException("Елемента з таким індексом не існує!");
                }
            }
        } catch (NullPointerException e) {
            System.err.println("Ви звернулися до пустого масиву!");
            e.printStackTrace();
        }
+        throw new EntityNotFoundException("Елемента з таким індексом не існує!");
 
-        return null;
     }
 
 
@@ -82,11 +84,11 @@ public abstract class RepositorySuper <E extends ModelsSuper> implements Reposit
                 System.arraycopy(arraySuper, i+1, arraySuper, i, arraySuper.length - 1 - i);
                 arraySuper[arraySuper.length-1] = null;
                 break;
-            } else {
-                System.out.println("Елемента з таким ID не існує!");
             }
         }
+        throw new NoSuchElementException();
     }
+
 
     public int size() {
         int counter = 0;
@@ -101,8 +103,7 @@ public abstract class RepositorySuper <E extends ModelsSuper> implements Reposit
 
     public boolean isEmpty() {
        int counter = size();
-       if (counter == 0) { return true;
-       } else { return false;}
+        return counter == 0;
     }
 
 
@@ -111,5 +112,20 @@ public abstract class RepositorySuper <E extends ModelsSuper> implements Reposit
     }
 
 
+    public void findAll() {
+        getAll();
+        int counter = 0;
+        SimpleIteration<E> simpleIteration = new SimpleIteration<>(arraySuper);
+        for (E element :
+                arraySuper) {
+            if (element != null) {
+                ++counter;
+            }
+        }
+            for (int i = 0; i < counter; i++) {
+                System.out.println(simpleIteration.next());
+
+        }
+    }
 }
 
