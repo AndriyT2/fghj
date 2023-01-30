@@ -2,20 +2,35 @@ package repository;
 
 import models.Homework;
 
-public class HomeworkRepository extends RepositorySuper<Homework> {
+import java.util.ArrayList;
+import java.util.List;
+import java.util.NoSuchElementException;
 
-        private static repository.HomeworkRepository instance;
+public class HomeworkRepository {
+    public List<Homework> getHomeworkList() {
+        return homeworkList;
+    }
+
+    private List<Homework> homeworkList;
+
+        private static HomeworkRepository instance;
 
         private HomeworkRepository() {
-            this.arraySuper = new Homework[STANDARD_CAPACITY];
+            this.homeworkList = new ArrayList<>();
         }
 
-        public static repository.HomeworkRepository getInstance() {
+        public static HomeworkRepository getInstance() {
             if (instance == null) {
-                instance = new repository.HomeworkRepository();
+                instance = new HomeworkRepository();
             }
             return instance;
         }
+    public Homework getById(int index) {
+        for (Homework homework : homeworkList){
+            if (homework.getId() == index) {return homework;}
+        }
+        throw new NoSuchElementException();
+    }
 
 
     }

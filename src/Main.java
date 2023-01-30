@@ -1,5 +1,8 @@
+import models.AdditionalMaterials;
 import models.Lecture;
+import repository.AdditionalMaterialsRepository;
 import repository.LectureRepository;
+import service.AdditionalMaterialsService;
 import service.CourseService;
 import service.LectureService;
 import service.PersonService;
@@ -94,9 +97,16 @@ public class Main {
         CourseService homework12C = new CourseService();
 //        homework12C.setCourseName(15);
         LectureService homework12L = new LectureService();
-        homework12L.setDescription(18);
-        LectureRepository.getInstance().findAll();
+//        homework12L.setDescription(17);
 
+        System.out.println("\n=====================  Лекція 16. Collection.  ===========================================================\n");
+
+//        LectureRepository.getInstance().findAll();  //??????
+
+        System.out.println("\n=====================  Лекція 17. Collection. List.  ===========================================================\n");
+
+        AdditionalMaterialsService additionalMaterials17 = new AdditionalMaterialsService("AD1", 17);
+        additionalMaterials17.addResourceType(18);
 
 
     }

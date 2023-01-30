@@ -2,12 +2,18 @@ package repository;
 
 import models.Person;
 
-public class PersonRepository extends  RepositorySuper<Person> {
+import java.util.ArrayList;
+import java.util.List;
+import java.util.NoSuchElementException;
+
+public class PersonRepository {
+    private List<Person> personList;
+
 
     private static PersonRepository instance;
 
     private PersonRepository() {
-        this.arraySuper = new Person[STANDARD_CAPACITY];
+        this.personList = new ArrayList<>();
     }
 
         public static PersonRepository getInstance() {
@@ -15,6 +21,20 @@ public class PersonRepository extends  RepositorySuper<Person> {
             instance = new PersonRepository();
         }
         return instance;
+    }
+
+
+    public List<Person> getPersonList() {
+        return personList;
+    }
+    public void getAll() {
+        System.out.println(PersonRepository.getInstance().getPersonList());
+    }
+    public Person getById(int index) {
+        for (Person person : personList){
+            if (person.getId() == index) {return person;}
+        }
+        throw new NoSuchElementException();
     }
 
 }

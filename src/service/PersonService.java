@@ -24,7 +24,7 @@ public class PersonService {
             } else if (ask.equalsIgnoreCase("y")) {
 
                 PersonRepository personRepository = PersonRepository.getInstance();
-                PersonRepository.getInstance().getAll();
+                System.out.println(PersonRepository.getInstance().getPersonList());
 
                 int ask1;
 
@@ -37,16 +37,14 @@ public class PersonService {
                 if (ask1 == 1) {
                     System.out.println("Ви створили нового студента.");
                     Person personS = new Person(Role.STUDENT);
-                    personRepository.add(personS);
-                    personRepository.getAll();
-                    break;
+                    personRepository.getPersonList().add(personS);
+                    System.out.println(PersonRepository.getInstance().getPersonList());
 
                 } else {
                     System.out.println("Ви створили нового вчителя.");
                     Person personT = new Person(Role.TEACHER);
-                    personRepository.add(personT);
-                    personRepository.getAll();
-                    break;
+                    personRepository.getPersonList().add(personT);
+                    System.out.println(PersonRepository.getInstance().getPersonList());
                 }
 
             } else {
@@ -56,8 +54,7 @@ public class PersonService {
         }
     }
     public void setPhone (int idPerson) throws EntityNotFoundException {
-        PersonRepository.getInstance().exist(idPerson);
-        PersonRepository.getInstance().getAll();
+        System.out.println(PersonRepository.getInstance().getPersonList());
         System.out.println("Введіть номер телефона в наступному форматі: +ххххххххххх.");
         Scanner scannerP = new Scanner(System.in);
         String phone = scannerP.nextLine();
@@ -74,12 +71,11 @@ public class PersonService {
             }
         }
         System.out.println("Номер телефона:  " + phoneNorm);
-        Person person = PersonRepository.getInstance().get(idPerson);
+        Person person = PersonRepository.getInstance().getById(idPerson);
         person.setPhone(phoneNorm);
     }
     public void setFirstname (int idPerson) throws EntityNotFoundException {
-        PersonRepository.getInstance().exist(idPerson);
-        PersonRepository.getInstance().getAll();
+        System.out.println(PersonRepository.getInstance().getPersonList());
         System.out.println("Введіть необхідне ім'я!");
         Scanner scannerP = new Scanner(System.in);
         String firstname = scannerP.nextLine();
@@ -96,13 +92,12 @@ public class PersonService {
             }
         }
         System.out.println("Ім'я:  " + firstnameNorm);
-        Person person = PersonRepository.getInstance().get(idPerson);
+        Person person = PersonRepository.getInstance().getById(idPerson);
         person.setFirstname(firstnameNorm);
     }
 
     public void setLastname (int idPerson) throws EntityNotFoundException {
-        PersonRepository.getInstance().exist(idPerson);
-        PersonRepository.getInstance().getAll();
+        System.out.println(PersonRepository.getInstance().getPersonList());
         System.out.println("Введіть необхідне прізвище!");
         Scanner scannerP = new Scanner(System.in);
         String lastname = scannerP.nextLine();
@@ -119,13 +114,12 @@ public class PersonService {
             }
         }
         System.out.println("Прізвище:  " + lastnameNorm);
-        Person person = PersonRepository.getInstance().get(idPerson);
+        Person person = PersonRepository.getInstance().getById(idPerson);
         person.setLastname(lastnameNorm);
     }
 
     public void setEmail (int idPerson) throws EntityNotFoundException {
-        PersonRepository.getInstance().exist(idPerson);
-        PersonRepository.getInstance().getAll();
+        System.out.println(PersonRepository.getInstance().getPersonList());
         System.out.println("Введіть необхідну поштову скриньку!");
         Scanner scannerP = new Scanner(System.in);
         String email = scannerP.nextLine();
@@ -143,7 +137,7 @@ public class PersonService {
         }
 
         System.out.println("Поштова скринька:  " + emailNorm);
-        Person person = PersonRepository.getInstance().get(idPerson);
+        Person person = PersonRepository.getInstance().getById(idPerson);
         person.setEmail(emailNorm);
     }
 }

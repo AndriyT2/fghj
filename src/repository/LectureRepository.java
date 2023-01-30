@@ -1,14 +1,22 @@
 package repository;
 
 import models.Lecture;
+import utility.EntityNotFoundException;
 
-public class LectureRepository extends RepositorySuper<Lecture> {
+import java.rmi.NoSuchObjectException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.NoSuchElementException;
+
+public class LectureRepository {
+    private List<Lecture> lecturesList;
 
 
         private static LectureRepository instance;
 
         private LectureRepository() {
-            this.arraySuper = new Lecture[STANDARD_CAPACITY];
+            this.lecturesList = new ArrayList<>();
         }
 
         public static LectureRepository getInstance() {
@@ -18,7 +26,21 @@ public class LectureRepository extends RepositorySuper<Lecture> {
             return instance;
         }
 
+    public List<Lecture> getLecturesList() {
+        return lecturesList;
     }
+
+    public void getAll() {
+        System.out.println(LectureRepository.getInstance().getLecturesList());
+    }
+
+    public Lecture getById(int index) {
+            for (Lecture lecture : lecturesList){
+                if (lecture.getId() == index) {return lecture;}
+            }
+            throw new NoSuchElementException();
+       }
+}
 
 
 

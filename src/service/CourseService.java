@@ -132,8 +132,7 @@ public class CourseService {
     }
 
     public void setCourseName (int idCourse) throws EntityNotFoundException {
-        CourseRepository.getInstance().exist(idCourse);
-        CourseRepository.getInstance().getAll();
+        System.out.println(CourseRepository.getInstance().getCourseList());
         System.out.println("Введіть назву курсу!");
         Scanner scannerP = new Scanner(System.in);
         String courseName = scannerP.nextLine();
@@ -150,7 +149,7 @@ public class CourseService {
             }
         }
         System.out.println("Назва курсу:  " + courseNameNorm);
-        Course course = CourseRepository.getInstance().get(idCourse);
+        Course course = CourseRepository.getInstance().getById(idCourse);
         course.setCourseName(courseNameNorm);
     }
 

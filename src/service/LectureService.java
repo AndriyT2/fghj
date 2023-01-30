@@ -130,14 +130,14 @@ public class LectureService {
     public void lecturesArrayCreator () {
 
         CourseRepository courseRepository2 = CourseRepository.getInstance();
-        courseRepository2.getAll();
+        System.out.println(CourseRepository.getInstance().getCourseList());
 
         LectureRepository lectureRepository2 = LectureRepository.getInstance();
-        System.out.println(Arrays.toString(lectureRepository2.getArraySuper()));
+        System.out.println(lectureRepository2.getLecturesList());
 
         CourseService course = new CourseService();
         Course course1H9 = course.createCourse();
-        courseRepository2.add(course1H9);
+        courseRepository2.getCourseList().add(course1H9);
         courseRepository2.getAll();
 
         int idCourse1H9 = course1H9.getId();
@@ -147,10 +147,10 @@ public class LectureService {
 
         Lecture lecture2H9 = createLecture(idCourse1H9);
 
-        lectureRepository2.add(lecture1H9);
+        lectureRepository2.getLecturesList().add(lecture1H9);
         lectureRepository2.getAll();
 
-        lectureRepository2.add(lecture2H9);
+        lectureRepository2.getLecturesList().add(lecture2H9);
         lectureRepository2.getAll();
 
         while (true) {
@@ -165,7 +165,7 @@ public class LectureService {
 
                 } else if (modelSuperAsk2.equalsIgnoreCase("y")) {
 
-                    lectureRepository2.add(new Lecture(idCourse1H9));
+                    lectureRepository2.getLecturesList().add(new Lecture(idCourse1H9));
                     lectureRepository2.getAll();
                 } else {
                    throw new RuntimeException();
@@ -194,7 +194,7 @@ public class LectureService {
 
                     int maxTeacherId = 0;
                     int totalTeacher = 0;
-                    for (Person person: PersonRepository.getInstance().getArraySuper()) {
+                    for (Person person: PersonRepository.getInstance().getPersonList()) {
                         if (person == null) { break;
                         } else if (person.getRole().equals(Role.TEACHER)) {
                             ++totalTeacher;
@@ -219,18 +219,18 @@ public class LectureService {
                         if (modelSuperAsk4.equalsIgnoreCase("n")) {
                             System.out.println("Ви створили лекцію без вчителя!");
                             LectureRepository.getInstance().getAll();
-                            LectureRepository.getInstance().add(new Lecture());
+                            LectureRepository.getInstance().getLecturesList().add(new Lecture());
                             LectureRepository.getInstance().getAll();
 
                         } else if (modelSuperAsk4.equalsIgnoreCase("y")) {
                             System.out.println("Створена лекція з новим вчителем!");
                             PersonRepository.getInstance().getAll();
                             Person teacherH11 = new Person(Role.TEACHER);
-                            PersonRepository.getInstance().add(teacherH11);
+                            PersonRepository.getInstance().getPersonList().add(teacherH11);
                             PersonRepository.getInstance().getAll();
                             LectureRepository.getInstance().getAll();
                             Lecture lectureH11 = new LectureService().createLectureWithTeacher(teacherH11.getId());
-                            LectureRepository.getInstance().add(lectureH11);
+                            LectureRepository.getInstance().getLecturesList().add(lectureH11);
                             LectureRepository.getInstance().getAll();
 
 
@@ -253,7 +253,7 @@ public class LectureService {
 
                         LectureRepository.getInstance().getAll();
                         Lecture lectureH11 = new LectureService().createLectureWithTeacher(ask5);
-                        LectureRepository.getInstance().add(lectureH11);
+                        LectureRepository.getInstance().getLecturesList().add(lectureH11);
                         LectureRepository.getInstance().getAll();
                         System.out.println("ID створенної лекції - " + lectureH11.getId());
 
@@ -279,7 +279,7 @@ public class LectureService {
             int idLectureFromTask = getAllInfoLecture.nextInt();
             getAllInfoLecture.nextLine();
             for (Lecture lecture :
-                    LectureRepository.getInstance().getArraySuper()) {
+                    LectureRepository.getInstance().getLecturesList()) {
                 if (lecture == null) {
                     continue;
                 }
@@ -297,7 +297,6 @@ public class LectureService {
     }
 
     public void setDescription (int idLecture) throws EntityNotFoundException {
-        LectureRepository.getInstance().exist(idLecture);
         LectureRepository.getInstance().getAll();
         System.out.println("Введіть опис лекції!");
         Scanner scannerP = new Scanner(System.in);
@@ -315,12 +314,11 @@ public class LectureService {
             }
         }
         System.out.println("Опис лекції:  " + descriptionNorm);
-        Lecture lecture = LectureRepository.getInstance().get(idLecture);
+        Lecture lecture = LectureRepository.getInstance().getById(idLecture);
         lecture.setDescription(descriptionNorm);
     }
 
     public void setName (int idLecture) throws EntityNotFoundException {
-        LectureRepository.getInstance().exist(idLecture);
         LectureRepository.getInstance().getAll();
         System.out.println("Введіть назву лекції!");
         Scanner scannerP = new Scanner(System.in);
@@ -338,7 +336,7 @@ public class LectureService {
             }
         }
         System.out.println("Назва лекції:  " + lectureNameNorm);
-        Lecture lecture = LectureRepository.getInstance().get(idLecture);
+        Lecture lecture = LectureRepository.getInstance().getById(idLecture);
         lecture.setName(lectureNameNorm);
     }
 }
