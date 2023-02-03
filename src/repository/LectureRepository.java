@@ -1,11 +1,8 @@
 package repository;
 
 import models.Lecture;
-import utility.EntityNotFoundException;
 
-import java.rmi.NoSuchObjectException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 

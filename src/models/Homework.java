@@ -1,6 +1,6 @@
 package models;
 
-public class Homework extends ModelsSuper<Homework> {
+public class Homework extends ModelsSuper {
  private int lectureId;
  private String task;
 

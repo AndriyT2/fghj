@@ -1,15 +1,21 @@
 package models;
 
-public class AdditionalMaterials extends ModelsSuper<AdditionalMaterials> {
+public class AdditionalMaterials extends ModelsSuper implements Comparable<AdditionalMaterials> {
 
     private String name;
     private int lectureId;
-    private Enum resourceType;
+    private ResourceType resourceType;
 
     public AdditionalMaterials() {
         super();
     }
-    public AdditionalMaterials(Enum resourceType) {this.resourceType = resourceType;}
+    public AdditionalMaterials(ResourceType resourceType) {this.resourceType = resourceType;}
+
+    public AdditionalMaterials(String name, int lectureId, ResourceType resourceType) {
+        this.name = name;
+        this.lectureId = lectureId;
+        this.resourceType = resourceType;
+    }
 
     public AdditionalMaterials(String name, int lectureId) {
         this.name = name;
@@ -32,11 +38,11 @@ public class AdditionalMaterials extends ModelsSuper<AdditionalMaterials> {
         this.lectureId = lectureId;
     }
 
-    public Enum getResourceType() {
+    public ResourceType getResourceType() {
         return resourceType;
     }
 
-    public void setResourceType(Enum resourceType) {
+    public void setResourceType(ResourceType resourceType) {
         this.resourceType = resourceType;
     }
 
@@ -48,6 +54,16 @@ public class AdditionalMaterials extends ModelsSuper<AdditionalMaterials> {
                 ", resourceType=" + resourceType +
                 ", Id" + getId() +
                 '}';
+    }
+
+    @Override
+    public int compareTo(AdditionalMaterials am) {
+        if (this.getId() > am.getId()) {
+            return 1;
+        } else if (this.getId() < am.getId()) {
+            return -1;
+        }
+        return 0;
     }
 }
 

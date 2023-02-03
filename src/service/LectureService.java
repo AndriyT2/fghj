@@ -1,19 +1,17 @@
 package service;
-import models.*;
+
+import models.Course;
+import models.Lecture;
+import models.Person;
+import models.Role;
 import repository.CourseRepository;
 import repository.LectureRepository;
 import repository.PersonRepository;
-import utility.EntityNotFoundException;
-import utility.SetParameterException;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class LectureService {
 
-    public Lecture createLecture() {
-        return new Lecture();
-    }
 
     public Lecture createLecture(int idCourse) {
         return new Lecture();
@@ -68,7 +66,7 @@ public class LectureService {
             }
 
         } else {
-            throw new RuntimeException();
+            throw new IllegalArgumentException();
 
         }
 
@@ -113,7 +111,7 @@ public class LectureService {
                 System.out.println("Ви створили " + totalLecturesLoop +"-у лекцію з Id курсу = " + IdCourseLoop);
 
             } else {
-                throw new RuntimeException();
+                throw new IllegalArgumentException();
             }
 
         }
@@ -168,7 +166,7 @@ public class LectureService {
                     lectureRepository2.getLecturesList().add(new Lecture(idCourse1H9));
                     lectureRepository2.getAll();
                 } else {
-                   throw new RuntimeException();
+                    throw new IllegalArgumentException();
                 }
 
             }
@@ -258,12 +256,12 @@ public class LectureService {
                         System.out.println("ID створенної лекції - " + lectureH11.getId());
 
                     } else {
-                        throw new RuntimeException();
+                        throw new IllegalArgumentException();
                     }
 
 
             } else {
-                throw new RuntimeException();
+                throw new IllegalArgumentException();
             }
 
         }
@@ -296,47 +294,5 @@ public class LectureService {
         System.out.println("Значення Name для заданної лекції - " + lectureFromTask.getName());
     }
 
-    public void setDescription (int idLecture) throws EntityNotFoundException {
-        LectureRepository.getInstance().getAll();
-        System.out.println("Введіть опис лекції!");
-        Scanner scannerP = new Scanner(System.in);
-        String description = scannerP.nextLine();
-        String descriptionNorm = description.trim();
-        boolean result = descriptionNorm.matches("^[A-Za-zА-ЯIЇҐЄа-яіїґє\\-'\\d\\s.]{1,400}$");
-        while (!result) {
-            try {
-                throw new SetParameterException("Ви ввели некоректний опис лекції!");
-            } catch (SetParameterException e) {
-                System.err.println("Введіть опис лекції знову!");
-                description = scannerP.nextLine();
-                descriptionNorm = description.trim();
-                result = descriptionNorm.matches("^[A-Za-zА-ЯIЇҐЄа-яіїґє\\-'\\d\\s.]{1,400}$");
-            }
-        }
-        System.out.println("Опис лекції:  " + descriptionNorm);
-        Lecture lecture = LectureRepository.getInstance().getById(idLecture);
-        lecture.setDescription(descriptionNorm);
-    }
 
-    public void setName (int idLecture) throws EntityNotFoundException {
-        LectureRepository.getInstance().getAll();
-        System.out.println("Введіть назву лекції!");
-        Scanner scannerP = new Scanner(System.in);
-        String lectureName = scannerP.nextLine();
-        String lectureNameNorm = lectureName.trim();
-        boolean result = lectureNameNorm.matches("^[A-Za-zА-ЯIЇҐЄа-яіїґє\\-'\\d\\s.]{1,200}$");
-        while (!result) {
-            try {
-                throw new SetParameterException("Ви ввели некоректну назву лекції!");
-            } catch (SetParameterException e) {
-                System.err.println("Введіть назву лекції знову у правильному форматі!");
-                lectureName = scannerP.nextLine();
-                lectureNameNorm = lectureName.trim();
-                result = lectureNameNorm.matches("^[A-Za-zА-ЯIЇҐЄа-яіїґє\\-'\\d\\s.]{1,200}$");
-            }
-        }
-        System.out.println("Назва лекції:  " + lectureNameNorm);
-        Lecture lecture = LectureRepository.getInstance().getById(idLecture);
-        lecture.setName(lectureNameNorm);
-    }
 }

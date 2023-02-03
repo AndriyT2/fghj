@@ -1,128 +1,56 @@
-import models.AdditionalMaterials;
-import models.Lecture;
-import repository.AdditionalMaterialsRepository;
-import repository.LectureRepository;
+import models.ResourceType;
+import models.Role;
+import repository.CourseRepository;
+import repository.PersonRepository;
 import service.AdditionalMaterialsService;
 import service.CourseService;
-import service.LectureService;
 import service.PersonService;
 import utility.EntityNotFoundException;
 
 public class Main {
     public static void main(String[] args) throws EntityNotFoundException {
 
-        System.out.println();
-        System.out.println("=====================  Лекція 5. Git - планування релізів.  =========================================");
-        System.out.println();
-
-        Lecture lecture1 = new Lecture();
-        Lecture lecture2 = new Lecture();
-        Lecture lecture3 = new Lecture();
-        Lecture lecture4 = new Lecture();
-        Lecture lecture5 = new Lecture();
 
 
-        System.out.println("Лічильник прийме знаачення = " + Lecture.getCounter());
 
-        System.out.println();
-        System.out.println("=====================  Лекція 6. Методи.  ===========================================================");
-        System.out.println();
+        System.out.println("\n=====================  Лекція 18. Collection. Set.  ===========================================================\n");
 
-        CourseService course1 = new CourseService();
-        int idCourse1 = course1.createCourse().getId();
-
-        LectureService lecture1C1 = new LectureService();
-        lecture1C1.createLecture(idCourse1);
-
-        LectureService lecture2C1 = new LectureService();
-        lecture2C1.createLecture(idCourse1);
-
-        LectureService lecture3C1 = new LectureService();
-        lecture3C1.createLecture(idCourse1);
-
-        LectureService lecture4C1 = new LectureService();
-        lecture4C1.createLecture(idCourse1);
-
-        LectureService lecture5C1 = new LectureService();
-        lecture5C1.createLecture(idCourse1);
-
-        LectureService lecture6C1 = new LectureService();
-        lecture6C1.createLecture(idCourse1);
-
-        System.out.println("Id курсу 6-ї лекції приймає значення = " + lecture6C1.createLecture(idCourse1).getIdCourse());
-
-        LecturesCounter totalLecturesHomework6 = new LecturesCounter();
-        int  totalLecturesHomework6Task4 = totalLecturesHomework6.lecturesCounter(lecture1C1, lecture2C1, lecture3C1, lecture4C1, lecture5C1, lecture6C1);
-        System.out.println("Загальна кількість створених лекцій = " + totalLecturesHomework6Task4);
+        CourseService courseH18T1 = new CourseService();
+        courseH18T1.createCourse("CCCCCCCCC");
+        CourseService courseH18T2 = new CourseService();
+        courseH18T2.createCourse("AAAAAAAA");
+        CourseService courseH18T3 = new CourseService();
+        courseH18T3.createCourse("BBBBBBBBB");
 
 
-        System.out.println("\n=====================  Лекція 7. Розгалуження.  ===========================================================\n");
+        CourseRepository.getInstance().courseSortByName();
 
 
-        CourseService course2 = new CourseService();
-        int courseScannerId = course2.courseScanner().getId();
+        PersonService personH18T1 = new PersonService();
+        personH18T1.addPerson("CCCCCCCC", "BBBBBB", Role.TEACHER);
+        PersonService personH18T2 = new PersonService();
+        personH18T2.addPerson("AAAAAAA", "BBBBB", Role.TEACHER);
+        PersonService personH18T3 = new PersonService();
+        personH18T3.addPerson("AAAAAAA", "aaaaaa", Role.TEACHER);
+        PersonService personH18T4 = new PersonService();
+        personH18T4.addPerson("BBBBBBBBB", "BBBBBB", Role.TEACHER);
 
-         System.out.println("\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
 
-        LectureService lecture1H7 = new LectureService();
-        lecture1H7.lectureScanner(courseScannerId);
+        PersonRepository.getInstance().personSortByLastname();
 
 
-        System.out.println("\n=====================  Лекція 8. Цикли.  ===========================================================\n");
+        AdditionalMaterialsService amH18T1 = new AdditionalMaterialsService();
+        amH18T1.createAdditionalMaterialsService("CCCCCCC", 3, ResourceType.VIDEO);
+        AdditionalMaterialsService amH18T2 = new AdditionalMaterialsService();
+        amH18T2.createAdditionalMaterialsService("AAAAAAA", 1, ResourceType.URL);
+        AdditionalMaterialsService amH18T3 = new AdditionalMaterialsService();
+        amH18T3.createAdditionalMaterialsService("BBBBBBB", 2, ResourceType.URL);
+        AdditionalMaterialsService amH18T4 = new AdditionalMaterialsService();
+        amH18T4.createAdditionalMaterialsService("AAAAAAA", 1, ResourceType.BOOK);
 
-        LectureService lecture1H8 = new LectureService();
-        lecture1H8.lectureScannerLoop();
 
-        System.out.println("\n=====================  Лекція 9. Масиви.  ===========================================================\n");
-
-        LectureService homework9 = new LectureService();
-        homework9.lecturesArrayCreator();
-
-        System.out.println("\n=====================  Лекція 11. ENUM.  ===========================================================\n");
-
-        PersonService homework11P = new PersonService();
-        homework11P.addPerson();
-//        LectureService homework11L = new LectureService();
-//        homework11L.lecturesCreatorWithTeacher();
-//        homework11L.getAllInfoLecture();
-
-        System.out.println("\n=====================  Лекція 12. String.  ===========================================================\n");
-
-        PersonService homework12 = new PersonService();
-//        homework12.setPhone(18);
-//        homework12.setFirstname(18);
-//        homework12.setLastname(18);
-//        homework12.setEmail(18);
-
-        CourseService homework12C = new CourseService();
-//        homework12C.setCourseName(15);
-        LectureService homework12L = new LectureService();
-//        homework12L.setDescription(17);
-
-        System.out.println("\n=====================  Лекція 16. Collection.  ===========================================================\n");
-
-//        LectureRepository.getInstance().findAll();  //??????
-
-        System.out.println("\n=====================  Лекція 17. Collection. List.  ===========================================================\n");
-
-        AdditionalMaterialsService additionalMaterials17 = new AdditionalMaterialsService("AD1", 17);
-        additionalMaterials17.addResourceType(18);
-
+        amH18T4.sortByChoose();
 
     }
-
-
-
-        //=====================  Лекція 6. Методи.  ===========================================================
-
-
-    private static class LecturesCounter {
-         int lecturesCounter (LectureService ... lectureName) {
-            return lectureName.length;
-        }
-    }
-
-
-
 
 }

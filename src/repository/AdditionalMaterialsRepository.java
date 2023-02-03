@@ -1,11 +1,13 @@
 package repository;
 
 import models.AdditionalMaterials;
-import models.Course;
+import utility.AdditionalMaterialsLectureIdComparator;
+import utility.AdditionalMaterialsResourceTypeComparator;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.TreeSet;
 
 public class AdditionalMaterialsRepository {
     private List<AdditionalMaterials> additionalMaterialsList;
@@ -37,4 +39,23 @@ public class AdditionalMaterialsRepository {
         }
         throw new NoSuchElementException();
     }
-}
+
+    public void sortAdditionalMaterialsById(){
+        TreeSet<AdditionalMaterials> additionalMaterialsTreeSet = new TreeSet<>(AdditionalMaterialsRepository.getInstance().getAdditionalMaterialsList());
+        System.out.println(additionalMaterialsTreeSet);
+    }
+
+    public void sortAdditionalMaterialsByLectureId(){
+        List<AdditionalMaterials> tmp = new ArrayList<>(AdditionalMaterialsRepository.getInstance().getAdditionalMaterialsList());
+        tmp.sort(new AdditionalMaterialsLectureIdComparator());
+        System.out.println(tmp);
+    }
+
+    public void sortAdditionalMaterialsByResourceType(){
+        List<AdditionalMaterials> tmp = new ArrayList<>(AdditionalMaterialsRepository.getInstance().getAdditionalMaterialsList());
+        tmp.sort(new AdditionalMaterialsResourceTypeComparator());
+        System.out.println(tmp);
+    }
+
+
+    }

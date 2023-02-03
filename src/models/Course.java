@@ -1,6 +1,6 @@
 package models;
 
-public class Course extends ModelsSuper<Course> {
+public class Course extends ModelsSuper implements Comparable<Course>{
     private String courseName;
     private Teacher teacher;
     private Student student;
@@ -28,9 +28,19 @@ public class Course extends ModelsSuper<Course> {
         this.lecture = new Lecture(lecture);
     }
 
+    @Override
+    public String toString() {
+        return "Course{" +
+                "courseName='" + courseName + '\'' +
+                ", teacher=" + teacher +
+                ", student=" + student +
+                ", lecture=" + lecture +
+                ", Id" + getId() +
+                '}';
+    }
 
-
-
-
-
+    @Override
+    public int compareTo(Course name) {
+     return this.courseName.compareTo(name.getCourseName());
+    }
 }

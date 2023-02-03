@@ -1,6 +1,6 @@
 package models;
 
-public class Lecture extends ModelsSuper<Lecture> {
+public class Lecture extends ModelsSuper {
 
     private String name;
     private String description;

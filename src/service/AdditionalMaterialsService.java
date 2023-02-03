@@ -8,27 +8,62 @@ import java.util.Scanner;
 
 public class AdditionalMaterialsService {
     public AdditionalMaterialsService() {
-        AdditionalMaterialsRepository.getInstance().getAdditionalMaterialsList().add(new  AdditionalMaterials());
-
     }
+
     public  AdditionalMaterialsService(String name, int lectureId) {
      AdditionalMaterialsRepository.getInstance().getAdditionalMaterialsList().add(new  AdditionalMaterials(name, lectureId));
     }
 
+    public void createAdditionalMaterialsService(String name, int lectureId, ResourceType resourceType) {
+        AdditionalMaterialsRepository.getInstance().getAdditionalMaterialsList().add(new  AdditionalMaterials(name, lectureId, resourceType));
+
+    }
+
+    public void sortByChoose () {
+        AdditionalMaterialsRepository.getInstance().sortAdditionalMaterialsById();
+        String answer;
+        Scanner scanner = new Scanner(System.in);
+        do{
+        System.out.println("Do you want to sort AdditionalMaterials by other methods? [Y/N]");
+        answer = scanner.nextLine();}
+        while (!answer.equalsIgnoreCase("y") && !answer.equalsIgnoreCase("n"));
+        if (answer.equalsIgnoreCase("y")) {
+            int answerMethod;
+            do{
+            System.out.println("""
+                                    Choose the method number to sort:
+                                    1 Sort by lectureId;
+                                    2 Sort by resourceType.""");
+            answerMethod = scanner.nextInt();
+            scanner.nextLine();}
+            while (answerMethod < 1 | answerMethod > 2);
+            if (answerMethod == 1) {
+                AdditionalMaterialsRepository.getInstance().sortAdditionalMaterialsByLectureId();
+            } else {AdditionalMaterialsRepository.getInstance().sortAdditionalMaterialsByResourceType();}
+        }else {
+            System.out.println("You refused to change the sorting method!");
+        }
+
+
+    }
+
+
+
 
 
     public void addResourceType (int idAdditionalMaterials) {
-        AdditionalMaterialsRepository.getInstance().getById(idAdditionalMaterials);
-
-        while (true) {
-
+            AdditionalMaterialsRepository.getInstance().getById(idAdditionalMaterials);
             Scanner scanner = new Scanner(System.in);
+            String ask;
+
+            do {
             System.out.println("Чи бажаєте додати елемент ResourceType до AdditionalMaterials? [Y/N]");
-            String ask = scanner.nextLine();
+            ask = scanner.nextLine();
+            } while (!ask.equalsIgnoreCase("n") && !ask.equalsIgnoreCase("y"));
+
 
             if (ask.equalsIgnoreCase("n")) {
                 System.out.println("Ви відмовилися додати елемент ResourceType до AdditionalMaterials!");
-                break;
 
             } else if (ask.equalsIgnoreCase("y")) {
 
@@ -50,26 +85,19 @@ public class AdditionalMaterialsService {
                     System.out.println("Ви створили новий компонент - URL.");
                     AdditionalMaterialsRepository.getInstance().getById(idAdditionalMaterials).setResourceType(ResourceType.URL);
                     System.out.println(AdditionalMaterialsRepository.getInstance().getAdditionalMaterialsList());
-                    break;
 
                 } else if (ask1 == 2) {
 
                     System.out.println("Ви створили новий компонент - VIDEO.");
                     AdditionalMaterialsRepository.getInstance().getById(idAdditionalMaterials).setResourceType(ResourceType.VIDEO);
                     System.out.println(AdditionalMaterialsRepository.getInstance().getAdditionalMaterialsList());
-                    break;
                 }else {
                     System.out.println("Ви створили новий компонент - BOOK.");
                     AdditionalMaterialsRepository.getInstance().getById(idAdditionalMaterials).setResourceType(ResourceType.BOOK);
                     System.out.println(AdditionalMaterialsRepository.getInstance().getAdditionalMaterialsList());
-                    break;
                 }
 
-            } else {
-                throw new RuntimeException();
             }
-
-        }
     }
 
 }

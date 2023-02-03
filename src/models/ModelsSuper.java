@@ -1,6 +1,6 @@
 package models;
 
-public abstract class ModelsSuper <E> {
+public abstract class ModelsSuper {
 
     private static int counter;
 
@@ -18,6 +18,8 @@ public abstract class ModelsSuper <E> {
     public int getId() {
         return id;
     }
+
+
 
 
     @Override

@@ -2,13 +2,11 @@ package repository;
 
 import models.Course;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 public class CourseRepository {
 
-   private List<Course> courseList;
+    private List<Course> courseList;
 
     public List<Course> getCourseList() {
         return courseList;
@@ -28,14 +26,21 @@ public class CourseRepository {
     }
 
     public void getAll() {
-    System.out.println(CourseRepository.getInstance().getCourseList());
+        System.out.println(CourseRepository.getInstance().getCourseList());
     }
 
     public Course getById(int index) {
-        for (Course course : courseList){
-            if (course.getId() == index) {return course;}
+        for (Course course : courseList) {
+            if (course.getId() == index) {
+                return course;
+            }
         }
         throw new NoSuchElementException();
     }
 
+    public void courseSortByName() {
+        Set<Course> courseTreeSet = new TreeSet<>(CourseRepository.getInstance().getCourseList());
+        System.out.println(courseTreeSet);
+
+    }
 }

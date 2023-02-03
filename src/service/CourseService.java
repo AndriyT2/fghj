@@ -2,10 +2,7 @@ package service;
 
 import models.Course;
 import repository.CourseRepository;
-import utility.EntityNotFoundException;
-import utility.SetParameterException;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class CourseService {
@@ -14,7 +11,10 @@ public class CourseService {
     }
 
     public Course createCourse(String courseName) {
-        return new Course(courseName);
+       Course course = new Course(courseName);
+     CourseRepository.getInstance().getCourseList().add(course);
+     int index = CourseRepository.getInstance().getCourseList().indexOf(course);
+     return CourseRepository.getInstance().getCourseList().get(index);
     }
 
     public Course createCourse(String courseName, String teacher, String student, String lecture) {
@@ -127,30 +127,8 @@ public class CourseService {
             return courseName + "#" + courseParameterNumber + "#" + courseParameter;
 
         } else {
-            throw new RuntimeException("Ви ввели некоректну відповідь. Почніть з самого початку!");
+            throw new IllegalArgumentException();
         }
-    }
-
-    public void setCourseName (int idCourse) throws EntityNotFoundException {
-        System.out.println(CourseRepository.getInstance().getCourseList());
-        System.out.println("Введіть назву курсу!");
-        Scanner scannerP = new Scanner(System.in);
-        String courseName = scannerP.nextLine();
-        String courseNameNorm = courseName.trim();
-        boolean result = courseNameNorm.matches("^[A-Za-zА-ЯIЇҐЄа-яіїґє\\-'\\d\\s.]{1,200}$");
-        while (!result) {
-            try {
-                throw new SetParameterException("Ви ввели некоректну назву курсу!");
-            } catch (SetParameterException e) {
-                System.err.println("Введіть назва курсу знову у правильному форматі!");
-                courseName = scannerP.nextLine();
-                courseNameNorm = courseName.trim();
-                result = courseNameNorm.matches("^[A-Za-zА-ЯIЇҐЄа-яіїґє\\-'\\d\\s.]{1,200}$");
-            }
-        }
-        System.out.println("Назва курсу:  " + courseNameNorm);
-        Course course = CourseRepository.getInstance().getById(idCourse);
-        course.setCourseName(courseNameNorm);
     }
 
 }

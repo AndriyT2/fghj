@@ -1,12 +1,18 @@
 package models;
 
-public class Person extends ModelsSuper<Person> {
+public class Person extends ModelsSuper implements Comparable<Person> {
 
     private int courseId;
     private String firstname;
     private String lastname;
     private String phone;
     private String email;
+
+    public Person(String lastname, String firstname, Role role) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.role = role;
+    }
 
     public String getFirstname() {
         return firstname;
@@ -24,13 +30,15 @@ public class Person extends ModelsSuper<Person> {
         return email;
     }
 
-    private Enum role;
+    private Role role;
 
-    public Person () { super();}
+    public Person() {
+        super();
+    }
 
-    public Person(Enum role) {
-       this.role = role;
-   }
+    public Person(Role role) {
+        this.role = role;
+    }
 
 
     public void setFirstname(String firstname) {
@@ -53,7 +61,7 @@ public class Person extends ModelsSuper<Person> {
         return courseId;
     }
 
-    public Enum getRole() {
+    public Role getRole() {
         return role;
     }
 
@@ -61,7 +69,21 @@ public class Person extends ModelsSuper<Person> {
     public String toString() {
         return "Person{" +
                 "courseId=" + courseId +
+                ", lastname='" + lastname + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
                 ", role=" + role +
+                ", Id" + getId() +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Person person) {
+        int result = this.lastname.toLowerCase().compareTo(person.getLastname().toLowerCase());
+        if (result == 0) {
+            result = this.firstname.toLowerCase().compareTo(person.getFirstname().toLowerCase());
+        }
+        return result;
     }
 }
