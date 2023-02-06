@@ -2,8 +2,8 @@ package service;
 
 import models.Course;
 import repository.CourseRepository;
+import utility.ScannerThis;
 
-import java.util.Scanner;
 
 public class CourseService {
     public Course createCourse() {
@@ -28,14 +28,13 @@ public class CourseService {
 
         if (answer.contains(String.valueOf('#'))) {
 
-            Scanner courseScanner2 = new Scanner(answer);
-            courseScanner2.useDelimiter("#");
+            ScannerThis.getInstance().useDelimiter("#");
 
-            String courseName1 = courseScanner2.next();
-            String courseParameterNumber1 = courseScanner2.next();
-            String courseParameter1 = courseScanner2.next();
+            String courseName1 = ScannerThis.getInstance().next();
+            String courseParameterNumber1 = ScannerThis.getInstance().next();
+            String courseParameter1 = ScannerThis.getInstance().next();
 
-            courseScanner2.close();
+            ScannerThis.getInstance().close();
 
             System.out.println("Ви створили курс:" + courseName1);
 
@@ -56,20 +55,19 @@ public class CourseService {
 
     private String askCourseScanner() {
 
-        Scanner courseScanner = new Scanner(System.in);
         System.out.println("Введіть назву курсу:");
-        String courseName = courseScanner.nextLine();
+        String courseName = ScannerThis.getInstance().nextLine();
         System.out.println("Ви впевнені, що хочете назвати курсу наступним чином: " + courseName + " ?");
         System.out.println("Якщо назва правильна, то введіть \"Так\" або \"Yes\", " +
                 "в противному випадку введіть \"Ні\" або \"No\"!");
 
-        String courseNameAnswer = courseScanner.nextLine();
+        String courseNameAnswer = ScannerThis.getInstance().nextLine();
 
         if (courseNameAnswer.equals("Ні") | courseNameAnswer.equals("ні") |
                 courseNameAnswer.equals("No") | courseNameAnswer.equals("no")) {
 
             System.out.println("Введіть нову назву курсу:");
-            courseName = courseScanner.nextLine();
+            courseName = ScannerThis.getInstance().nextLine();
 
         } else if (courseNameAnswer.equals("Так") | courseNameAnswer.equals("так") |
                 courseNameAnswer.equals("Yes") | courseNameAnswer.equals("yes")) {
@@ -84,7 +82,7 @@ public class CourseService {
         System.out.println("Якщо бажаєте, то введіть \"Так\" або \"Yes\", " +
                 "в противному випадку введіть \"Ні\" або \"No\"!");
 
-        String courseParametersAnswer = courseScanner.nextLine();
+        String courseParametersAnswer = ScannerThis.getInstance().nextLine();
 
         if (courseParametersAnswer.equals("Ні") | courseParametersAnswer.equals("ні") |
                 courseParametersAnswer.equals("No") | courseParametersAnswer.equals("no")) {
@@ -100,11 +98,11 @@ public class CourseService {
                     2 Студент;
                     3 Лекція.""");
 
-            int courseParameterNumber = courseScanner.nextInt();
-            courseScanner.nextLine();
+            int courseParameterNumber = ScannerThis.getInstance().nextInt();
+            ScannerThis.getInstance().nextLine();
 
             System.out.println("Тепер введіть значення для вибраного параметру:");
-            String courseParameterValue = courseScanner.nextLine();
+            String courseParameterValue = ScannerThis.getInstance().nextLine();
 
             String courseParameter = switch (courseParameterNumber) {
                 case 1:

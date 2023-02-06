@@ -10,6 +10,11 @@ public class Homework extends ModelsSuper {
         this.lectureId = lectureId;
     }
 
+    public Homework(int lectureId, String task) {
+        this.lectureId = lectureId;
+        this.task = task;
+    }
+
     public Homework(String task) {
         this.task = task;
     }

@@ -5,6 +5,7 @@ import models.Homework;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.TreeMap;
 
 public class HomeworkRepository {
     public List<Homework> getHomeworkList() {
@@ -31,6 +32,17 @@ public class HomeworkRepository {
         }
         throw new NoSuchElementException();
     }
+
+
+    public TreeMap<Integer, Homework> homeworkTreeMap() {
+        TreeMap<Integer, Homework> homeworkTreeMap = new TreeMap<>();
+        for (Homework homework : HomeworkRepository.getInstance().getHomeworkList()) {
+            homeworkTreeMap.put(homework.getLectureId(), homework);
+        }
+        return homeworkTreeMap;
+    }
+
+
 
 
     }

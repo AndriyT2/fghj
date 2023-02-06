@@ -3,8 +3,8 @@ package service;
 import models.Person;
 import models.Role;
 import repository.PersonRepository;
+import utility.ScannerThis;
 
-import java.util.Scanner;
 
 public class PersonService {
 
@@ -15,9 +15,8 @@ public class PersonService {
 
         while (true) {
 
-            Scanner scanner = new Scanner(System.in);
             System.out.println("Чи бажаєте створити новий елемент Person? [Y/N]");
-            String ask = scanner.nextLine();
+            String ask = ScannerThis.getInstance().nextLine();
 
             if (ask.equalsIgnoreCase("n")) {
                 System.out.println("Ви відмовилися створювати новий елемент!");
@@ -32,8 +31,8 @@ public class PersonService {
 
                 do {
                     System.out.println("Введіть числове значення для вибору необхідного критерія: \n1 Студент;\n2 Вчитель.");
-                    ask1 = scanner.nextInt();
-                    scanner.nextLine();
+                    ask1 = ScannerThis.getInstance().nextInt();
+                    ScannerThis.getInstance().nextLine();
                 } while (ask1 < 1 | ask1 > 2);
 
                 if (ask1 == 1) {

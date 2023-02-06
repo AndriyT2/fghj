@@ -3,15 +3,13 @@ package utility;
 import models.Lecture;
 import repository.LectureRepository;
 
-import java.util.Scanner;
 
 public class LectureRegex {
     public static void setDescription (int idLecture) throws EntityNotFoundException {
         final String rule = "^[A-Za-zА-ЯIЇҐЄа-яіїґє\\-'\\d\\s.]{1,400}$";
         LectureRepository.getInstance().getAll();
         System.out.println("Введіть опис лекції!");
-        Scanner scannerP = new Scanner(System.in);
-        String description = scannerP.nextLine();
+        String description = ScannerThis.getInstance().nextLine();
         String descriptionNorm = description.trim();
         boolean result = descriptionNorm.matches(rule);
         while (!result) {
@@ -19,7 +17,7 @@ public class LectureRegex {
                 throw new SetParameterException("Ви ввели некоректний опис лекції!");
             } catch (SetParameterException e) {
                 System.err.println("Введіть опис лекції знову!");
-                description = scannerP.nextLine();
+                description = ScannerThis.getInstance().nextLine();
                 descriptionNorm = description.trim();
                 result = descriptionNorm.matches(rule);
             }
@@ -33,8 +31,7 @@ public class LectureRegex {
         final String rule = "^[A-Za-zА-ЯIЇҐЄа-яіїґє\\-'\\d\\s.]{1,200}$";
         LectureRepository.getInstance().getAll();
         System.out.println("Введіть назву лекції!");
-        Scanner scannerP = new Scanner(System.in);
-        String lectureName = scannerP.nextLine();
+        String lectureName = ScannerThis.getInstance().nextLine();
         String lectureNameNorm = lectureName.trim();
         boolean result = lectureNameNorm.matches(rule);
         while (!result) {
@@ -42,7 +39,7 @@ public class LectureRegex {
                 throw new SetParameterException("Ви ввели некоректну назву лекції!");
             } catch (SetParameterException e) {
                 System.err.println("Введіть назву лекції знову у правильному форматі!");
-                lectureName = scannerP.nextLine();
+                lectureName = ScannerThis.getInstance().nextLine();
                 lectureNameNorm = lectureName.trim();
                 result = lectureNameNorm.matches(rule);
             }

@@ -4,13 +4,16 @@ import models.Course;
 import models.Lecture;
 import models.Person;
 import models.Role;
-import repository.CourseRepository;
-import repository.LectureRepository;
-import repository.PersonRepository;
-
-import java.util.Scanner;
+import repository.*;
+import utility.ScannerThis;
 
 public class LectureService {
+
+
+
+    public void createLecture() {
+LectureRepository.getInstance().getLecturesList().add(new Lecture());
+    }
 
 
     public Lecture createLecture(int idCourse) {
@@ -29,10 +32,9 @@ public class LectureService {
     }
     public void lectureScanner(int idCourse) {
         int totalLectures = 0;
-        Scanner lectureScanner = new Scanner(System.in);
         System.out.println("Чи бажаєте створити нову лекцію? [Так/Ні]");
 
-        String lectureScannerAsk1 = lectureScanner.nextLine();
+        String lectureScannerAsk1 = ScannerThis.getInstance().nextLine();
 
         if (lectureScannerAsk1.equals("Ні") | lectureScannerAsk1.equals("ні") | lectureScannerAsk1.equals("No") | lectureScannerAsk1.equals("no")) {
 
@@ -47,7 +49,7 @@ public class LectureService {
             System.out.println("Створена нова лекція. Значення Id курсу для даної лекції становить: " + lecture1H7Id + ".");
 
             System.out.println("Чи бажаєте створити додаткову лекцію? [Так/Ні]");
-            String lectureScannerAsk2 = lectureScanner.nextLine();
+            String lectureScannerAsk2 = ScannerThis.getInstance().nextLine();
 
             if (lectureScannerAsk2.equals("Ні") | lectureScannerAsk2.equals("ні") | lectureScannerAsk2.equals("No") | lectureScannerAsk2.equals("no")) {
 
@@ -83,9 +85,8 @@ public class LectureService {
 
         while (true){
 
-            Scanner lectureScannerLoop = new Scanner(System.in);
             System.out.println("Чи бажаєте створити нову лекцію? [Y/N]");
-            String lectureScannerLoopAsk1 = lectureScannerLoop.nextLine();
+            String lectureScannerLoopAsk1 = ScannerThis.getInstance().nextLine();
 
             if (lectureScannerLoopAsk1.equalsIgnoreCase("n")) {
                 System.out.println("Ви відмовилися створювати нову лекцію!");
@@ -95,8 +96,8 @@ public class LectureService {
 
                 do {
                     System.out.println("Введіть значення Id курсу для майбутньої лекції тільки в наступних межах від " + minValueIdCourse + " до " + maxValueIdCourse + "!");
-                    IdCourseLoop = lectureScannerLoop.nextInt();
-                    lectureScannerLoop.nextLine();
+                    IdCourseLoop = ScannerThis.getInstance().nextInt();
+                    ScannerThis.getInstance().nextLine();
 
                 } while (IdCourseLoop < minValueIdCourse || IdCourseLoop > maxValueIdCourse);
 
@@ -153,9 +154,8 @@ public class LectureService {
 
         while (true) {
 
-                Scanner modelsSuper1 = new Scanner(System.in);
                 System.out.println("Чи бажаєте створити новий елемент? [Y/N]");
-                String modelSuperAsk2 = modelsSuper1.nextLine();
+                String modelSuperAsk2 = ScannerThis.getInstance().nextLine();
 
                 if (modelSuperAsk2.equalsIgnoreCase("n")) {
                     System.out.println("Ви відмовилися створювати новий елемент!");
@@ -175,12 +175,11 @@ public class LectureService {
 
     public void lecturesCreatorWithTeacher () {
 
-        Scanner modelsSuper1 = new Scanner(System.in);
 
         while (true) {
 
             System.out.println("Чи бажаєте створити нову лекцію? [Y/N]");
-            String modelSuperAsk2 = modelsSuper1.nextLine();
+            String modelSuperAsk2 = ScannerThis.getInstance().nextLine();
 
             if (modelSuperAsk2.equalsIgnoreCase("n")) {
                 System.out.println("Ви відмовилися створювати нову лекцію!");
@@ -206,13 +205,13 @@ public class LectureService {
                     System.out.println("Жодний вчитель ще не був доданий до списку!\nВставити код з пропозицією створення нового вчителя чи лекції без вчителя!");
                 }
 
-                    String modelSuperAsk3 = modelsSuper1.nextLine();
+                    String modelSuperAsk3 = ScannerThis.getInstance().nextLine();
 
                     if (modelSuperAsk3.equalsIgnoreCase("n")) {
 
                         System.out.println("Чи бажаєте додати нового вчителя? [Y/N]");
 
-                        String modelSuperAsk4 = modelsSuper1.nextLine();
+                        String modelSuperAsk4 = ScannerThis.getInstance().nextLine();
 
                         if (modelSuperAsk4.equalsIgnoreCase("n")) {
                             System.out.println("Ви створили лекцію без вчителя!");
@@ -244,8 +243,8 @@ public class LectureService {
                        int ask5;
                         do {
                             System.out.println("Введіть значення ID з представленного списку для вибраного вчителя!");
-                            int modelSuperAsk5 = modelsSuper1.nextInt();
-                            modelsSuper1.nextLine();
+                            int modelSuperAsk5 = ScannerThis.getInstance().nextInt();
+                            ScannerThis.getInstance().nextLine();
                             ask5 = modelSuperAsk5;
                         } while (ask5<0 || ask5>maxTeacherId);
 
@@ -268,14 +267,13 @@ public class LectureService {
     }
 
     public void getAllInfoLecture () {
-        Scanner getAllInfoLecture = new Scanner(System.in);
 
         int search = -1;
         Lecture lectureFromTask = null;
         do {
             System.out.println("Введіть існуюче значення ID лекції");
-            int idLectureFromTask = getAllInfoLecture.nextInt();
-            getAllInfoLecture.nextLine();
+            int idLectureFromTask = ScannerThis.getInstance().nextInt();
+            ScannerThis.getInstance().nextLine();
             for (Lecture lecture :
                     LectureRepository.getInstance().getLecturesList()) {
                 if (lecture == null) {
@@ -292,6 +290,12 @@ public class LectureService {
         System.out.println("Значення IDCourse для заданної лекції - " + lectureFromTask.getIdCourse());
         System.out.println("Значення PersonId для заданної лекції - " + lectureFromTask.getPersonId());
         System.out.println("Значення Name для заданної лекції - " + lectureFromTask.getName());
+    }
+
+    public void lectureWithHomeworkAndAMById(int id) {
+        System.out.println("Lecture with Id = " + id + ": " + LectureRepository.getInstance().getById(id));
+        System.out.println("Homework for this lecture: " + HomeworkRepository.getInstance().homeworkTreeMap().get(id));
+        System.out.println("AdditionalMaterials for this lecture: " + AdditionalMaterialsRepository.getInstance().additionalMaterialsTreeMap().get(id));
     }
 
 

@@ -4,13 +4,10 @@ import models.AdditionalMaterials;
 import utility.AdditionalMaterialsLectureIdComparator;
 import utility.AdditionalMaterialsResourceTypeComparator;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.TreeSet;
+import java.util.*;
 
 public class AdditionalMaterialsRepository {
-    private List<AdditionalMaterials> additionalMaterialsList;
+    private final List<AdditionalMaterials> additionalMaterialsList;
 
     public List<AdditionalMaterials> getAdditionalMaterialsList() {
         return additionalMaterialsList;
@@ -57,5 +54,12 @@ public class AdditionalMaterialsRepository {
         System.out.println(tmp);
     }
 
-
+    public TreeMap<Integer, AdditionalMaterials> additionalMaterialsTreeMap() {
+        TreeMap<Integer, AdditionalMaterials> additionalMaterialsTreeMap = new TreeMap<>();
+        for (AdditionalMaterials additionalMaterials : AdditionalMaterialsRepository.getInstance().getAdditionalMaterialsList()) {
+           additionalMaterialsTreeMap.put(additionalMaterials.getLectureId(), additionalMaterials);
+        }
+        return additionalMaterialsTreeMap;
     }
+
+}

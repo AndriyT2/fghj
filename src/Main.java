@@ -1,10 +1,10 @@
 import models.ResourceType;
 import models.Role;
+import repository.AdditionalMaterialsRepository;
 import repository.CourseRepository;
+import repository.LectureRepository;
 import repository.PersonRepository;
-import service.AdditionalMaterialsService;
-import service.CourseService;
-import service.PersonService;
+import service.*;
 import utility.EntityNotFoundException;
 
 public class Main {
@@ -40,16 +40,45 @@ public class Main {
 
 
         AdditionalMaterialsService amH18T1 = new AdditionalMaterialsService();
-        amH18T1.createAdditionalMaterialsService("CCCCCCC", 3, ResourceType.VIDEO);
+        amH18T1.createAdditionalMaterialsService("CCCCCCC", 12, ResourceType.VIDEO);
         AdditionalMaterialsService amH18T2 = new AdditionalMaterialsService();
-        amH18T2.createAdditionalMaterialsService("AAAAAAA", 1, ResourceType.URL);
+        amH18T2.createAdditionalMaterialsService("AAAAAAA", 13, ResourceType.URL);
         AdditionalMaterialsService amH18T3 = new AdditionalMaterialsService();
-        amH18T3.createAdditionalMaterialsService("BBBBBBB", 2, ResourceType.URL);
+        amH18T3.createAdditionalMaterialsService("BBBBBBB", 14, ResourceType.URL);
         AdditionalMaterialsService amH18T4 = new AdditionalMaterialsService();
-        amH18T4.createAdditionalMaterialsService("AAAAAAA", 1, ResourceType.BOOK);
+        amH18T4.createAdditionalMaterialsService("AAAAAAA", 15, ResourceType.BOOK);
 
 
-        amH18T4.sortByChoose();
+
+        System.out.println("\n=====================  Лекція 19. Map.  ===========================================================\n");
+
+        LectureService lectureH19T1 = new LectureService();
+        lectureH19T1.createLecture();
+        lectureH19T1.createLecture();
+        lectureH19T1.createLecture();
+        lectureH19T1.createLecture();
+
+        LectureRepository.getInstance().getAll();
+        System.out.println(AdditionalMaterialsRepository.getInstance().additionalMaterialsTreeMap());
+
+
+        lectureH19T1.lectureWithHomeworkAndAMById(14);
+
+        System.out.println("++++++++++++++++++++++++++++++++++");
+
+        AdditionalMaterialsService additionalMaterialH19T1 = new AdditionalMaterialsService();
+        additionalMaterialH19T1.shoveAdditionalMaterialsTreeMapWithOptions();
+
+
+        System.out.println("++++++++++++++++++++++++++++++++++");
+
+
+        HomeworkService homeworkH19T1 = new HomeworkService();
+        homeworkH19T1.createHomeworkWithLectureId(12);
+        homeworkH19T1.createHomeworkWithLectureId(13);
+        homeworkH19T1.createHomeworkWithLectureId(14);
+        homeworkH19T1.shoveHomeworkTreeMapWithOptions();
+
 
     }
 

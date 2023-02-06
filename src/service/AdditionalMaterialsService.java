@@ -3,8 +3,9 @@ package service;
 import models.AdditionalMaterials;
 import models.ResourceType;
 import repository.AdditionalMaterialsRepository;
+import utility.ScannerThis;
 
-import java.util.Scanner;
+import java.util.NoSuchElementException;
 
 public class AdditionalMaterialsService {
     public AdditionalMaterialsService() {
@@ -22,10 +23,9 @@ public class AdditionalMaterialsService {
     public void sortByChoose () {
         AdditionalMaterialsRepository.getInstance().sortAdditionalMaterialsById();
         String answer;
-        Scanner scanner = new Scanner(System.in);
         do{
         System.out.println("Do you want to sort AdditionalMaterials by other methods? [Y/N]");
-        answer = scanner.nextLine();}
+        answer = ScannerThis.getInstance().nextLine();}
         while (!answer.equalsIgnoreCase("y") && !answer.equalsIgnoreCase("n"));
         if (answer.equalsIgnoreCase("y")) {
             int answerMethod;
@@ -34,8 +34,8 @@ public class AdditionalMaterialsService {
                                     Choose the method number to sort:
                                     1 Sort by lectureId;
                                     2 Sort by resourceType.""");
-            answerMethod = scanner.nextInt();
-            scanner.nextLine();}
+            answerMethod = ScannerThis.getInstance().nextInt();
+                ScannerThis.getInstance().nextLine();}
             while (answerMethod < 1 | answerMethod > 2);
             if (answerMethod == 1) {
                 AdditionalMaterialsRepository.getInstance().sortAdditionalMaterialsByLectureId();
@@ -53,12 +53,11 @@ public class AdditionalMaterialsService {
 
     public void addResourceType (int idAdditionalMaterials) {
             AdditionalMaterialsRepository.getInstance().getById(idAdditionalMaterials);
-            Scanner scanner = new Scanner(System.in);
             String ask;
 
             do {
             System.out.println("Чи бажаєте додати елемент ResourceType до AdditionalMaterials? [Y/N]");
-            ask = scanner.nextLine();
+            ask = ScannerThis.getInstance().nextLine();
             } while (!ask.equalsIgnoreCase("n") && !ask.equalsIgnoreCase("y"));
 
 
@@ -77,8 +76,8 @@ public class AdditionalMaterialsService {
                             1 URL;
                             2 VIDEO;
                             3 BOOK.""");
-                    ask1 = scanner.nextInt();
-                    scanner.nextLine();
+                    ask1 = ScannerThis.getInstance().nextInt();
+                    ScannerThis.getInstance().nextLine();
                 } while (ask1 < 1 | ask1 > 3);
 
                 if (ask1 == 1) {
@@ -98,6 +97,57 @@ public class AdditionalMaterialsService {
                 }
 
             }
+    }
+
+    public void shoveAdditionalMaterialsTreeMapWithOptions() { //  перевірити правопис
+        System.out.println(AdditionalMaterialsRepository.getInstance().additionalMaterialsTreeMap());
+        String answer;
+        do{
+            System.out.println("Do you want to add or remove  AdditionalMaterials? [Y/N]");
+            answer = ScannerThis.getInstance().nextLine();}
+        while (!answer.equalsIgnoreCase("y") && !answer.equalsIgnoreCase("n"));
+        if (answer.equalsIgnoreCase("y")) {
+            int answerDo;
+            do{
+                System.out.println("""
+                                    Select the desired action number:
+                                    1 Add new AdditionalMaterials;
+                                    2 Remove the exist AdditionalMaterials.""");
+                answerDo = ScannerThis.getInstance().nextInt();
+                ScannerThis.getInstance().nextLine();}
+            while (answerDo < 1 | answerDo > 2);
+            if (answerDo == 1) {
+                System.out.println("Enter a name for the new AdditionalMaterials:");
+                String name = ScannerThis.getInstance().nextLine();
+                int freeId = AdditionalMaterialsRepository.getInstance().additionalMaterialsTreeMap().lastKey() + 1;
+                System.out.println("Enter the lectureId for the new AdditionalMaterials (" + freeId + "):");
+                int lectureId = ScannerThis.getInstance().nextInt();
+                ScannerThis.getInstance().nextLine();
+                new AdditionalMaterialsService(name, lectureId);
+                System.out.println(AdditionalMaterialsRepository.getInstance().additionalMaterialsTreeMap());
+
+            } else {
+                System.out.println("Enter a lectureId to remove AdditionalMaterials:");
+                int lectureId = ScannerThis.getInstance().nextInt();
+                ScannerThis.getInstance().nextLine();
+                boolean flag = false;
+                for (AdditionalMaterials  additionalMaterials : AdditionalMaterialsRepository.getInstance().getAdditionalMaterialsList()) {
+                    if (additionalMaterials.getLectureId() == lectureId) {
+                        flag = true;
+                        AdditionalMaterialsRepository.getInstance().getAdditionalMaterialsList().remove(additionalMaterials);
+                    break;}
+                }
+                if (!flag) { throw new NoSuchElementException();
+                }
+
+                System.out.println(AdditionalMaterialsRepository.getInstance().additionalMaterialsTreeMap());
+
+            }
+
+        }else {
+            System.out.println("You refused to make changes!");
+        }
+
     }
 
 }
