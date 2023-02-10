@@ -2,6 +2,7 @@ import models.ResourceType;
 import models.Role;
 import service.*;
 import utility.EntityNotFoundException;
+import utilityLog.LogReader;
 
 public class Main {
     public static void main(String[] args) throws EntityNotFoundException {
@@ -61,6 +62,7 @@ public class Main {
         System.out.println("\n=====================  Menu  ===========================================================\n");
         Menu menu = new Menu();
         menu.menu();
+
 
     }
 

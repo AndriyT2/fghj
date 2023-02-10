@@ -6,6 +6,7 @@ import utility.CourseRegex;
 import utility.IntTrue;
 import utility.ScannerThis;
 import utilityLog.LogFactory;
+import utilityLog.LogReader;
 
 public class Menu {
 public void menu() {
@@ -22,11 +23,12 @@ public void menu() {
             3 - Домашня робота;
             4 - Додаткові матеріали;
             5 - Особа;
-            6 - Завершення роботи з програмою.""");
+            6 - Отримати вміст LogFile;
+            7 - Завершення роботи з програмою.""");
 
     answer = new IntTrue().intTrue();
 
-        }while (answer<1 || answer>6);
+        }while (answer<1 || answer>7);
 
         switch (answer) {
             case 1 -> {
@@ -50,6 +52,13 @@ public void menu() {
                 personMenu();
             }
             case 6 -> {
+                System.out.println("Ви вибрали категорію - LogFile.");
+                System.out.println("Вміст LogFile:");
+                LogReader logReader = new LogReader();
+                logReader.readDataFromFile();
+
+            }
+            case 7 -> {
                 System.out.println("Ви вибрали категорію - Завершення роботи з програмою.");
                 exit = true;
                 LogFactory.debug(this.getClass().getName(), "CLOSE MENU");
