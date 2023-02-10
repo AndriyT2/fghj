@@ -3,6 +3,7 @@ package service;
 import models.Course;
 import repository.CourseRepository;
 import utility.ScannerThis;
+import utilityLog.LogFactory;
 
 
 public class CourseService {
@@ -14,7 +15,8 @@ public class CourseService {
        Course course = new Course(courseName);
      CourseRepository.getInstance().getCourseList().add(course);
      int index = CourseRepository.getInstance().getCourseList().indexOf(course);
-     return CourseRepository.getInstance().getCourseList().get(index);
+        LogFactory.debug(this.getClass().getName(),"Create course with name");
+        return CourseRepository.getInstance().getCourseList().get(index);
     }
 
     public Course createCourse(String courseName, String teacher, String student, String lecture) {

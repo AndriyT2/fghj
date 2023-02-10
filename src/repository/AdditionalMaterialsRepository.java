@@ -3,6 +3,7 @@ package repository;
 import models.AdditionalMaterials;
 import utility.AdditionalMaterialsLectureIdComparator;
 import utility.AdditionalMaterialsResourceTypeComparator;
+import utilityLog.LogFactory;
 
 import java.util.*;
 

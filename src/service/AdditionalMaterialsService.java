@@ -4,6 +4,7 @@ import models.AdditionalMaterials;
 import models.ResourceType;
 import repository.AdditionalMaterialsRepository;
 import utility.ScannerThis;
+import utilityLog.LogFactory;
 
 import java.util.NoSuchElementException;
 
@@ -13,6 +14,10 @@ public class AdditionalMaterialsService {
 
     public  AdditionalMaterialsService(String name, int lectureId) {
      AdditionalMaterialsRepository.getInstance().getAdditionalMaterialsList().add(new  AdditionalMaterials(name, lectureId));
+    }
+
+    public void createAdditionalMaterialsService(String name, int lectureId) {
+        AdditionalMaterialsRepository.getInstance().getAdditionalMaterialsList().add(new  AdditionalMaterials(name, lectureId));
     }
 
     public void createAdditionalMaterialsService(String name, int lectureId, ResourceType resourceType) {
@@ -99,6 +104,25 @@ public class AdditionalMaterialsService {
             }
     }
 
+    public void removeAdditionalMaterialsMenu(int lectureId) {
+
+                boolean flag = false;
+                for (AdditionalMaterials  additionalMaterials : AdditionalMaterialsRepository.getInstance().getAdditionalMaterialsList()) {
+                    if (additionalMaterials.getLectureId() == lectureId) {
+                        flag = true;
+                        AdditionalMaterialsRepository.getInstance().getAdditionalMaterialsList().remove(additionalMaterials);
+                    break;}
+                }
+                if (!flag) {
+
+                    NoSuchElementException e = new NoSuchElementException();
+                    LogFactory.warning(this.getClass().getName(), "Id don't exist", e.getStackTrace());
+                    throw e;
+                }
+
+                System.out.println(AdditionalMaterialsRepository.getInstance().additionalMaterialsTreeMap());
+    }
+
     public void shoveAdditionalMaterialsTreeMapWithOptions() { //  перевірити правопис
         System.out.println(AdditionalMaterialsRepository.getInstance().additionalMaterialsTreeMap());
         String answer;
@@ -135,7 +159,7 @@ public class AdditionalMaterialsService {
                     if (additionalMaterials.getLectureId() == lectureId) {
                         flag = true;
                         AdditionalMaterialsRepository.getInstance().getAdditionalMaterialsList().remove(additionalMaterials);
-                    break;}
+                        break;}
                 }
                 if (!flag) { throw new NoSuchElementException();
                 }

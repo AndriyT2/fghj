@@ -2,6 +2,7 @@ package repository;
 
 import models.Person;
 import utility.PersonLastnameComparator;
+import utilityLog.LogFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,10 @@ public class PersonRepository {
         return personList;
     }
     public void getAll() {
+
         System.out.println(PersonRepository.getInstance().getPersonList());
+        LogFactory.info(this.getClass().getName(), "Display PersonRepository");
+
     }
     public Person getById(int index) {
         for (Person person : personList){
@@ -37,10 +41,6 @@ public class PersonRepository {
         throw new NoSuchElementException();
     }
 
-    public void personSortByLastname() {
-        List<Person> tmp = new ArrayList<>(PersonRepository.getInstance().getPersonList());
-        tmp.sort(new PersonLastnameComparator());
-        System.out.println(tmp);
-    }
+
 
 }

@@ -1,6 +1,7 @@
 package repository;
 
 import models.Lecture;
+import utilityLog.LogFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,10 @@ public class LectureRepository {
     }
 
     public void getAll() {
-        System.out.println(LectureRepository.getInstance().getLecturesList());
+
+            System.out.println(LectureRepository.getInstance().getLecturesList());
+        LogFactory.info(this.getClass().getName(), "Display LectureRepository");
+
     }
 
     public Lecture getById(int index) {

@@ -3,7 +3,12 @@ package service;
 import models.Person;
 import models.Role;
 import repository.PersonRepository;
+import utility.IntTrue;
+import utility.PersonLastnameComparator;
 import utility.ScannerThis;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class PersonService {
@@ -53,6 +58,34 @@ public class PersonService {
             }
 
         }
+    }
+
+
+    public void addPersonMenu () {
+
+                int ask1;
+
+                do {
+                    System.out.println("Введіть числове значення для вибору необхідного критерія: \n1 Студент;\n2 Вчитель.");
+                    ask1 = new IntTrue().intTrue();
+                } while (ask1 < 1 | ask1 > 2);
+
+                if (ask1 == 1) {
+                    System.out.println("Ви створили нового студента.");
+                    Person personS = new Person(Role.STUDENT);
+                    PersonRepository.getInstance().getPersonList().add(personS);
+
+                } else {
+                    System.out.println("Ви створили нового вчителя.");
+                    Person personT = new Person(Role.TEACHER);
+                    PersonRepository.getInstance().getPersonList().add(personT);
+                }
+    }
+
+    public void personSortByLastname() {
+        List<Person> tmp = new ArrayList<>(PersonRepository.getInstance().getPersonList());
+        tmp.sort(new PersonLastnameComparator());
+        System.out.println(tmp);
     }
 
 }

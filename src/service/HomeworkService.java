@@ -3,6 +3,7 @@ package service;
 import models.Homework;
 import repository.HomeworkRepository;
 import utility.ScannerThis;
+import utilityLog.LogFactory;
 
 import java.util.NoSuchElementException;
 
@@ -25,7 +26,7 @@ HomeworkRepository.getInstance().getHomeworkList().add(new Homework(lectureId));
     }
 
 
-    public void shoveHomeworkTreeMapWithOptions() { //  перевірити правопис
+    public void shoveHomeworkTreeMapWithOptions() {
         System.out.println(HomeworkRepository.getInstance().homeworkTreeMap());
         String answer;
         do{
@@ -74,4 +75,27 @@ HomeworkRepository.getInstance().getHomeworkList().add(new Homework(lectureId));
 
     }
 
+    public void homeworkRemoveMenu(int lectureId) {
+
+
+                boolean flag = false;
+                for (Homework homework : HomeworkRepository.getInstance().getHomeworkList()) {
+                    if (homework.getLectureId() == lectureId) {
+                        flag = true;
+                        HomeworkRepository.getInstance().getHomeworkList().remove(homework);
+                        break;}
+                }
+                if (!flag) {
+
+                    NoSuchElementException e = new NoSuchElementException();
+                    LogFactory.warning(this.getClass().getName(), "Id don't exist", e.getStackTrace());
+
+                    throw e;
+                }
+    }
+
+
+
 }
+
+
