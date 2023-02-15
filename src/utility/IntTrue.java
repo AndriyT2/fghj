@@ -1,7 +1,6 @@
 package utility;
 
-import utilityLog.Log;
-import utilityLog.LogFactory;
+import utility.utilityLog.LogFactory;
 
 import java.util.InputMismatchException;
 

@@ -1,8 +1,7 @@
 import models.ResourceType;
 import models.Role;
 import service.*;
-import utility.EntityNotFoundException;
-import utilityLog.LogReader;
+import utility.exception.EntityNotFoundException;
 
 public class Main {
     public static void main(String[] args) throws EntityNotFoundException {

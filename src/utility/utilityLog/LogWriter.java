@@ -1,9 +1,8 @@
-package utilityLog;
+package utility.utilityLog;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.List;
 
 public class LogWriter {
 
@@ -18,6 +17,7 @@ public class LogWriter {
             }
         } catch (IOException e) {
             e.printStackTrace();
+
         }
     }
 }

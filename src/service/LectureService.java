@@ -6,13 +6,16 @@ import models.Person;
 import models.Role;
 import repository.*;
 import utility.ScannerThis;
+import utility.utilityLog.LogFactory;
 
 public class LectureService {
 
 
 
     public void createLecture() {
-LectureRepository.getInstance().getLecturesList().add(new Lecture());
+        LectureRepository.getInstance().getLecturesList().add(new Lecture());
+        LogFactory.debug(this.getClass().getName(),"Create new lecture");
+
     }
 
 
@@ -293,6 +296,7 @@ LectureRepository.getInstance().getLecturesList().add(new Lecture());
     }
 
     public void lectureWithHomeworkAndAMById(int id) {
+        LogFactory.debug(this.getClass().getName(), "Display homework and additional materials for by lecture id");
         System.out.println("Lecture with Id = " + id + ": " + LectureRepository.getInstance().getById(id));
         System.out.println("Homework for this lecture: " + HomeworkRepository.getInstance().homeworkTreeMap().get(id));
         System.out.println("AdditionalMaterials for this lecture: " + AdditionalMaterialsRepository.getInstance().additionalMaterialsTreeMap().get(id));

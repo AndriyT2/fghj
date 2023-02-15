@@ -1,7 +1,10 @@
-package utility;
+package utility.regex;
 
 import models.Person;
 import repository.PersonRepository;
+import utility.ScannerThis;
+import utility.exception.EntityNotFoundException;
+import utility.exception.SetParameterException;
 
 
 public class PersonRegex {

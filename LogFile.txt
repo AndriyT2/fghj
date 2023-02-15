@@ -1,55 +1,30 @@
-2023-02-10/DEBUG/service.CourseService/Create course with name
-2023-02-10/DEBUG/service.CourseService/Create course with name
-2023-02-10/DEBUG/service.CourseService/Create course with name
-2023-02-10/DEBUG/service.Menu/CREATE NEW MENU
-2023-02-10/DEBUG/service.Menu/Menu.List with options
-2023-02-10/WARNING/utility.IntTrue/Entered a symbol instead of a number/[java.base/java.util.Scanner.throwFor(Scanner.java:939), java.base/java.util.Scanner.next(Scanner.java:1594), java.base/java.util.Scanner.nextInt(Scanner.java:2258), java.base/java.util.Scanner.nextInt(Scanner.java:2212), utility.IntTrue.intTrue(IntTrue.java:14), service.Menu.menu(Menu.java:27), Main.main(Main.java:64)]
-2023-02-10/DEBUG/service.Menu/Create new courseMenu
-2023-02-10/DEBUG/service.Menu/courseMenu.List with options
-2023-02-10/DEBUG/service.Menu/courseMenu.List with options
-2023-02-10/DEBUG/service.Menu/Close courseMenu
-2023-02-10/DEBUG/service.Menu/Menu.List with options
-2023-02-10/DEBUG/service.Menu/CLOSE MENU
-2023-02-10/DEBUG/service.CourseService/Create course with name
-2023-02-10/DEBUG/service.CourseService/Create course with name
-2023-02-10/DEBUG/service.CourseService/Create course with name
-2023-02-10/DEBUG/service.Menu/CREATE NEW MENU
-2023-02-10/DEBUG/service.Menu/Menu.List with options
-2023-02-10/WARNING/utility.IntTrue/Entered a symbol instead of a number/[java.base/java.util.Scanner.throwFor(Scanner.java:939), java.base/java.util.Scanner.next(Scanner.java:1594), java.base/java.util.Scanner.nextInt(Scanner.java:2258), java.base/java.util.Scanner.nextInt(Scanner.java:2212), utility.IntTrue.intTrue(IntTrue.java:14), service.Menu.menu(Menu.java:29), Main.main(Main.java:64)]
-2023-02-10/DEBUG/service.Menu/Create new courseMenu
-2023-02-10/DEBUG/service.Menu/courseMenu.List with options
-2023-02-10/DEBUG/utility.CourseRegex/Run regex course name.
-2023-02-10/DEBUG/service.CourseService/Create course with name
-2023-02-10/DEBUG/service.Menu/courseMenu.List with options
-2023-02-10/DEBUG/service.Menu/Close courseMenu
-2023-02-10/DEBUG/service.Menu/Menu.List with options
-2023-02-10/DEBUG/service.Menu/Menu.List with options
-2023-02-10/DEBUG/service.CourseService/Create course with name
-2023-02-10/DEBUG/service.CourseService/Create course with name
-2023-02-10/DEBUG/service.CourseService/Create course with name
-2023-02-10/DEBUG/service.Menu/CREATE NEW MENU
-2023-02-10/DEBUG/service.Menu/Menu.List with options
-2023-02-10/WARNING/utility.IntTrue/Entered a symbol instead of a number/[java.base/java.util.Scanner.throwFor(Scanner.java:939), java.base/java.util.Scanner.next(Scanner.java:1594), java.base/java.util.Scanner.nextInt(Scanner.java:2258), java.base/java.util.Scanner.nextInt(Scanner.java:2212), utility.IntTrue.intTrue(IntTrue.java:14), service.Menu.menu(Menu.java:29), Main.main(Main.java:64)]
-2023-02-10/DEBUG/service.Menu/Create new courseMenu
-2023-02-10/DEBUG/service.Menu/courseMenu.List with options
-2023-02-10/DEBUG/service.Menu/Close courseMenu
-2023-02-10/DEBUG/service.Menu/Menu.List with options
-2023-02-10/DEBUG/service.Menu/Menu.List with options
-2023-02-10/DEBUG/service.CourseService/Create course with name
-2023-02-10/DEBUG/service.CourseService/Create course with name
-2023-02-10/DEBUG/service.CourseService/Create course with name
-2023-02-10/DEBUG/service.Menu/CREATE NEW MENU
-2023-02-10/DEBUG/service.Menu/Menu.List with options
-2023-02-10/WARNING/utility.IntTrue/Entered a symbol instead of a number/[java.base/java.util.Scanner.throwFor(Scanner.java:939), java.base/java.util.Scanner.next(Scanner.java:1594), java.base/java.util.Scanner.nextInt(Scanner.java:2258), java.base/java.util.Scanner.nextInt(Scanner.java:2212), utility.IntTrue.intTrue(IntTrue.java:14), service.Menu.menu(Menu.java:29), Main.main(Main.java:64)]
-2023-02-10/DEBUG/service.Menu/Create new courseMenu
-2023-02-10/DEBUG/service.Menu/courseMenu.List with options
-2023-02-10/DEBUG/service.Menu/Close courseMenu
-2023-02-10/DEBUG/service.Menu/Menu.List with options
-2023-02-10/DEBUG/service.Menu/Menu.List with options
-2023-02-10/DEBUG/service.CourseService/Create course with name
-2023-02-10/DEBUG/service.CourseService/Create course with name
-2023-02-10/DEBUG/service.CourseService/Create course with name
-2023-02-10/DEBUG/service.Menu/CREATE NEW MENU
-2023-02-10/DEBUG/service.Menu/Menu.List with options
-2023-02-10/WARNING/utility.IntTrue/Entered a symbol instead of a number/[java.base/java.util.Scanner.throwFor(Scanner.java:939), java.base/java.util.Scanner.next(Scanner.java:1594), java.base/java.util.Scanner.nextInt(Scanner.java:2258), java.base/java.util.Scanner.nextInt(Scanner.java:2212), utility.IntTrue.intTrue(IntTrue.java:14), service.Menu.menu(Menu.java:29), Main.main(Main.java:64)]
-2023-02-10/DEBUG/service.Menu/Menu.List with options
+2023-02-15/DEBUG/service.CourseService/Create course with name
+2023-02-15/DEBUG/service.CourseService/Create course with name
+2023-02-15/DEBUG/service.CourseService/Create course with name
+2023-02-15/DEBUG/service.PersonService/Create new person
+2023-02-15/DEBUG/service.PersonService/Create new person
+2023-02-15/DEBUG/service.PersonService/Create new person
+2023-02-15/DEBUG/service.PersonService/Create new person
+2023-02-15/DEBUG/service.LectureService/Create new lecture
+2023-02-15/DEBUG/service.LectureService/Create new lecture
+2023-02-15/DEBUG/service.LectureService/Create new lecture
+2023-02-15/DEBUG/service.LectureService/Create new lecture
+2023-02-15/DEBUG/service.Menu/CREATE NEW MENU
+2023-02-15/DEBUG/service.Menu/Menu.List with options
+2023-02-15/DEBUG/service.ControlWork.ControlWork11/Finish getTask. Create Task List
+2023-02-15/DEBUG/service.ControlWork.ControlWork14/Run Control Work
+2023-02-15/DEBUG/service.ControlWork.ControlWork14/Run createControlWork
+2023-02-15/DEBUG/service.PersonService/Create new person
+2023-02-15/DEBUG/service.PersonService/Create new person
+2023-02-15/DEBUG/service.PersonService/Create new person
+2023-02-15/DEBUG/service.PersonService/Create new person
+2023-02-15/DEBUG/service.PersonService/Create new person
+2023-02-15/DEBUG/service.PersonService/Create new person
+2023-02-15/DEBUG/service.PersonService/Create new person
+2023-02-15/DEBUG/service.PersonService/Create new person
+2023-02-15/DEBUG/service.PersonService/Create new person
+2023-02-15/DEBUG/service.PersonService/Create new person
+2023-02-15/DEBUG/service.ControlWork.ControlWork11/Finish createPerson
+2023-02-15/DEBUG/service.Menu/Create new Control Work
+2023-02-15/DEBUG/service.Menu/Menu.List with options
+2023-02-15/DEBUG/service.Menu/CLOSE MENU

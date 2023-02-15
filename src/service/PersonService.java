@@ -4,8 +4,9 @@ import models.Person;
 import models.Role;
 import repository.PersonRepository;
 import utility.IntTrue;
-import utility.PersonLastnameComparator;
+import utility.comparator.PersonLastnameComparator;
 import utility.ScannerThis;
+import utility.utilityLog.LogFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
 public class PersonService {
 
     public void addPerson(String lastname, String firstname, Role role) {
+        LogFactory.debug(this.getClass().getName(), "Create new person");
         PersonRepository.getInstance().getPersonList().add(new Person(lastname, firstname, role));
     }
     public void addPerson () {
@@ -87,5 +89,24 @@ public class PersonService {
         tmp.sort(new PersonLastnameComparator());
         System.out.println(tmp);
     }
+
+    public int countStudent() {
+        int counter = 0;
+        for (Person person: PersonRepository.getInstance().getPersonList()) {
+          if (person.getRole() == Role.STUDENT) {++counter;}
+        }
+        return counter;
+    }
+
+    public List<Person> studentList() {
+        List<Person> student = new ArrayList<>();
+        for (Person person : PersonRepository.getInstance().getPersonList()) {
+            if (person.getRole() == Role.STUDENT) {
+                student.add(person);
+            }
+        }
+        return student;
+    }
+
 
 }

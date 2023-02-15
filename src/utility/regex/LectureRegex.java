@@ -1,7 +1,10 @@
-package utility;
+package utility.regex;
 
 import models.Lecture;
 import repository.LectureRepository;
+import utility.ScannerThis;
+import utility.exception.EntityNotFoundException;
+import utility.exception.SetParameterException;
 
 
 public class LectureRegex {

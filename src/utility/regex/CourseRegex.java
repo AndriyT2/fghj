@@ -1,8 +1,11 @@
-package utility;
+package utility.regex;
 
 import models.Course;
 import repository.CourseRepository;
-import utilityLog.LogFactory;
+import utility.ScannerThis;
+import utility.exception.EntityNotFoundException;
+import utility.exception.SetParameterException;
+import utility.utilityLog.LogFactory;
 
 
 public class CourseRegex {

@@ -1,4 +1,4 @@
-package utilityLog;
+package utility.utilityLog;
 
 import java.time.LocalDate;
 import java.util.Arrays;

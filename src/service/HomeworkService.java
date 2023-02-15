@@ -3,7 +3,7 @@ package service;
 import models.Homework;
 import repository.HomeworkRepository;
 import utility.ScannerThis;
-import utilityLog.LogFactory;
+import utility.utilityLog.LogFactory;
 
 import java.util.NoSuchElementException;
 

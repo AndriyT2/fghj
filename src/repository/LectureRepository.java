@@ -1,7 +1,7 @@
 package repository;
 
 import models.Lecture;
-import utilityLog.LogFactory;
+import utility.utilityLog.LogFactory;
 
 import java.util.ArrayList;
 import java.util.List;

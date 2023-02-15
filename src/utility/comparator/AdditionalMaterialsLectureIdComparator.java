@@ -1,4 +1,4 @@
-package utility;
+package utility.comparator;
 
 import models.AdditionalMaterials;
 

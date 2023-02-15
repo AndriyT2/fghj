@@ -2,11 +2,12 @@ package service;
 
 import models.Course;
 import repository.*;
-import utility.CourseRegex;
+import service.ControlWork.ControlWork14;
+import utility.regex.CourseRegex;
 import utility.IntTrue;
 import utility.ScannerThis;
-import utilityLog.LogFactory;
-import utilityLog.LogReader;
+import utility.utilityLog.LogFactory;
+import utility.utilityLog.LogReader;
 
 public class Menu {
 public void menu() {
@@ -24,11 +25,12 @@ public void menu() {
             4 - Додаткові матеріали;
             5 - Особа;
             6 - Отримати вміст LogFile;
-            7 - Завершення роботи з програмою.""");
+            7 - Контрольна робота;
+            8 - Завершення роботи з програмою.""");
 
     answer = new IntTrue().intTrue();
 
-        }while (answer<1 || answer>7);
+        }while (answer<1 || answer>8);
 
         switch (answer) {
             case 1 -> {
@@ -59,6 +61,14 @@ public void menu() {
 
             }
             case 7 -> {
+//
+                ControlWork14 controlWork  = new ControlWork14();
+                controlWork.runControlWork();
+                LogFactory.debug(this.getClass().getName(), "Create new Control Work");
+
+
+            }
+            case 8 -> {
                 System.out.println("Ви вибрали категорію - Завершення роботи з програмою.");
                 exit = true;
                 LogFactory.debug(this.getClass().getName(), "CLOSE MENU");

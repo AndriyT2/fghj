@@ -1,4 +1,4 @@
-package utilityLog;
+package utility.utilityLog;
 
 import java.util.ArrayList;
 import java.util.List;

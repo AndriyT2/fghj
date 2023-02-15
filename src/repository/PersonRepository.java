@@ -1,8 +1,7 @@
 package repository;
 
 import models.Person;
-import utility.PersonLastnameComparator;
-import utilityLog.LogFactory;
+import utility.utilityLog.LogFactory;
 
 import java.util.ArrayList;
 import java.util.List;

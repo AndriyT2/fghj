@@ -14,6 +14,11 @@ public class Person extends ModelsSuper implements Comparable<Person> {
         this.role = role;
     }
 
+    public Person(String lastname, Role role) {
+        this.lastname = lastname;
+        this.role = role;
+    }
+
     public String getFirstname() {
         return firstname;
     }

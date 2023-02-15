@@ -1,5 +1,7 @@
 package models;
 
+import java.util.Objects;
+
 public class AdditionalMaterials extends ModelsSuper implements Comparable<AdditionalMaterials> {
 
     private String name;
@@ -64,6 +66,19 @@ public class AdditionalMaterials extends ModelsSuper implements Comparable<Addit
             return -1;
         }
         return 0;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AdditionalMaterials that = (AdditionalMaterials) o;
+        return lectureId == that.lectureId && Objects.equals(name, that.name) && resourceType == that.resourceType;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, lectureId, resourceType);
     }
 }
 

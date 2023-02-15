@@ -1,7 +1,4 @@
-package utilityLog;
-
-import models.Lecture;
-import utility.ScannerThis;
+package utility.utilityLog;
 
 import java.io.*;
 

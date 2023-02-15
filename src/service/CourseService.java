@@ -3,7 +3,7 @@ package service;
 import models.Course;
 import repository.CourseRepository;
 import utility.ScannerThis;
-import utilityLog.LogFactory;
+import utility.utilityLog.LogFactory;
 
 
 public class CourseService {

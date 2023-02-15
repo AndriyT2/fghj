@@ -1,7 +1,7 @@
 package repository;
 
 import models.Course;
-import utilityLog.LogFactory;
+import utility.utilityLog.LogFactory;
 
 import java.util.*;
 
