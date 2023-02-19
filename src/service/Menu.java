@@ -3,11 +3,12 @@ package service;
 import models.Course;
 import repository.*;
 import service.ControlWork.ControlWork14;
-import utility.regex.CourseRegex;
 import utility.IntTrue;
 import utility.ScannerThis;
+import utility.regex.CourseRegex;
 import utility.utilityLog.LogFactory;
 import utility.utilityLog.LogReader;
+import utility.utilityLog.LogWriter;
 
 public class Menu {
 public void menu() {
@@ -24,7 +25,7 @@ public void menu() {
             3 - Домашня робота;
             4 - Додаткові матеріали;
             5 - Особа;
-            6 - Отримати вміст LogFile;
+            6 - LogFile;
             7 - Контрольна робота;
             8 - Завершення роботи з програмою.""");
 
@@ -55,13 +56,10 @@ public void menu() {
             }
             case 6 -> {
                 System.out.println("Ви вибрали категорію - LogFile.");
-                System.out.println("Вміст LogFile:");
-                LogReader logReader = new LogReader();
-                logReader.readDataFromFile();
+                logFileMenu();
 
             }
             case 7 -> {
-//
                 ControlWork14 controlWork  = new ControlWork14();
                 controlWork.runControlWork();
                 LogFactory.debug(this.getClass().getName(), "Create new Control Work");
@@ -328,6 +326,44 @@ public void menu() {
                 case 4 -> {
                     exit = true;
                     LogFactory.debug(this.getClass().getName(), "Close personMenu");
+                }
+                default -> throw new IllegalStateException("Unexpected value: " + answer);
+            }
+
+        }
+    }
+
+    private void logFileMenu() {
+        LogFactory.debug(this.getClass().getName(), "Create new  logFileMenu");
+        boolean exit = false;
+        int answer;
+        while (!exit){
+            do{
+                LogFactory.debug(this.getClass().getName(), "logFileMenu.List with options");
+                System.out.println("""
+            Виберіть числове значення бажаної дії для подальшої роботи:
+            1 - Вивести вміст LogFile;
+            2 - Змінити рівень логування;
+            3 - Повернутися в головне меню.""");
+
+                answer = new IntTrue().intTrue();
+
+            }while (answer<1 || answer>3);
+
+            switch (answer) {
+                case 1 -> {
+                    System.out.println("Вміст LogFile:");
+                    LogReader logReader = new LogReader();
+                    logReader.readDataFromFile();
+                }
+                case 2 -> {
+                    LogWriter log = new LogWriter();
+                    log.levelChange();
+                }
+
+                case 3 -> {
+                    exit = true;
+                    LogFactory.debug(this.getClass().getName(), "Close logFileMenu");
                 }
                 default -> throw new IllegalStateException("Unexpected value: " + answer);
             }

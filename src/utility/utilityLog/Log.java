@@ -18,6 +18,10 @@ public class Log {
         this.stacktrace = stacktrace;
     }
 
+    public LogLevel getLevel() {
+        return level;
+    }
+
     @Override
     public String toString() {
         String s;

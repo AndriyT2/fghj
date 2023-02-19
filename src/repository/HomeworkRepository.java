@@ -1,6 +1,7 @@
 package repository;
 
 import models.Homework;
+import utility.utilityLog.LogFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +40,7 @@ public class HomeworkRepository {
         for (Homework homework : HomeworkRepository.getInstance().getHomeworkList()) {
             homeworkTreeMap.put(homework.getLectureId(), homework);
         }
+        LogFactory.info(this.getClass().getName(), "Create TreeMapHomework from ListHomework");
         return homeworkTreeMap;
 
     }

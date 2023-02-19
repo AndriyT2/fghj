@@ -3,8 +3,10 @@ import models.Role;
 import service.*;
 import utility.exception.EntityNotFoundException;
 
+import java.io.IOException;
+
 public class Main {
-    public static void main(String[] args) throws EntityNotFoundException {
+    public static void main(String[] args) throws EntityNotFoundException, IOException {
 
 
 

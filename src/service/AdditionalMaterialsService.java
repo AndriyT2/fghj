@@ -123,7 +123,7 @@ public class AdditionalMaterialsService {
                 System.out.println(AdditionalMaterialsRepository.getInstance().additionalMaterialsTreeMap());
     }
 
-    public void shoveAdditionalMaterialsTreeMapWithOptions() { //  перевірити правопис
+    public void shoveAdditionalMaterialsTreeMapWithOptions() {
         System.out.println(AdditionalMaterialsRepository.getInstance().additionalMaterialsTreeMap());
         String answer;
         do{

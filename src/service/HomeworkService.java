@@ -13,7 +13,9 @@ public class HomeworkService {
         return new Homework();
     }
     public void createHomeworkWithLectureId(int lectureId) {
-HomeworkRepository.getInstance().getHomeworkList().add(new Homework(lectureId));
+        HomeworkRepository.getInstance().getHomeworkList().add(new Homework(lectureId));
+        LogFactory.debug(this.getClass().getName(),"Create new homework with lectureId");
+
     }
 
 
@@ -83,6 +85,7 @@ HomeworkRepository.getInstance().getHomeworkList().add(new Homework(lectureId));
                     if (homework.getLectureId() == lectureId) {
                         flag = true;
                         HomeworkRepository.getInstance().getHomeworkList().remove(homework);
+                        LogFactory.debug(this.getClass().getName(), "Remove the homework with lectureId = " + lectureId);
                         break;}
                 }
                 if (!flag) {
