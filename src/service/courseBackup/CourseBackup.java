@@ -10,7 +10,7 @@ import java.util.List;
 
 public class CourseBackup implements Serializable {
     Course course;
-    int f = 45;  //Працює та поверне 45 а не null !!!!!!!!!!!!!!!!!
+    int f = 45;  //Працює та поверне 45 а не null !!!!!!!!!!!!!!!
 
     int courseId;
 
