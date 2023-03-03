@@ -47,9 +47,9 @@ public class Main {
 
 
         LectureService lectureH19T1 = new LectureService();
-        lectureH19T1.createLecture();
-        lectureH19T1.createLecture();
-        lectureH19T1.createLecture();
+        lectureH19T1.createLecture(1);
+        lectureH19T1.createLecture(2);
+        lectureH19T1.createLecture(3);
         lectureH19T1.createLecture();
 
 
@@ -63,6 +63,7 @@ public class Main {
         System.out.println("\n=====================  Menu  ===========================================================\n");
         Menu menu = new Menu();
         menu.menu();
+
 
 
     }

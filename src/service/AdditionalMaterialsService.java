@@ -6,9 +6,10 @@ import repository.AdditionalMaterialsRepository;
 import utility.ScannerThis;
 import utility.utilityLog.LogFactory;
 
+import java.io.Serializable;
 import java.util.NoSuchElementException;
 
-public class AdditionalMaterialsService {
+public class AdditionalMaterialsService implements Serializable {
     public AdditionalMaterialsService() {
     }
 

@@ -1,6 +1,8 @@
 package models;
 
-public abstract class ModelsSuper {
+import java.io.Serializable;
+
+public abstract class ModelsSuper implements Serializable {
 
     private static int counter;
 

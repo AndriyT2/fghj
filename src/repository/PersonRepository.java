@@ -3,11 +3,12 @@ package repository;
 import models.Person;
 import utility.utilityLog.LogFactory;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class PersonRepository {
+public class PersonRepository implements Serializable {
     private List<Person> personList;
 
     private static PersonRepository instance;

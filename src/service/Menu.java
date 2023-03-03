@@ -10,6 +10,10 @@ import utility.utilityLog.LogFactory;
 import utility.utilityLog.LogReader;
 import utility.utilityLog.LogWriter;
 
+import java.io.FileNotFoundException;
+
+import static utility.regex.LectureRegex.setDate;
+
 public class Menu {
 public void menu() {
     LogFactory.debug(this.getClass().getName(), "CREATE NEW MENU");
@@ -80,8 +84,8 @@ public void menu() {
     }
 
     private void courseMenu() {
-    CourseService courseService = new CourseService();
-    LogFactory.debug(this.getClass().getName(), "Create new courseMenu");
+        CourseService courseService = new CourseService();
+        LogFactory.debug(this.getClass().getName(), "Create new courseMenu");
 
         boolean exit = false;
         int answer;
@@ -93,11 +97,13 @@ public void menu() {
             1 - Вивести список існуючих курсів;
             2 - Створити курс;
             3 - Відкрити курс по його ID;
-            4 - Повернутися в головне меню.""");
+            4 - Backup курсу по його ID;
+            5 - Вивести на екран вміст backup;
+            6 - Повернутися в головне меню.""");
 
                 answer = new IntTrue().intTrue();
 
-            }while (answer<1 || answer>4);
+            }while (answer<1 || answer>6);
 
             switch (answer) {
                 case 1 -> {
@@ -109,7 +115,7 @@ public void menu() {
                     System.out.println("Введіть назву нового курсу:");
                     String courseName = ScannerThis.getInstance().nextLine();
                     String afterRegex = CourseRegex.setCourseNameMenu(courseName);
-                    courseService.createCourse(afterRegex);
+                    courseService.courseScanner(afterRegex);
                 }
                 case 3 -> {
                     System.out.println("Введіть значення ID для курсу:");
@@ -119,6 +125,19 @@ public void menu() {
                 }
 
                 case 4 -> {
+                    service.courseBackup.CourseBackup backup = new service.courseBackup.CourseBackup();
+                    try {
+                        new service.courseBackup.WriteBackup(backup);
+                    } catch (FileNotFoundException e) {
+                        LogFactory.error(this.getClass().getName(), "Course Backup menu", e.getStackTrace());
+                    }
+                }
+                case 5 -> {
+                    System.out.println("Вміст файлу backup:");
+                    service.courseBackup.ReadBackup readBackup = new service.courseBackup.ReadBackup();
+                }
+
+                case 6 -> {
                     exit = true;
                     LogFactory.debug(this.getClass().getName(), "Close courseMenu");
                 }
@@ -141,11 +160,12 @@ public void menu() {
             1 - Вивести список існуючих лекції;
             2 - Створити нову лекцію;
             3 - Відкрити домашнє завдання та додаткові матеріали для лекції по її ID;
-            4 - Повернутися в головне меню.""");
+            4 - Додати дату проведення лекції до існуючої лекції;
+            5 - Повернутися в головне меню.""");
 
                 answer = new IntTrue().intTrue();
 
-            }while (answer<1 || answer>4);
+            }while (answer<1 || answer>5);
 
             switch (answer) {
                 case 1 -> {
@@ -163,8 +183,13 @@ public void menu() {
                     int lectureId = new  IntTrue().intTrue();
                     lectureService.lectureWithHomeworkAndAMById(lectureId);
                 }
-
                 case 4 -> {
+                    System.out.println("Введіть значення ID для лекції:");
+                    int lectureId = new  IntTrue().intTrue();
+                    setDate(lectureId);
+                }
+
+                case 5 -> {
                     exit = true;
                     LogFactory.debug(this.getClass().getName(), "Close lectureMenu");
                 }
@@ -222,6 +247,8 @@ public void menu() {
 
 
                 }
+
+
 
                 case 4 -> {
                     exit = true;

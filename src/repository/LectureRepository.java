@@ -3,12 +3,13 @@ package repository;
 import models.Lecture;
 import utility.utilityLog.LogFactory;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class LectureRepository {
-    private List<Lecture> lecturesList;
+public class LectureRepository implements Serializable {
+    private final List<Lecture> lecturesList;
 
 
         private static LectureRepository instance;

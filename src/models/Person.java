@@ -1,5 +1,7 @@
 package models;
 
+import repository.PersonRepository;
+
 public class Person extends ModelsSuper implements Comparable<Person> {
 
     private int courseId;
@@ -13,6 +15,13 @@ public class Person extends ModelsSuper implements Comparable<Person> {
         this.lastname = lastname;
         this.role = role;
     }
+
+    public Person(String lastname, Role role, int courseId) {
+        this.lastname = lastname;
+        this.role = role;
+        this.courseId = courseId;
+    }
+
 
     public Person(String lastname, Role role) {
         this.lastname = lastname;

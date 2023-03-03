@@ -4,9 +4,10 @@ import models.AdditionalMaterials;
 import utility.comparator.AdditionalMaterialsLectureIdComparator;
 import utility.comparator.AdditionalMaterialsResourceTypeComparator;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class AdditionalMaterialsRepository {
+public class AdditionalMaterialsRepository implements Serializable {
     private final List<AdditionalMaterials> additionalMaterialsList;
 
     public List<AdditionalMaterials> getAdditionalMaterialsList() {

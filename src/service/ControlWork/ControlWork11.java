@@ -22,9 +22,9 @@ public class ControlWork11 {
 
         int needPerson = personTotal -personServiceCW.countStudent();
         if (needPerson > 0) {
-            for (Integer i = 0; i < needPerson; i++) {
-                String lastname = "Lastname" + String.valueOf(i);
-                String firstname = "Firstname" + String.valueOf(i);
+            for (int i = 0; i < needPerson; i++) {
+                String lastname = "Lastname" + i;
+                String firstname = "Firstname" + i;
                 personServiceCW.addPerson(lastname, firstname, Role.STUDENT);
             }
         }

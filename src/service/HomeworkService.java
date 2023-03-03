@@ -5,9 +5,10 @@ import repository.HomeworkRepository;
 import utility.ScannerThis;
 import utility.utilityLog.LogFactory;
 
+import java.io.Serializable;
 import java.util.NoSuchElementException;
 
-public class HomeworkService {
+public class HomeworkService implements Serializable {
 
     public Homework createHomework() {
         return new Homework();

@@ -3,9 +3,10 @@ package repository;
 import models.Course;
 import utility.utilityLog.LogFactory;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class CourseRepository {
+public class CourseRepository implements Serializable {
 
     private List<Course> courseList;
 

@@ -8,11 +8,12 @@ import utility.comparator.PersonLastnameComparator;
 import utility.ScannerThis;
 import utility.utilityLog.LogFactory;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class PersonService {
+public class PersonService implements Serializable {
 
     public void addPerson(String lastname, String firstname, Role role) {
         LogFactory.debug(this.getClass().getName(), "Create new person");

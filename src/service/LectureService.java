@@ -8,7 +8,9 @@ import repository.*;
 import utility.ScannerThis;
 import utility.utilityLog.LogFactory;
 
-public class LectureService {
+import java.io.Serializable;
+
+public class LectureService implements Serializable {
 
 
 
@@ -19,8 +21,8 @@ public class LectureService {
     }
 
 
-    public Lecture createLecture(int idCourse) {
-        return new Lecture();
+    public void createLecture(int idCourse) {
+        LectureRepository.getInstance().getLecturesList().add(new Lecture(idCourse));
 
     }
 
@@ -29,10 +31,7 @@ public class LectureService {
 
     }
 
-    public Lecture createLecture(int idCourse, int idTeacher) {
-        return new Lecture(idCourse, idTeacher);
 
-    }
     public void lectureScanner(int idCourse) {
         int totalLectures = 0;
         System.out.println("Чи бажаєте створити нову лекцію? [Так/Ні]");
@@ -138,6 +137,7 @@ public class LectureService {
         System.out.println(lectureRepository2.getLecturesList());
 
         CourseService course = new CourseService();
+        LectureService lecture = new LectureService();
         Course course1H9 = course.createCourse();
         courseRepository2.getCourseList().add(course1H9);
         courseRepository2.getAll();
@@ -145,14 +145,11 @@ public class LectureService {
         int idCourse1H9 = course1H9.getId();
         System.out.println("Значення ID для курсу - " + idCourse1H9);
 
-        Lecture lecture1H9 = createLecture(idCourse1H9);
+        lecture.createLecture(idCourse1H9);
 
-        Lecture lecture2H9 = createLecture(idCourse1H9);
+        lecture.createLecture(idCourse1H9);
 
-        lectureRepository2.getLecturesList().add(lecture1H9);
-        lectureRepository2.getAll();
 
-        lectureRepository2.getLecturesList().add(lecture2H9);
         lectureRepository2.getAll();
 
         while (true) {

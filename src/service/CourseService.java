@@ -1,12 +1,19 @@
 package service;
 
 import models.Course;
+import models.Lecture;
+import models.Person;
+import models.Role;
 import repository.CourseRepository;
+import repository.LectureRepository;
+import repository.PersonRepository;
 import utility.ScannerThis;
 import utility.utilityLog.LogFactory;
 
+import java.io.Serializable;
 
-public class CourseService {
+
+public class CourseService implements Serializable {
     public Course createCourse() {
         return new Course();
     }
@@ -19,46 +26,63 @@ public class CourseService {
         return CourseRepository.getInstance().getCourseList().get(index);
     }
 
-    public Course createCourse(String courseName, String teacher, String student, String lecture) {
-        return new Course(courseName, teacher, student, lecture);
+    public void createCourse(String courseName, String teacher, String student, String lecture) {
+        Course course = new Course(courseName);
+        int  courseId = course.getId();
+        CourseRepository.getInstance().getCourseList().add(course);
+        if(teacher != null) {
+            PersonRepository.getInstance().getPersonList().add(new Person(teacher, Role.TEACHER, courseId));
+        }
+        if (student != null) {
+            PersonRepository.getInstance().getPersonList().add(new Person(student, Role.STUDENT, courseId));
+        }
+        if (lecture != null) {
+            LectureRepository.getInstance().getLecturesList().add(new Lecture(lecture, courseId));
+        }
+
     }
 
 
 
-    public Course courseScanner() {
-        String answer = askCourseScanner();
+    public void courseScanner(String courseName) {
+        String answer = askCourseScanner(courseName);
 
         if (answer.contains(String.valueOf('#'))) {
+            System.out.println(answer);
+            int pointOfFirstDelimiter = answer.indexOf('#');
+            int pointOfSecondDelimiter = answer.lastIndexOf('#');
 
-            ScannerThis.getInstance().useDelimiter("#");
 
-            String courseName1 = ScannerThis.getInstance().next();
-            String courseParameterNumber1 = ScannerThis.getInstance().next();
-            String courseParameter1 = ScannerThis.getInstance().next();
+            String courseName1 = answer.substring(0, pointOfFirstDelimiter);
+            System.out.println(courseName1);
+            String courseParameterNumber1 = answer.substring(pointOfFirstDelimiter + 1, pointOfSecondDelimiter);
+            System.out.println(courseParameterNumber1);
+            String courseParameter1 = answer.substring(pointOfSecondDelimiter + 1);
+            System.out.println(courseParameter1);
 
-            ScannerThis.getInstance().close();
 
             System.out.println("Ви створили курс:" + courseName1);
 
             if (courseParameterNumber1.equals("1")) {
-                return createCourse(courseName1, courseParameter1, "unavailable", "unavailable");
+                System.out.println(courseParameter1);
+                 createCourse(courseName1, courseParameter1, null, null);
+
             } else if (courseParameterNumber1.equals("2")) {
-                return createCourse(courseName1, "unavailable", courseParameter1, "unavailable");
+                 createCourse(courseName1, null, courseParameter1, null);
             } else {
-                return createCourse(courseName1, "unavailable", "unavailable", courseParameter1);
+                 createCourse(courseName1, null, null, courseParameter1);
             }
 
         } else {
 
             System.out.println("Ви створили курс:" + answer);
-            return createCourse(answer);
+            createCourse(answer);
         }
     }
 
-    private String askCourseScanner() {
+    private String askCourseScanner(String courseName) {
 
-        System.out.println("Введіть назву курсу:");
-        String courseName = ScannerThis.getInstance().nextLine();
+
         System.out.println("Ви впевнені, що хочете назвати курсу наступним чином: " + courseName + " ?");
         System.out.println("Якщо назва правильна, то введіть \"Так\" або \"Yes\", " +
                 "в противному випадку введіть \"Ні\" або \"No\"!");
@@ -123,13 +147,15 @@ public class CourseService {
                     yield "Ви ввели некоректну відповідь. Почніть з самого спочатку!";
             };
 
-
             return courseName + "#" + courseParameterNumber + "#" + courseParameter;
 
         } else {
             throw new IllegalArgumentException();
         }
     }
+
+
+
 
 }
 

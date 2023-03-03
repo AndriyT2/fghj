@@ -3,12 +3,13 @@ package repository;
 import models.Homework;
 import utility.utilityLog.LogFactory;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.TreeMap;
 
-public class HomeworkRepository {
+public class HomeworkRepository implements Serializable {
     public List<Homework> getHomeworkList() {
         return homeworkList;
     }
