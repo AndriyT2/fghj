@@ -9,6 +9,10 @@ import utility.ScannerThis;
 import utility.utilityLog.LogFactory;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.function.Predicate;
+
+import static utility.regex.LectureRegex.DateLectureRegex;
 
 public class LectureService implements Serializable {
 
@@ -297,6 +301,22 @@ public class LectureService implements Serializable {
         System.out.println("Lecture with Id = " + id + ": " + LectureRepository.getInstance().getById(id));
         System.out.println("Homework for this lecture: " + HomeworkRepository.getInstance().homeworkTreeMap().get(id));
         System.out.println("AdditionalMaterials for this lecture: " + AdditionalMaterialsRepository.getInstance().additionalMaterialsTreeMap().get(id));
+    }
+
+    public void setDate (int idLecture) {
+        Lecture lecture = LectureRepository.getInstance().getById(idLecture);
+        lecture.setLectureDate(DateLectureRegex());
+    }
+
+    public void sortByDate(Predicate<LocalDateTime> predicate){
+
+        for (Lecture lecture : LectureRepository.getInstance().getLecturesList()){
+            LocalDateTime dateTime = lecture.getLectureDate();
+            if (dateTime == null){continue;}
+            if (predicate.test(dateTime)){
+                System.out.println(lecture);
+            }
+        }
     }
 
 

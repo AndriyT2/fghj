@@ -54,38 +54,38 @@ public class LectureRegex {
         lecture.setName(lectureNameNorm);
     }
 
-    public static void setDate (int idLecture) {
+
+
+    public static LocalDateTime DateLectureRegex() {
         final String rule1 = "^\\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$";
         final String rule2 = "^(?:[01]\\d|2[0123]):(?:[012345]\\d):(?:[012345]\\d)$";
-        System.out.println("Введіть дату лекції у наступному форматі: YYYY-MM-dd");
+        System.out.println("Введіть дату у наступному форматі: YYYY-MM-dd");
         String lectureDate = ScannerThis.getInstance().nextLine();
         String lectureDateNorm = lectureDate.trim();
         boolean result1 = lectureDateNorm.matches(rule1);
         while (!result1) {
 
-                System.err.println("Ви ввели некоректну дату лекції!");
-                System.err.println("Введіть дату лекції знову у правильному форматі!");
+                System.err.println("Ви ввели некоректну дату!");
+                System.err.println("Введіть дату знову у правильному форматі!");
                 lectureDate = ScannerThis.getInstance().nextLine();
                 lectureDateNorm = lectureDate.trim();
                 result1 = lectureDateNorm.matches(rule1);
 
         }
-        System.out.println("Введіть час лекції у наступному форматі: HH:mm:ss");
+        System.out.println("Введіть час у наступному форматі: HH:mm:ss");
         String lectureTime = ScannerThis.getInstance().nextLine();
         String lectureTimeNorm = lectureTime.trim();
         boolean result2 = lectureTimeNorm.matches(rule2);
         while (!result2) {
 
-            System.err.println("Ви ввели некоректний час лекції!");
-            System.err.println("Введіть час лекції знову у правильному форматі!");
+            System.err.println("Ви ввели некоректний час!");
+            System.err.println("Введіть час знову у правильному форматі!");
             lectureTime = ScannerThis.getInstance().nextLine();
             lectureTimeNorm = lectureTime.trim();
             result2 = lectureTimeNorm.matches(rule2);
 
         }
-        System.out.println("Час даної  лекції:  " + lectureTimeNorm);
-        Lecture lecture = LectureRepository.getInstance().getById(idLecture);
         String dataTime = lectureDateNorm + "T" + lectureTimeNorm;
-        lecture.setLectureDate(LocalDateTime.parse(dataTime));
+        return LocalDateTime.parse(dataTime);
     }
 }

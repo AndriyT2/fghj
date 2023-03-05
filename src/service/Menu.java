@@ -1,6 +1,9 @@
 package service;
 
+import models.AdditionalMaterials;
 import models.Course;
+import models.Lecture;
+import models.ModelsSuper;
 import repository.*;
 import service.ControlWork.ControlWork14;
 import utility.IntTrue;
@@ -11,8 +14,10 @@ import utility.utilityLog.LogReader;
 import utility.utilityLog.LogWriter;
 
 import java.io.FileNotFoundException;
+import java.time.LocalDateTime;
 
-import static utility.regex.LectureRegex.setDate;
+import static utility.regex.LectureRegex.DateLectureRegex;
+
 
 public class Menu {
 public void menu() {
@@ -161,11 +166,12 @@ public void menu() {
             2 - Створити нову лекцію;
             3 - Відкрити домашнє завдання та додаткові матеріали для лекції по її ID;
             4 - Додати дату проведення лекції до існуючої лекції;
-            5 - Повернутися в головне меню.""");
+            5 - Сортувати лекції за датою;
+            6 - Повернутися в головне меню.""");
 
                 answer = new IntTrue().intTrue();
 
-            }while (answer<1 || answer>5);
+            }while (answer<1 || answer>6);
 
             switch (answer) {
                 case 1 -> {
@@ -186,10 +192,14 @@ public void menu() {
                 case 4 -> {
                     System.out.println("Введіть значення ID для лекції:");
                     int lectureId = new  IntTrue().intTrue();
-                    setDate(lectureId);
+                    lectureService.setDate(lectureId);
+                }
+                case 5 -> {
+                    lectureDateSortMenu();
                 }
 
-                case 5 -> {
+
+                case 6 -> {
                     exit = true;
                     LogFactory.debug(this.getClass().getName(), "Close lectureMenu");
                 }
@@ -198,6 +208,76 @@ public void menu() {
 
         }
     }
+
+        private void lectureDateSortMenu() {
+            LogFactory.debug(this.getClass().getName(), "Create new lectureDateSortMenu");
+            LectureService lectureService = new LectureService();
+            boolean exit = false;
+            int answer;
+
+            while (!exit){
+//                boolean rule = false;
+//                for(Lecture lecture : LectureRepository.getInstance().getLecturesList()){
+//                    if (lecture.getLectureDate() != null) {
+//                        rule = true;
+//                        break;
+//                    }
+//                }
+//                if (!rule){
+//                    System.out.println("\nЖодній лекції не було задано значення дати!\n");
+//                    exit = true;
+//                }
+
+                do{
+                    LogFactory.debug(this.getClass().getName(), "lectureDateSortMenu.List with options");
+                    System.out.println("""
+            Виберіть числове значення бажаної дії для подальшої роботи:
+            1 - Сортувати лекції з вказаної дати;
+            2 - Сортувати лекції до вказаної дати;
+            3 - Сортувати лекції між вказаними дати;
+            4 - Повернутися в головне меню.""");
+
+
+
+                    answer = new IntTrue().intTrue();
+
+                }while (answer<1 || answer>4);
+
+                switch (answer) {
+                    case 1 -> {
+                        LocalDateTime data1 = DateLectureRegex();
+                        lectureService.sortByDate(localDateTime -> localDateTime.isAfter(data1));
+                        LogFactory.debug(this.getClass().getName(), "Lectures after date");
+                    }
+                    case 2 -> {
+                        LocalDateTime data1 = DateLectureRegex();
+                        lectureService.sortByDate(localDateTime -> localDateTime.isBefore(data1));
+                        LogFactory.debug(this.getClass().getName(), "Lectures before date");
+                    }
+                    case 3 -> {
+                        LocalDateTime data1 = DateLectureRegex();
+                        System.out.println("Друга дата.");
+                        LocalDateTime data2 = DateLectureRegex();
+                        if (data1.isBefore(data2)) {
+                            lectureService.sortByDate(localDateTime -> localDateTime.isAfter(data1)&&localDateTime.isBefore(data2));
+                        }else {
+                            lectureService.sortByDate(localDateTime -> localDateTime.isAfter(data2)&&localDateTime.isBefore(data1));
+                        }
+                        LogFactory.debug(this.getClass().getName(), "Lectures between date");
+
+                    }
+
+                    case 4 -> {
+                        exit = true;
+                        LogFactory.debug(this.getClass().getName(), "Close lectureDateSortMenu");
+                    }
+                    default -> throw new IllegalStateException("Unexpected value: " + answer);
+                }
+
+            }
+        }
+
+
 
 
 
@@ -273,11 +353,12 @@ public void menu() {
             1 - Вивести список існуючих додаткових матеріалів;
             2 - Створити додаткові матеріали;
             3 - Видалити додаткові матеріали;
-            4 - Повернутися в головне меню.""");
+            4 - Вивести всі додаткові матеріали, згруповані за лекціями;
+            5 - Повернутися в головне меню.""");
 
                 answer = new IntTrue().intTrue();
 
-            }while (answer<1 || answer>4);
+            }while (answer<1 || answer>5);
 
             switch (answer) {
                 case 1 -> {
@@ -305,8 +386,15 @@ public void menu() {
                     additionalMaterialsService.removeAdditionalMaterialsMenu(lectureId);
                     System.out.println("Додаткові матеріали для лекції з " + lectureId + " видалено!");
                 }
-
                 case 4 -> {
+                    additionalMaterialsService.allAdditionalMaterialsSortedBySMT(
+                            LectureRepository.getInstance().getLecturesList(),
+                            AdditionalMaterialsRepository.getInstance().getAdditionalMaterialsList(),
+                            System.out::println, System.out::println, ModelsSuper::getId, AdditionalMaterials::getLectureId);
+
+                }
+
+                case 5 -> {
                     exit = true;
                     LogFactory.debug(this.getClass().getName(), "Close additionalMaterialsMenu");
                 }

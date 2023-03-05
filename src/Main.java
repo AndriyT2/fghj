@@ -1,5 +1,6 @@
-import models.ResourceType;
-import models.Role;
+import models.*;
+import repository.AdditionalMaterialsRepository;
+import repository.LectureRepository;
 import service.*;
 import utility.exception.EntityNotFoundException;
 
@@ -41,7 +42,7 @@ public class Main {
         AdditionalMaterialsService amH18T3 = new AdditionalMaterialsService();
         amH18T3.createAdditionalMaterialsService("BBBBBBB", 14, ResourceType.URL);
         AdditionalMaterialsService amH18T4 = new AdditionalMaterialsService();
-        amH18T4.createAdditionalMaterialsService("AAAAAAA", 15, ResourceType.BOOK);
+        amH18T4.createAdditionalMaterialsService("AAAAAAA", 12, ResourceType.BOOK);
 
 
 
@@ -51,6 +52,7 @@ public class Main {
         lectureH19T1.createLecture(2);
         lectureH19T1.createLecture(3);
         lectureH19T1.createLecture();
+
 
 
 

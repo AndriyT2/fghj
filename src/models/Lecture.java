@@ -94,6 +94,8 @@ public class Lecture extends ModelsSuper {
         return lecture;
     }
 
+
+
     @Override
     public String toString() {
         return "Lecture{" +
