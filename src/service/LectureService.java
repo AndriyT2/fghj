@@ -1,17 +1,16 @@
 package service;
 
-import models.Course;
-import models.Lecture;
-import models.Person;
-import models.Role;
+import models.*;
 import repository.*;
 import utility.ScannerThis;
 import utility.utilityLog.LogFactory;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.function.Predicate;
 
+import static javax.swing.UIManager.get;
 import static utility.regex.LectureRegex.DateLectureRegex;
 
 public class LectureService implements Serializable {
@@ -298,9 +297,15 @@ public class LectureService implements Serializable {
 
     public void lectureWithHomeworkAndAMById(int id) {
         LogFactory.debug(this.getClass().getName(), "Display homework and additional materials for by lecture id");
-        System.out.println("Lecture with Id = " + id + ": " + LectureRepository.getInstance().getById(id));
-        System.out.println("Homework for this lecture: " + HomeworkRepository.getInstance().homeworkTreeMap().get(id));
-        System.out.println("AdditionalMaterials for this lecture: " + AdditionalMaterialsRepository.getInstance().additionalMaterialsTreeMap().get(id));
+
+        Optional<Homework> homework = Optional.ofNullable(HomeworkRepository.getInstance().homeworkTreeMap().get(id));
+        Optional<AdditionalMaterials> additionalMaterials =Optional.ofNullable(AdditionalMaterialsRepository.getInstance().additionalMaterialsTreeMap().get(id));
+
+        System.out.println("Lecture with Id = " + id + ": " + Optional.ofNullable(LectureRepository.getInstance().getById(id)));
+        System.out.print("Homework for this lecture: ");
+        homework.ifPresent(System.out::print);
+        System.out.print("\nAdditionalMaterials for this lecture: ");
+        additionalMaterials.ifPresent(System.out::println);
     }
 
     public void setDate (int idLecture) {

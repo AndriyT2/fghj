@@ -11,6 +11,9 @@ import utility.utilityLog.LogFactory;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 
 public class PersonService implements Serializable {
@@ -107,6 +110,29 @@ public class PersonService implements Serializable {
             }
         }
         return student;
+    }
+
+    public List<Person> teacherList() {
+        List<Person> teacher = new ArrayList<>();
+        for (Person person : PersonRepository.getInstance().getPersonList()) {
+            if (person.getRole() == Role.TEACHER) {
+                teacher.add(person);
+            }
+        }
+        LogFactory.debug(this.getClass().getName(), "Create teacher list");
+        return teacher;
+    }
+
+
+    public void getTeacherBeforeLetter(String letter){
+        List<Person> teacher = teacherList().stream()
+                .filter(person -> person.getLastname().substring(0, 1)
+                        .compareTo(letter) < 0 )
+                .toList();
+        System.out.println(teacher);
+        LogFactory.info(this.getClass().getName(), "Display teacher list before letter");
+
+
     }
 
 

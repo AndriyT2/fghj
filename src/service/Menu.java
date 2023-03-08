@@ -15,6 +15,8 @@ import utility.utilityLog.LogWriter;
 
 import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
 
 import static utility.regex.LectureRegex.DateLectureRegex;
 
@@ -98,7 +100,7 @@ public void menu() {
             do{
                 LogFactory.debug(this.getClass().getName(), "courseMenu.List with options");
                 System.out.println("""
-            Виберіть числове значення бажаної дії для подальшої роботи:
+            \nВиберіть числове значення бажаної дії для подальшої роботи:
             1 - Вивести список існуючих курсів;
             2 - Створити курс;
             3 - Відкрити курс по його ID;
@@ -161,7 +163,7 @@ public void menu() {
             do{
                 LogFactory.debug(this.getClass().getName(), "lectureMenu.List with options");
                 System.out.println("""
-            Виберіть числове значення бажаної дії для подальшої роботи:
+            \nВиберіть числове значення бажаної дії для подальшої роботи:
             1 - Вивести список існуючих лекції;
             2 - Створити нову лекцію;
             3 - Відкрити домашнє завдання та додаткові матеріали для лекції по її ID;
@@ -216,6 +218,7 @@ public void menu() {
             int answer;
 
             while (!exit){
+                
 //                boolean rule = false;
 //                for(Lecture lecture : LectureRepository.getInstance().getLecturesList()){
 //                    if (lecture.getLectureDate() != null) {
@@ -231,7 +234,7 @@ public void menu() {
                 do{
                     LogFactory.debug(this.getClass().getName(), "lectureDateSortMenu.List with options");
                     System.out.println("""
-            Виберіть числове значення бажаної дії для подальшої роботи:
+            \nВиберіть числове значення бажаної дії для подальшої роботи:
             1 - Вивести на екран лекції з вказаної дати;
             2 - Вивести на екран лекції до вказаної дати;
             3 - Вивести на екран лекції між вказаними дати;
@@ -291,7 +294,7 @@ public void menu() {
             do{
                 LogFactory.debug(this.getClass().getName(), "homeworkMenu.List with options");
                 System.out.println("""
-            Виберіть числове значення бажаної дії для подальшої роботи:
+            \nВиберіть числове значення бажаної дії для подальшої роботи:
             1 - Вивести список існуючих домашных завдань;
             2 - Створити домашнє завдання;
             3 - Видалити домашнє завдання;
@@ -349,7 +352,7 @@ public void menu() {
             do{
                 LogFactory.debug(this.getClass().getName(), "additionalMaterialsMenu.List with options");
                 System.out.println("""
-            Виберіть числове значення бажаної дії для подальшої роботи:
+            \nВиберіть числове значення бажаної дії для подальшої роботи:
             1 - Вивести список існуючих додаткових матеріалів;
             2 - Створити додаткові матеріали;
             3 - Видалити додаткові матеріали;
@@ -413,15 +416,16 @@ public void menu() {
             do{
                 LogFactory.debug(this.getClass().getName(), "personMenu.List with options");
                 System.out.println("""
-            Виберіть числове значення бажаної дії для подальшої роботи:
+            \nВиберіть числове значення бажаної дії для подальшої роботи:
             1 - Вивести список існуючих осіб;
             2 - Створити особу;
             3 - Відсортувати осіб по фамілії;
-            4 - Повернутися в головне меню.""");
+            4 - Вивести список вчителів прізвища яких починаються з літер, які стоять до певної літери ;
+            5 - Повернутися в головне меню.""");
 
                 answer = new IntTrue().intTrue();
 
-            }while (answer<1 || answer>4);
+            }while (answer<1 || answer>5);
 
             switch (answer) {
                 case 1 -> {
@@ -437,8 +441,14 @@ public void menu() {
                     System.out.println("Список існуючих осіб після сортування:");
                     personService.personSortByLastname();
                 }
-
                 case 4 -> {
+                    System.out.println("Введіть значення букви:");
+                    String letter = ScannerThis.getInstance().nextLine().toUpperCase().trim().substring(0, 1);
+                    personService.getTeacherBeforeLetter(letter);
+
+                }
+
+                case 5 -> {
                     exit = true;
                     LogFactory.debug(this.getClass().getName(), "Close personMenu");
                 }
@@ -456,14 +466,15 @@ public void menu() {
             do{
                 LogFactory.debug(this.getClass().getName(), "logFileMenu.List with options");
                 System.out.println("""
-            Виберіть числове значення бажаної дії для подальшої роботи:
+            \nВиберіть числове значення бажаної дії для подальшої роботи:
             1 - Вивести вміст LogFile;
             2 - Змінити рівень логування;
-            3 - Повернутися в головне меню.""");
+            3 - Вивести повідомлення з LogFile;
+            4 - Повернутися в головне меню.""");
 
                 answer = new IntTrue().intTrue();
 
-            }while (answer<1 || answer>3);
+            }while (answer<1 || answer>4);
 
             switch (answer) {
                 case 1 -> {
@@ -475,8 +486,12 @@ public void menu() {
                     LogWriter log = new LogWriter();
                     log.levelChange();
                 }
-
                 case 3 -> {
+                   LogReader message = new LogReader();
+                   message.readMessageFromFile();
+                }
+
+                case 4 -> {
                     exit = true;
                     LogFactory.debug(this.getClass().getName(), "Close logFileMenu");
                 }

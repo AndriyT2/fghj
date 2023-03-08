@@ -3,6 +3,7 @@ import repository.AdditionalMaterialsRepository;
 import repository.LectureRepository;
 import service.*;
 import utility.exception.EntityNotFoundException;
+import utility.utilityLog.LogReader;
 
 import java.io.IOException;
 
@@ -57,7 +58,7 @@ public class Main {
 
 
         HomeworkService homeworkH19T1 = new HomeworkService();
-        homeworkH19T1.createHomeworkWithLectureId(12);
+        homeworkH19T1.createHomeworkWithLectureId(15);
         homeworkH19T1.createHomeworkWithLectureId(13);
         homeworkH19T1.createHomeworkWithLectureId(14);
 
@@ -65,6 +66,8 @@ public class Main {
         System.out.println("\n=====================  Menu  ===========================================================\n");
         Menu menu = new Menu();
         menu.menu();
+
+
 
 
 
