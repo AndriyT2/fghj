@@ -1,15 +1,12 @@
 package models;
 
-import repository.LectureRepository;
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Lecture extends ModelsSuper {
 
     private String name;
     private String description;
-    private LocalDate creationDate;
+    private LocalDateTime creationDate;
     private LocalDateTime lectureDate;
     private Homework[] homeworkArray;
 
@@ -44,7 +41,7 @@ public class Lecture extends ModelsSuper {
         return personId;
     }
 
-    public LocalDate getCreationDate() {
+    public LocalDateTime getCreationDate() {
         return creationDate;
     }
 
@@ -58,14 +55,14 @@ public class Lecture extends ModelsSuper {
 
     public Lecture () {
         super();
-        creationDate = LocalDate.now();
+        creationDate = LocalDateTime.now();
 
     }
 
     public Lecture (String name) {
         this();
         this.name = name;
-        creationDate = LocalDate.now();
+        creationDate = LocalDateTime.now();
 
     }
 
@@ -74,7 +71,7 @@ public class Lecture extends ModelsSuper {
     public Lecture (int idCourse) {
         this();
         this.idCourse = idCourse;
-        creationDate = LocalDate.now();
+        creationDate = LocalDateTime.now();
 
     }
 
@@ -82,13 +79,13 @@ public class Lecture extends ModelsSuper {
         this();
         this.idCourse = idCourse;
         this.name = name;
-        creationDate = LocalDate.now();
+        creationDate = LocalDateTime.now();
 
     }
 
 
     public Lecture lectureWithTeacher (int personId) {
-        creationDate = LocalDate.now();
+        creationDate = LocalDateTime.now();
         Lecture lecture = new Lecture();
         lecture.setPersonId(personId);
         return lecture;

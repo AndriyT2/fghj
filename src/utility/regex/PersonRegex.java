@@ -5,6 +5,7 @@ import repository.PersonRepository;
 import utility.ScannerThis;
 import utility.exception.EntityNotFoundException;
 import utility.exception.SetParameterException;
+import utility.utilityLog.LogFactory;
 
 
 public class PersonRegex {
@@ -73,26 +74,24 @@ public class PersonRegex {
         person.setLastname(lastnameNorm);
     }
 
-    public static void setEmail (int idPerson) throws EntityNotFoundException {
+    public static String setEmail () {
         final String rule = "^([a-z0-9_.-]+)@([\\da-z.-]+)\\.([a-z.]{2,6})$";
-        System.out.println(PersonRepository.getInstance().getPersonList());
         System.out.println("Введіть необхідну поштову скриньку!");
         String email = ScannerThis.getInstance().nextLine();
         String emailNorm = email.trim();
         boolean result = emailNorm.matches(rule);
-        while (!result){
+
+        while (!result) {
             try {
                 throw new SetParameterException("Ви ввели некоректну поштову скриньку!");
             } catch (SetParameterException e) {
+                LogFactory.warning(Thread.currentThread().getStackTrace()[1].getClassName(),"Uncorrected e-mail format", e.getStackTrace());
                 System.err.println("Введіть поштову скриньку в правильному форматі!");
                 email = ScannerThis.getInstance().nextLine();
                 emailNorm = email.trim();
                 result = emailNorm.matches(rule);
             }
         }
-
-        System.out.println("Поштова скринька:  " + emailNorm);
-        Person person = PersonRepository.getInstance().getById(idPerson);
-        person.setEmail(emailNorm);
+        return emailNorm;
     }
 }

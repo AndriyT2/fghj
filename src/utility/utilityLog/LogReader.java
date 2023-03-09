@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class LogReader {
     private static final String LOG_STORAGE_FILE = "LogFile.txt";
@@ -33,6 +34,21 @@ public class LogReader {
         } catch (IOException e) {
             LogFactory.warning(this.getClass().getName(), "File don't exist", e.getStackTrace());
         }
+
+    }
+
+    public void logInfoCounter(){
+        System.out.print("Кількість логів з з рівнем INFO: ");
+
+        try {
+            long allInfoCounter = Files.lines(path).count();
+            System.out.println( Files.lines(path).skip(allInfoCounter/2).filter(s -> s.startsWith("INF", 11)).count());
+
+        } catch (IOException e) {
+
+            throw new RuntimeException(e);
+        }
+
 
     }
 }

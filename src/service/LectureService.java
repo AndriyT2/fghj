@@ -3,10 +3,12 @@ package service;
 import models.*;
 import repository.*;
 import utility.ScannerThis;
+import utility.comparator.LectureMaxCountOfAdditionalMaterialComparator;
 import utility.utilityLog.LogFactory;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -255,7 +257,7 @@ public class LectureService implements Serializable {
                         Lecture lectureH11 = new LectureService().createLectureWithTeacher(ask5);
                         LectureRepository.getInstance().getLecturesList().add(lectureH11);
                         LectureRepository.getInstance().getAll();
-                        System.out.println("ID створенної лекції - " + lectureH11.getId());
+                        System.out.println("ID створеної лекції - " + lectureH11.getId());
 
                     } else {
                         throw new IllegalArgumentException();
@@ -323,6 +325,16 @@ public class LectureService implements Serializable {
             }
         }
     }
+
+
+    public void findOldestLecture (){
+
+        LocalDateTime maxTime = LectureRepository.getInstance().getLecturesList().stream().min(Comparator.comparing(Lecture::getCreationDate)).get().getCreationDate();
+        System.out.println( LectureRepository.getInstance().getLecturesList().stream().filter(lecture -> lecture.getCreationDate().equals(maxTime)).max(new LectureMaxCountOfAdditionalMaterialComparator()));
+
+        LogFactory.info(this.getClass().getName(), "Display oldest lecture with Max AdditionalMaterials");
+    }
+
 
 
 }

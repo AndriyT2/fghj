@@ -1,9 +1,6 @@
 package service;
 
-import models.AdditionalMaterials;
-import models.Course;
-import models.Lecture;
-import models.ModelsSuper;
+import models.*;
 import repository.*;
 import service.ControlWork.ControlWork14;
 import utility.IntTrue;
@@ -19,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static utility.regex.LectureRegex.DateLectureRegex;
+import static utility.regex.PersonRegex.setEmail;
 
 
 public class Menu {
@@ -238,13 +236,14 @@ public void menu() {
             1 - Вивести на екран лекції з вказаної дати;
             2 - Вивести на екран лекції до вказаної дати;
             3 - Вивести на екран лекції між вказаними дати;
-            4 - Повернутися в головне меню.""");
+            4 - Вивести на екран лекцію, яка створена раніше за всіх та має найбільшу кількість додаткових матеріалів;
+            5 - Повернутися в головне меню.""");
 
 
 
                     answer = new IntTrue().intTrue();
 
-                }while (answer<1 || answer>4);
+                }while (answer<1 || answer>5);
 
                 switch (answer) {
                     case 1 -> {
@@ -269,8 +268,12 @@ public void menu() {
                         LogFactory.debug(this.getClass().getName(), "Lectures between date");
 
                     }
-
                     case 4 -> {
+                        lectureService.findOldestLecture();
+
+                    }
+
+                    case 5 -> {
                         exit = true;
                         LogFactory.debug(this.getClass().getName(), "Close lectureDateSortMenu");
                     }
@@ -420,12 +423,14 @@ public void menu() {
             1 - Вивести список існуючих осіб;
             2 - Створити особу;
             3 - Відсортувати осіб по фамілії;
-            4 - Вивести список вчителів прізвища яких починаються з літер, які стоять до певної літери ;
-            5 - Повернутися в головне меню.""");
+            4 - Вивести список вчителів прізвища яких починаються з літер, які стоять до певної літери;
+            5 - Додати поштову скриньку;
+            6 - Повернутися в головне меню.""");
+
 
                 answer = new IntTrue().intTrue();
 
-            }while (answer<1 || answer>5);
+            }while (answer<1 || answer>6);
 
             switch (answer) {
                 case 1 -> {
@@ -447,8 +452,24 @@ public void menu() {
                     personService.getTeacherBeforeLetter(letter);
 
                 }
-
                 case 5 -> {
+                    System.out.println("Введіть значення ID особи для додавання поштової скриньки:");
+                    int personId = new IntTrue().intTrue();
+
+                    String finalEmailNorm = setEmail();
+
+                    if (PersonRepository.getInstance().getPersonList().stream().
+                            filter(person -> person.getEmail() != null).
+                            anyMatch(person -> person.getEmail().equalsIgnoreCase(finalEmailNorm))){
+                        System.out.println("Така поштова скринька вже існує!\nВведіть іншу поштову скриньку.");
+                    } else {
+                        Person person = PersonRepository.getInstance().getById(personId);
+                        person.setEmail(finalEmailNorm);
+                        LogFactory.debug(this.getClass().getName(), "Add new e-mail to person");
+                    }
+                }
+
+                case 6 -> {
                     exit = true;
                     LogFactory.debug(this.getClass().getName(), "Close personMenu");
                 }
@@ -470,11 +491,12 @@ public void menu() {
             1 - Вивести вміст LogFile;
             2 - Змінити рівень логування;
             3 - Вивести повідомлення з LogFile;
-            4 - Повернутися в головне меню.""");
+            4 - Вивести кількість логів з рівнем INFO починаючи з середини файлу;            
+            5 - Повернутися в головне меню.""");
 
                 answer = new IntTrue().intTrue();
 
-            }while (answer<1 || answer>4);
+            }while (answer<1 || answer>5);
 
             switch (answer) {
                 case 1 -> {
@@ -492,6 +514,11 @@ public void menu() {
                 }
 
                 case 4 -> {
+                    LogReader log = new LogReader();
+                    log.logInfoCounter();
+                }
+
+                case 5 -> {
                     exit = true;
                     LogFactory.debug(this.getClass().getName(), "Close logFileMenu");
                 }
