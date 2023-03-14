@@ -9,8 +9,11 @@ import utility.utilityLog.LogFactory;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import static javax.swing.UIManager.get;
 import static utility.regex.LectureRegex.DateLectureRegex;
@@ -32,7 +35,9 @@ public class LectureService implements Serializable {
     }
 
     public Lecture createLectureWithTeacher(int idPerson) {
-        return new Lecture().lectureWithTeacher(idPerson);
+        Lecture lecture = new Lecture().lectureWithTeacher(idPerson);
+        LectureRepository.getInstance().getLecturesList().add(lecture);
+        return lecture ;
 
     }
 
@@ -333,6 +338,18 @@ public class LectureService implements Serializable {
         System.out.println( LectureRepository.getInstance().getLecturesList().stream().filter(lecture -> lecture.getCreationDate().equals(maxTime)).max(new LectureMaxCountOfAdditionalMaterialComparator()));
 
         LogFactory.info(this.getClass().getName(), "Display oldest lecture with Max AdditionalMaterials");
+    }
+
+    public  void lecturesSortedByTeacher () {
+        Map<String, List<Lecture> > lecture1 = LectureRepository.getInstance().getLecturesList().stream()
+                .filter(lecture -> lecture.getPersonId() != 0)
+                .filter(lecture ->PersonRepository.getInstance().getById(lecture.getPersonId()).getRole() == Role.TEACHER)
+                .collect(Collectors.groupingBy(lecture ->PersonRepository.getInstance().getById(lecture.getPersonId()).getLastname()));
+
+        System.out.println(lecture1);
+        LogFactory.info(this.getClass().getName(), "Display lectures sorted by teacher");
+
+
     }
 
 

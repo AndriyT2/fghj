@@ -29,9 +29,10 @@ public class Main {
         PersonService personH18T2 = new PersonService();
         personH18T2.addPerson("AAAAAAA", "BBBBB", Role.TEACHER);
         PersonService personH18T3 = new PersonService();
-        personH18T3.addPerson("AAAAAAA", "aaaaaa", Role.TEACHER);
+        personH18T3.addPerson("AAAA", "aaaaaa", Role.TEACHER);
         PersonService personH18T4 = new PersonService();
         personH18T4.addPerson("BBBBBBBBB", "BBBBBB", Role.TEACHER);
+        personH18T4.addPerson("nnnnnnnn", "mmmmmmmm", Role.STUDENT);
 
 
 
@@ -52,7 +53,10 @@ public class Main {
         lectureH19T1.createLecture(1);
         lectureH19T1.createLecture(2);
         lectureH19T1.createLecture(3);
-        lectureH19T1.createLecture();
+        lectureH19T1.createLectureWithTeacher(4);
+        lectureH19T1.createLectureWithTeacher(5);
+        lectureH19T1.createLectureWithTeacher(6);
+        lectureH19T1.createLectureWithTeacher(7);
 
 
 
@@ -62,11 +66,13 @@ public class Main {
         homeworkH19T1.createHomeworkWithLectureId(13);
         homeworkH19T1.createHomeworkWithLectureId(14);
 
+        personH18T1.addPerson("ffffffff", "hhhhhhhh", Role.STUDENT);
+
+
 
         System.out.println("\n=====================  Menu  ===========================================================\n");
         Menu menu = new Menu();
         menu.menu();
-
 
 
 

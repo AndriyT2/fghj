@@ -11,6 +11,7 @@ import utility.utilityLog.LogReader;
 import utility.utilityLog.LogWriter;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -20,7 +21,7 @@ import static utility.regex.PersonRegex.setEmail;
 
 
 public class Menu {
-public void menu() {
+public void menu() throws IOException {
     LogFactory.debug(this.getClass().getName(), "CREATE NEW MENU");
     boolean exit = false;
     int answer;
@@ -167,11 +168,12 @@ public void menu() {
             3 - Відкрити домашнє завдання та додаткові матеріали для лекції по її ID;
             4 - Додати дату проведення лекції до існуючої лекції;
             5 - Сортувати лекції за датою;
-            6 - Повернутися в головне меню.""");
+            6 - Вивести на екран лекції, згруповані за вчителем;
+            7 - Повернутися в головне меню.""");
 
                 answer = new IntTrue().intTrue();
 
-            }while (answer<1 || answer>6);
+            }while (answer<1 || answer>7);
 
             switch (answer) {
                 case 1 -> {
@@ -197,9 +199,11 @@ public void menu() {
                 case 5 -> {
                     lectureDateSortMenu();
                 }
-
-
                 case 6 -> {
+                    lectureService.lecturesSortedByTeacher();
+                }
+
+                case 7 -> {
                     exit = true;
                     LogFactory.debug(this.getClass().getName(), "Close lectureMenu");
                 }
@@ -360,11 +364,12 @@ public void menu() {
             2 - Створити додаткові матеріали;
             3 - Видалити додаткові матеріали;
             4 - Вивести всі додаткові матеріали, згруповані за лекціями;
-            5 - Повернутися в головне меню.""");
+            5 - Вивести всі додаткові матеріали, згруповані за ID лекції;
+            6 - Повернутися в головне меню.""");
 
                 answer = new IntTrue().intTrue();
 
-            }while (answer<1 || answer>5);
+            }while (answer<1 || answer>6);
 
             switch (answer) {
                 case 1 -> {
@@ -399,8 +404,12 @@ public void menu() {
                             System.out::println, System.out::println, ModelsSuper::getId, AdditionalMaterials::getLectureId);
 
                 }
-
                 case 5 -> {
+                   additionalMaterialsService.additionalMaterialsSortedByLectureId();
+
+                }
+
+                case 6 -> {
                     exit = true;
                     LogFactory.debug(this.getClass().getName(), "Close additionalMaterialsMenu");
                 }
@@ -410,7 +419,7 @@ public void menu() {
         }
     }
 
-    private void personMenu() {
+    private void personMenu() throws IOException {
         LogFactory.debug(this.getClass().getName(), "Create new  personMenu");
         PersonService personService = new PersonService();
         boolean exit = false;
@@ -425,12 +434,14 @@ public void menu() {
             3 - Відсортувати осіб по фамілії;
             4 - Вивести список вчителів прізвища яких починаються з літер, які стоять до певної літери;
             5 - Додати поштову скриньку;
-            6 - Повернутися в головне меню.""");
+            6 - Вивести на екран поштову скриньку, ім'я, фамілію;
+            7 - Записати в файл поштові скриньки студентів, відсортовані в натуральному порядку;
+            8 - Повернутися в головне меню.""");
 
 
                 answer = new IntTrue().intTrue();
 
-            }while (answer<1 || answer>6);
+            }while (answer<1 || answer>8);
 
             switch (answer) {
                 case 1 -> {
@@ -468,8 +479,14 @@ public void menu() {
                         LogFactory.debug(this.getClass().getName(), "Add new e-mail to person");
                     }
                 }
-
                 case 6 -> {
+                    personService.firstAndLastNameAndEmail();
+                }
+                case 7 -> {
+                    personService.emailStudentToFile();
+                }
+
+                case 8 -> {
                     exit = true;
                     LogFactory.debug(this.getClass().getName(), "Close personMenu");
                 }

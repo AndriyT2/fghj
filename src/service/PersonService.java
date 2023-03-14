@@ -8,11 +8,18 @@ import utility.comparator.PersonLastnameComparator;
 import utility.ScannerThis;
 import utility.utilityLog.LogFactory;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.*;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 
@@ -133,6 +140,33 @@ public class PersonService implements Serializable {
         LogFactory.info(this.getClass().getName(), "Display teacher list before letter");
 
 
+    }
+
+    public void firstAndLastNameAndEmail(){
+        System.out.println("Поштова скринька - Ім'я Фамілія");
+       Map<String, String> person = PersonRepository.getInstance().getPersonList().stream()
+               .filter(person1 -> person1.getEmail() != null )
+               .collect(Collectors.toMap(Person::getEmail, p1 ->(p1.getFirstname()+ " " + p1.getLastname())));
+       person.forEach((k,v) -> System.out.println(k + " - " + v));
+       LogFactory.info(this.getClass().getName(), "Display Firstname And LastName And Email");
+    }
+
+    public void emailStudentToFile() throws IOException {
+
+        final String FILE = "Student_Email.txt";
+
+
+        Writer writer = new OutputStreamWriter(new FileOutputStream(FILE), StandardCharsets.UTF_8);
+        writer.write(
+
+                PersonRepository.getInstance().getPersonList().stream()
+                .filter(p -> p.getRole() == Role.STUDENT)
+                .filter(p -> p.getEmail() != null)
+                .map(Person::getEmail)
+                .sorted(Comparator.naturalOrder()).toList().toString());
+
+        writer.close();
+        LogFactory.info(this.getClass().getName(), "Create new version of students e-mail");
     }
 
 

@@ -9,12 +9,10 @@ import utility.ScannerThis;
 import utility.utilityLog.LogFactory;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Objects;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class AdditionalMaterialsService implements Serializable {
     public AdditionalMaterialsService() {
@@ -218,6 +216,16 @@ public class AdditionalMaterialsService implements Serializable {
         }
 
     }
+
+    public void additionalMaterialsSortedByLectureId() {
+       Map<Integer, List<AdditionalMaterials>> am = AdditionalMaterialsRepository.getInstance().getAdditionalMaterialsList().stream()
+               .filter(a -> a.getLectureId() != 0)
+               .collect(Collectors.groupingBy(AdditionalMaterials::getLectureId));
+       am.forEach((a,b) -> System.out.println("Лекції з Id " + a + " відповідають наступні додаткові матеріали: " +b) );
+    LogFactory.info(this.getClass().getName(), "AdditionalMaterials Sorted By LectureId");
+
+    }
+
 }
 
 
