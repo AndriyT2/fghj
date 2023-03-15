@@ -1,2 +1,67 @@
 2023-02-19/INF0/repository.CourseRepository/Display CourseRepository
 2023-02-19/INF0/repository.LectureRepository/Display LectureRepository
+2023-02-28/INF0/repository.CourseRepository/Display CourseRepository
+2023-02-28/ERROR/repository.CourseRepository/Course with such Id doesn't exist/[repository.CourseRepository.getById(CourseRepository.java:42), service.courseBackup.CourseBackup.<init>(CourseBackup.java:25), service.Menu.courseMenu(Menu.java:128), service.Menu.menu(Menu.java:43), Main.main(Main.java:67)]
+2023-02-28/ERROR/service.courseBackup.WriteBackup/Course Backup/[java.base/java.io.ObjectOutputStream.writeObject0(ObjectOutputStream.java:1197), java.base/java.io.ObjectOutputStream.defaultWriteFields(ObjectOutputStream.java:1582), java.base/java.io.ObjectOutputStream.writeSerialData(ObjectOutputStream.java:1539), java.base/java.io.ObjectOutputStream.writeOrdinaryObject(ObjectOutputStream.java:1448), java.base/java.io.ObjectOutputStream.writeObject0(ObjectOutputStream.java:1191), java.base/java.io.ObjectOutputStream.writeObject(ObjectOutputStream.java:354), service.courseBackup.WriteBackup.<init>(WriteBackup.java:16), service.Menu.courseMenu(Menu.java:130), service.Menu.menu(Menu.java:43), Main.main(Main.java:67)]
+2023-02-28/ERROR/service.courseBackup.WriteBackup/Course Backup/[java.base/java.io.ObjectOutputStream.writeObject0(ObjectOutputStream.java:1197), java.base/java.io.ObjectOutputStream.defaultWriteFields(ObjectOutputStream.java:1582), java.base/java.io.ObjectOutputStream.writeSerialData(ObjectOutputStream.java:1539), java.base/java.io.ObjectOutputStream.writeOrdinaryObject(ObjectOutputStream.java:1448), java.base/java.io.ObjectOutputStream.writeObject0(ObjectOutputStream.java:1191), java.base/java.io.ObjectOutputStream.writeObject(ObjectOutputStream.java:354), service.courseBackup.WriteBackup.<init>(WriteBackup.java:16), service.Menu.courseMenu(Menu.java:130), service.Menu.menu(Menu.java:43), Main.main(Main.java:67)]
+2023-02-28/ERROR/service.courseBackup.WriteBackup/Course Backup/[java.base/java.io.ObjectOutputStream.writeObject0(ObjectOutputStream.java:1197), java.base/java.io.ObjectOutputStream.defaultWriteFields(ObjectOutputStream.java:1582), java.base/java.io.ObjectOutputStream.writeSerialData(ObjectOutputStream.java:1539), java.base/java.io.ObjectOutputStream.writeOrdinaryObject(ObjectOutputStream.java:1448), java.base/java.io.ObjectOutputStream.writeObject0(ObjectOutputStream.java:1191), java.base/java.io.ObjectOutputStream.writeObject(ObjectOutputStream.java:354), service.courseBackup.WriteBackup.<init>(WriteBackup.java:16), service.Menu.courseMenu(Menu.java:129), service.Menu.menu(Menu.java:43), Main.main(Main.java:67)]
+2023-02-28/INF0/repository.CourseRepository/Display CourseRepository
+2023-02-28/ERROR/service.courseBackup.WriteBackup/Course Backup/[java.base/java.io.ObjectOutputStream.writeObject0(ObjectOutputStream.java:1197), java.base/java.io.ObjectOutputStream.defaultWriteFields(ObjectOutputStream.java:1582), java.base/java.io.ObjectOutputStream.writeSerialData(ObjectOutputStream.java:1539), java.base/java.io.ObjectOutputStream.writeOrdinaryObject(ObjectOutputStream.java:1448), java.base/java.io.ObjectOutputStream.writeObject0(ObjectOutputStream.java:1191), java.base/java.io.ObjectOutputStream.writeObject(ObjectOutputStream.java:354), service.courseBackup.WriteBackup.<init>(WriteBackup.java:16), service.Menu.courseMenu(Menu.java:129), service.Menu.menu(Menu.java:43), Main.main(Main.java:67)]
+2023-02-28/INF0/repository.CourseRepository/Display CourseRepository
+2023-03-01/INF0/repository.CourseRepository/Display CourseRepository
+2023-03-01/INF0/repository.LectureRepository/Display LectureRepository
+2023-03-01/INF0/repository.LectureRepository/Display LectureRepository
+2023-03-01/INF0/repository.LectureRepository/Display LectureRepository
+2023-03-01/INF0/repository.LectureRepository/Display LectureRepository
+2023-03-02/INF0/service.courseBackup.WriteBackup/Create  courseBackup
+2023-03-02/INF0/service.courseBackup.ReadBackup/Display  course Backup
+2023-03-03/INF0/repository.CourseRepository/Display CourseRepository
+2023-03-03/INF0/repository.LectureRepository/Display LectureRepository
+2023-03-03/INF0/repository.LectureRepository/Display LectureRepository
+2023-03-03/INF0/repository.LectureRepository/Display LectureRepository
+2023-03-03/INF0/repository.LectureRepository/Display LectureRepository
+2023-03-03/INF0/repository.LectureRepository/Display LectureRepository
+2023-03-03/INF0/repository.LectureRepository/Display LectureRepository
+2023-03-03/INF0/repository.LectureRepository/Display LectureRepository
+2023-03-03/INF0/repository.LectureRepository/Display LectureRepository
+2023-03-03/INF0/service.courseBackup.ReadBackup/Display  course Backup
+2023-03-05/WARNING/utility.IntTrue/Entered a symbol instead of a number/[java.base/java.util.Scanner.throwFor(Scanner.java:939), java.base/java.util.Scanner.next(Scanner.java:1594), java.base/java.util.Scanner.nextInt(Scanner.java:2258), java.base/java.util.Scanner.nextInt(Scanner.java:2212), utility.IntTrue.intTrue(IntTrue.java:13), service.Menu.lectureDateSortMenu(Menu.java:240), service.Menu.lectureMenu(Menu.java:197), service.Menu.menu(Menu.java:51), Main.main(Main.java:66)]
+2023-03-05/INF0/repository.LectureRepository/Display LectureRepository
+2023-03-06/INF0/repository.CourseRepository/Display CourseRepository
+2023-03-06/ERROR/repository.CourseRepository/Course with such Id doesn't exist/[repository.CourseRepository.getById(CourseRepository.java:43), service.Menu.courseMenu(Menu.java:128), service.Menu.menu(Menu.java:48), Main.main(Main.java:68)]
+2023-03-06/ERROR/repository.CourseRepository/Course with such Id doesn't exist/[repository.CourseRepository.getById(CourseRepository.java:43), service.courseBackup.CourseBackup.<init>(CourseBackup.java:27), service.Menu.courseMenu(Menu.java:133), service.Menu.menu(Menu.java:48), Main.main(Main.java:68)]
+2023-03-08/INF0/repository.LectureRepository/Display LectureRepository
+2023-03-08/INF0/repository.LectureRepository/Display LectureRepository
+2023-03-08/INF0/repository.HomeworkRepository/Create TreeMapHomework from ListHomework
+2023-03-08/INF0/repository.HomeworkRepository/Create TreeMapHomework from ListHomework
+2023-03-08/INF0/repository.HomeworkRepository/Create TreeMapHomework from ListHomework
+2023-03-08/INF0/repository.HomeworkRepository/Create TreeMapHomework from ListHomework
+2023-03-08/INF0/repository.HomeworkRepository/Create TreeMapHomework from ListHomework
+2023-03-08/INF0/repository.HomeworkRepository/Create TreeMapHomework from ListHomework
+2023-03-08/INF0/repository.HomeworkRepository/Create TreeMapHomework from ListHomework
+2023-03-08/INF0/repository.HomeworkRepository/Create TreeMapHomework from ListHomework
+2023-03-08/INF0/repository.HomeworkRepository/Create TreeMapHomework from ListHomework
+2023-03-08/INF0/repository.HomeworkRepository/Create TreeMapHomework from ListHomework
+2023-03-08/INF0/repository.HomeworkRepository/Create TreeMapHomework from ListHomework
+2023-03-08/INF0/repository.HomeworkRepository/Create TreeMapHomework from ListHomework
+2023-03-08/INF0/repository.HomeworkRepository/Create TreeMapHomework from ListHomework
+2023-03-08/INF0/repository.HomeworkRepository/Create TreeMapHomework from ListHomework
+2023-03-08/INF0/repository.HomeworkRepository/Create TreeMapHomework from ListHomework
+2023-03-08/INF0/repository.HomeworkRepository/Create TreeMapHomework from ListHomework
+2023-03-08/INF0/repository.HomeworkRepository/Create TreeMapHomework from ListHomework
+2023-03-08/INF0/repository.HomeworkRepository/Create TreeMapHomework from ListHomework
+2023-03-08/INF0/repository.HomeworkRepository/Create TreeMapHomework from ListHomework
+2023-03-08/INF0/repository.HomeworkRepository/Create TreeMapHomework from ListHomework
+2023-03-08/INF0/repository.HomeworkRepository/Create TreeMapHomework from ListHomework
+2023-03-08/INF0/service.PersonService/Display teacher list before letter
+2023-03-08/INF0/service.LectureService/Display oldest lecture with Max AdditionalMaterials
+2023-03-09/WARNING/utility.IntTrue/Entered a symbol instead of a number/[java.base/java.util.Scanner.throwFor(Scanner.java:939), java.base/java.util.Scanner.next(Scanner.java:1594), java.base/java.util.Scanner.nextInt(Scanner.java:2258), java.base/java.util.Scanner.nextInt(Scanner.java:2212), utility.IntTrue.intTrue(IntTrue.java:13), service.Menu.personMenu(Menu.java:457), service.Menu.menu(Menu.java:64), Main.main(Main.java:68)]
+2023-03-09/INF0/service.LectureService/Display oldest lecture with Max AdditionalMaterials
+2023-03-09/WARNING/utility.regex.PersonRegex/Uncorrected e-mail format/[utility.regex.PersonRegex.setEmail(PersonRegex.java:86), service.Menu.personMenu(Menu.java:468), service.Menu.menu(Menu.java:64), Main.main(Main.java:72)]
+2023-03-09/INF0/service.PersonService/Display Firstname And LastName And Email
+2023-03-09/INF0/service.PersonService/Display Firstname And LastName And Email
+2023-03-10/WARNING/utility.IntTrue/Entered a symbol instead of a number/[java.base/java.util.Scanner.throwFor(Scanner.java:939), java.base/java.util.Scanner.next(Scanner.java:1594), java.base/java.util.Scanner.nextInt(Scanner.java:2258), java.base/java.util.Scanner.nextInt(Scanner.java:2212), utility.IntTrue.intTrue(IntTrue.java:13), service.Menu.personMenu(Menu.java:468), service.Menu.menu(Menu.java:65), Main.main(Main.java:75)]
+2023-03-14/INF0/service.LectureService/Display lectures sorted by teacher
+2023-03-14/INF0/service.AdditionalMaterialsService/AdditionalMaterials Sorted By LectureId
+2023-03-14/INF0/service.PersonService/Create new version of students e-mail
+2023-03-15/INF0/repository.CourseRepository/Display CourseRepository
