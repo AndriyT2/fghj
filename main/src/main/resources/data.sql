@@ -44,3 +44,20 @@ INSERT INTO `online_school`.`homework` (`task`, `lecture_id`) VALUES ('HWT3', '3
 INSERT INTO `online_school`.`homework` (`task`, `lecture_id`) VALUES ('HWT4', '4');
 INSERT INTO `online_school`.`homework` (`task`, `lecture_id`) VALUES ('HWT5', '5');
 INSERT INTO `online_school`.`homework` (`task`, `lecture_id`) VALUES ('HWT6', '6');
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+INSERT INTO `online_school`.`additional_materials` (`name`, `resource_type`, `lecture_id`) VALUES ('AMu', 'URL', '8');
+INSERT INTO `online_school`.`additional_materials` (`name`, `resource_type`, `lecture_id`) VALUES ('AMu', 'URL', '8');
+INSERT INTO `online_school`.`additional_materials` (`name`, `resource_type`, `lecture_id`) VALUES ('AMu', 'URL', '7');
+
+
+INSERT INTO `online_school`.`lecture` (`name`, `description`, `course_id`, `lecture_date`) VALUES ('lecture73', 'd7', '3', '2022-02-02 02:02:02');
+INSERT INTO `online_school`.`lecture` (`name`, `description`, `course_id`, `lecture_date`) VALUES ('lecture83', 'd8', '3', '2022-01-01 01:01:01');
+INSERT INTO `online_school`.`lecture` (`name`, `description`, `course_id`, `lecture_date`) VALUES ('lecture93', 'd9', '1', '2022-01-01 01:01:01');
+
+
+INSERT INTO `online_school`.`homework` (`task`, `lecture_id`) VALUES ('HWT8', '8');
+INSERT INTO `online_school`.`homework` (`task`, `lecture_id`) VALUES ('HWT9.1', '9');
+INSERT INTO `online_school`.`homework` (`task`, `lecture_id`) VALUES ('HWT9.2', '9');
+

@@ -66,6 +66,67 @@ CREATE TABLE `course_with_student` (
 
 
 
+====================================================================================================================
+
+SELECT * FROM person where role = 'student' ORDER BY lastname;
+
+
+
+SELECT l.name, COUNT(am.additional_materials_id) AS am_count
+FROM lecture l
+LEFT JOIN additional_materials am ON l.lecture_id = am.lecture_id
+WHERE l.lecture_date < '2023-01-01 00:00:00'
+GROUP BY l.lecture_id
+ORDER BY l.lecture_date;
+
+
+
+SELECT l.name, l.creation_date, COUNT(h.homework_id)  AS hw_count
+FROM lecture l
+LEFT JOIN homework h ON l.lecture_id = h.lecture_id
+WHERE l.creation_date = (SELECT MIN(creation_date) FROM lecture)
+GROUP BY l.lecture_id
+ORDER BY hw_count DESC
+LIMIT 1;
+
+
+
+SELECT resource_type, count(*) as type_total FROM online_school.additional_materials group by resource_type;
+
+
+
+SELECT lastname, firstname FROM online_school.person where role = 'teacher' AND lastname REGEXP '^[A-N]|^[А-Н]';
+
+
+
+SELECT  p.lastname, p.firstname,  COUNT(cws.course_with_student_id) AS course_total_count
+FROM person p  LEFT  JOIN course_with_student cws ON p.person_id = cws.person_id
+WHERE p.role = 'student'
+    GROUP BY p.person_id
+    HAVING course_total_count =1
+ORDER BY lastname;
+
+
+
+SELECT  p.lastname, p.firstname,  COUNT(cws.course_with_student_id) AS course_total_count
+FROM person p  LEFT  JOIN course_with_student cws ON p.person_id = cws.person_id
+WHERE p.role = 'student'
+    GROUP BY p.person_id
+    HAVING course_total_count =2
+ORDER BY lastname;
+
+
+
+SELECT  p.lastname, p.firstname,  COUNT(cws.course_with_student_id) AS course_total_count
+FROM person p  LEFT  JOIN course_with_student cws ON p.person_id = cws.person_id
+WHERE p.role = 'student'
+    GROUP BY p.person_id
+    HAVING course_total_count >=3
+ORDER BY lastname;
+
+
+
+
 
 
 
