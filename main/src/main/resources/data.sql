@@ -61,3 +61,16 @@ INSERT INTO `online_school`.`homework` (`task`, `lecture_id`) VALUES ('HWT8', '8
 INSERT INTO `online_school`.`homework` (`task`, `lecture_id`) VALUES ('HWT9.1', '9');
 INSERT INTO `online_school`.`homework` (`task`, `lecture_id`) VALUES ('HWT9.2', '9');
 
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+INSERT INTO `online_school`.`lecture_with_teacher` (`lecture_id`, `person_id`) VALUES ('1', '10');
+INSERT INTO `online_school`.`lecture_with_teacher` (`lecture_id`, `person_id`) VALUES ('2', '9');
+INSERT INTO `online_school`.`lecture_with_teacher` (`lecture_id`, `person_id`) VALUES ('3', '8');
+INSERT INTO `online_school`.`lecture_with_teacher` (`lecture_id`, `person_id`) VALUES ('4', '10');
+INSERT INTO `online_school`.`lecture_with_teacher` (`lecture_id`, `person_id`) VALUES ('5', '9');
+INSERT INTO `online_school`.`lecture_with_teacher` (`lecture_id`, `person_id`) VALUES ('6', '8');
+INSERT INTO `online_school`.`lecture_with_teacher` (`lecture_id`, `person_id`) VALUES ('7', '10');
+INSERT INTO `online_school`.`lecture_with_teacher` (`lecture_id`, `person_id`) VALUES ('8', '9');
+INSERT INTO `online_school`.`lecture_with_teacher` (`lecture_id`, `person_id`) VALUES ('9', '8');

@@ -126,7 +126,91 @@ ORDER BY lastname;
 
 
 
+====================================================================================================================
 
+CREATE TABLE `lecture_with_teacher` (
+  `lecture_with_teacher_id` int NOT NULL AUTO_INCREMENT,
+  `lecture_id` int DEFAULT NULL,
+  `person_id` int DEFAULT NULL,
+  PRIMARY KEY (`lecture_with_teacher_id`),
+  KEY `fk_lecture` (`lecture_id`),
+  KEY `fk_teacher` (`person_id`),
+  CONSTRAINT `fk_lecture` FOREIGN KEY (`lecture_id`) REFERENCES `lecture` (`lecture_id`),
+  CONSTRAINT `fk_teacher` FOREIGN KEY (`person_id`) REFERENCES `person` (`person_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+
+
+SELECT l.name, l.lecture_date, p.lastname, p.firstname
+FROM lecture l
+RIGHT JOIN lecture_with_teacher lwt
+ON l.lecture_id = lwt.lecture_id
+JOIN person p
+ON lwt.person_id = p.person_id
+ORDER BY l.lecture_date;
+
+
+
+SELECT p.lastname, p.firstname, COUNT(lecture_id) AS lecture_count
+FROM person p
+JOIN lecture_with_teacher lwt
+ON lwt.person_id = p.person_id
+GROUP BY lwt.person_id;
+
+
+
+SELECT p.lastname, l.name, l.lecture_date
+FROM person p
+JOIN lecture_with_teacher lwt
+ON lwt.person_id = p.person_id
+JOIN lecture l
+ON l.lecture_id = lwt.lecture_id
+WHERE lwt.person_id = 3
+ORDER BY l.lecture_date;
+
+
+
+SELECT
+    c.`name`,
+    COUNT(l.name) AS lecture_count,
+    COUNT(DISTINCT lwt.person_id) AS teacher_count,
+    COUNT(DISTINCT cws.person_id) AS student_count,
+    COUNT(DISTINCT h.homework_id) AS homework_count,
+    COUNT(DISTINCT am.additional_materials_id) AS additional_materials_count
+FROM
+    course c
+        LEFT JOIN
+    lecture l ON c.course_id = l.course_id
+        JOIN
+    lecture_with_teacher lwt ON l.lecture_id = lwt.lecture_id
+        JOIN
+    course_with_student cws ON c.course_id = cws.course_id
+        JOIN
+    homework h ON l.lecture_id = h.lecture_id
+        JOIN
+    additional_materials am ON am.lecture_id = l.lecture_id
+GROUP BY c.course_id
+
+
+
+SELECT
+	MONTH(lecture.lecture_date) AS month_number,
+	MONTHNAME(lecture.lecture_date) AS month_name,
+    COUNT(name) AS lecture_count
+FROM online_school.lecture
+GROUP BY month_number, month_name
+ORDER BY month_number;
+
+
+
+WITH counts AS (
+	SELECT 'homework' as data_type, COUNT(*) AS total FROM homework
+    UNION ALL
+    SELECT 'additional_materials', COUNT(*) FROM additional_materials
+)
+SELECT data_type, total
+FROM counts
+WHERE total = (SELECT MAX(total) FROM counts);
 
 
 
