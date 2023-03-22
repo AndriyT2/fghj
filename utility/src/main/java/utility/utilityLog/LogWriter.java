@@ -17,37 +17,46 @@ public class LogWriter {
 
     Path path = Paths.get(pathToFile);
     private static final int bufferSize = 132;
-   static ByteBuffer buffer = ByteBuffer.allocate(bufferSize);
+    static ByteBuffer buffer = ByteBuffer.allocate(bufferSize);
 
 
     protected static void writeDataToFile(Log log) {
         String level = returnLevel();
-        if (level.equalsIgnoreCase("ERROR")){
-            if(log.getLevel().toString().equalsIgnoreCase("ERROR")) {writeCheckLogToFile(log);}
+        if (level.equalsIgnoreCase("ERROR")) {
+            if (log.getLevel().toString().equalsIgnoreCase("ERROR")) {
+                writeCheckLogToFile(log);
+            }
         } else if (level.equalsIgnoreCase("WARNING")) {
-            if(log.getLevel().toString().equalsIgnoreCase("WARNING")
-                    |log.getLevel().toString().equalsIgnoreCase("ERROR")) {writeCheckLogToFile(log);}
+            if (log.getLevel().toString().equalsIgnoreCase("WARNING")
+                    | log.getLevel().toString().equalsIgnoreCase("ERROR")) {
+                writeCheckLogToFile(log);
+            }
         } else if (level.equalsIgnoreCase("INF0")) {
-            if(log.getLevel().toString().equalsIgnoreCase("INF0")
-                    |log.getLevel().toString().equalsIgnoreCase("WARNING")
-                    |log.getLevel().toString().equalsIgnoreCase("ERROR")) {writeCheckLogToFile(log);}
+            if (log.getLevel().toString().equalsIgnoreCase("INF0")
+                    | log.getLevel().toString().equalsIgnoreCase("WARNING")
+                    | log.getLevel().toString().equalsIgnoreCase("ERROR")) {
+                writeCheckLogToFile(log);
+            }
         } else if (level.equalsIgnoreCase("DEBUG")) {
-            if(log.getLevel().toString().equalsIgnoreCase("DEBUG")
-                    |log.getLevel().toString().equalsIgnoreCase("INF0")
-                    |log.getLevel().toString().equalsIgnoreCase("WARNING")
-                    |log.getLevel().toString().equalsIgnoreCase("ERROR")) {writeCheckLogToFile(log);}
+            if (log.getLevel().toString().equalsIgnoreCase("DEBUG")
+                    | log.getLevel().toString().equalsIgnoreCase("INF0")
+                    | log.getLevel().toString().equalsIgnoreCase("WARNING")
+                    | log.getLevel().toString().equalsIgnoreCase("ERROR")) {
+                writeCheckLogToFile(log);
+            }
         } else {
-            if(!log.getLevel().toString().equalsIgnoreCase("OFF")) {
-                     throw new UnknownFormatConversionException("Incorrect value of the level parameter in LogLevel.txt");
+            if (!log.getLevel().toString().equalsIgnoreCase("OFF")) {
+                throw new UnknownFormatConversionException("Incorrect value of the level parameter in LogLevel.txt");
             }
         }
 
 
     }
 
-    private static void writeCheckLogToFile(Log log){
-        try ( BufferedWriter writer = new BufferedWriter(new FileWriter(LOG_STORAGE_FILE, true))){
-            {writer.write(log + "\n");
+    private static void writeCheckLogToFile(Log log) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(LOG_STORAGE_FILE, true))) {
+            {
+                writer.write(log + "\n");
                 writer.close();
             }
         } catch (IOException e) {
@@ -56,19 +65,18 @@ public class LogWriter {
         }
     }
 
-    private static   String getLevel() throws IOException {
-        int  endOfWordBefore = 6;                 //6 - end of word "level=" in LogLevel.txt
-        FileChannel inChannel = new FileInputStream(pathToFile).getChannel();
+    private static String getLevel() throws IOException {
 
+        try (FileChannel inChannel = new FileInputStream(pathToFile).getChannel()){
+        int endOfWordBefore = 6;                 //6 - end of word "level=" in LogLevel.txt
         inChannel.read(buffer);
         String level = new String(buffer.array()).substring(endOfWordBefore, buffer.position()).strip();
         buffer.clear();
-        inChannel.close();
-
         return level;
+        }
     }
 
-    private static String returnLevel(){
+    private static String returnLevel() {
         try {
             return getLevel();
         } catch (IOException e) {
@@ -132,21 +140,22 @@ public class LogWriter {
         return level;
     }
 
-    private  void enterLogLevel() throws IOException {
+    private void enterLogLevel() throws IOException {
         LogFactory.debug(this.getClass().getName(), "Change the level of logs");
         String level = setLevel();
         FileChannel inChannel = new RandomAccessFile(pathToFile, "rw").getChannel();
-        inChannel.position(6);
-        buffer.put("        ".getBytes());//It is correct?
-        buffer.flip();
-        inChannel.write(buffer);
-        buffer.clear();
-        inChannel.position(6);
-        buffer.put(level.getBytes());
-        buffer.flip();
-        inChannel.write(buffer);
-        buffer.clear();
-        inChannel.close();
+            inChannel.position(6);
+            buffer.put("        ".getBytes());//It is correct?
+            buffer.flip();
+            inChannel.write(buffer);
+            buffer.clear();
+            inChannel.position(6);
+            buffer.put(level.getBytes());
+            buffer.flip();
+            inChannel.write(buffer);
+            buffer.clear();
+            inChannel.close();
+
     }
 }
 

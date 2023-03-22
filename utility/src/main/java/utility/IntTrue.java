@@ -5,9 +5,10 @@ import utility.utilityLog.LogFactory;
 import java.util.InputMismatchException;
 
 public class IntTrue {
-     int number;
-     boolean  rule = false;
-    public  int intTrue(){
+    int number;
+    boolean rule = false;
+
+    public int intTrue() {
         while (!rule) {
             try {
                 number = ScannerThis.getInstance().nextInt();

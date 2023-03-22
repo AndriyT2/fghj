@@ -3,13 +3,12 @@ package utility.regex;
 import models.Person;
 import repository.PersonRepository;
 import utility.ScannerThis;
-import utility.exception.EntityNotFoundException;
 import utility.exception.SetParameterException;
 import utility.utilityLog.LogFactory;
 
 
 public class PersonRegex {
-    public static void setPhone (int idPerson) throws EntityNotFoundException {
+    public static void setPhone(int idPerson) {
         final String rule = "(\\+*)\\d{12}";
         System.out.println(PersonRepository.getInstance().getPersonList());
         System.out.println("Введіть номер телефона в наступному форматі: +хххххххххххx.");
@@ -30,7 +29,8 @@ public class PersonRegex {
         Person person = PersonRepository.getInstance().getById(idPerson);
         person.setPhone(phoneNorm);
     }
-    public static void setFirstname (int idPerson) throws EntityNotFoundException {
+
+    public static void setFirstname(int idPerson) {
         final String rule = "^([A-Za-z][A-Za-z\\-']{1,50})|([А-ЯIЇҐЄа-яіїґє][А-ЯIЇҐЄа-яіїґє\\-']{1,50})$";
         System.out.println(PersonRepository.getInstance().getPersonList());
         System.out.println("Введіть необхідне ім'я!");
@@ -52,7 +52,7 @@ public class PersonRegex {
         person.setFirstname(firstnameNorm);
     }
 
-    public static void setLastname (int idPerson) throws EntityNotFoundException {
+    public static void setLastname(int idPerson) {
         final String rule = "^([A-Za-z][A-Za-z\\-']{1,100})|([А-ЯIЇҐЄа-яіїґє][А-ЯIЇҐЄа-яіїґє\\-']{1,100})$";
         System.out.println(PersonRepository.getInstance().getPersonList());
         System.out.println("Введіть необхідне прізвище!");
@@ -74,7 +74,7 @@ public class PersonRegex {
         person.setLastname(lastnameNorm);
     }
 
-    public static String setEmail () {
+    public static String setEmail() {
         final String rule = "^([a-z0-9_.-]+)@([\\da-z.-]+)\\.([a-z.]{2,6})$";
         System.out.println("Введіть необхідну поштову скриньку!");
         String email = ScannerThis.getInstance().nextLine();
@@ -85,7 +85,7 @@ public class PersonRegex {
             try {
                 throw new SetParameterException("Ви ввели некоректну поштову скриньку!");
             } catch (SetParameterException e) {
-                LogFactory.warning(Thread.currentThread().getStackTrace()[1].getClassName(),"Uncorrected e-mail format", e.getStackTrace());
+                LogFactory.warning(Thread.currentThread().getStackTrace()[1].getClassName(), "Uncorrected e-mail format", e.getStackTrace());
                 System.err.println("Введіть поштову скриньку в правильному форматі!");
                 email = ScannerThis.getInstance().nextLine();
                 emailNorm = email.trim();

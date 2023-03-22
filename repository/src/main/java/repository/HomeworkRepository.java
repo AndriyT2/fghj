@@ -16,21 +16,24 @@ public class HomeworkRepository implements Serializable {
 
     private List<Homework> homeworkList;
 
-        private static HomeworkRepository instance;
+    private static HomeworkRepository instance;
 
-        private HomeworkRepository() {
-            this.homeworkList = new ArrayList<>();
-        }
+    private HomeworkRepository() {
+        this.homeworkList = new ArrayList<>();
+    }
 
-        public static HomeworkRepository getInstance() {
-            if (instance == null) {
-                instance = new HomeworkRepository();
-            }
-            return instance;
+    public static HomeworkRepository getInstance() {
+        if (instance == null) {
+            instance = new HomeworkRepository();
         }
+        return instance;
+    }
+
     public Homework getById(int index) {
-        for (Homework homework : homeworkList){
-            if (homework.getId() == index) {return homework;}
+        for (Homework homework : homeworkList) {
+            if (homework.getId() == index) {
+                return homework;
+            }
         }
         throw new NoSuchElementException();
     }
@@ -47,7 +50,5 @@ public class HomeworkRepository implements Serializable {
     }
 
 
-
-
-    }
+}
 

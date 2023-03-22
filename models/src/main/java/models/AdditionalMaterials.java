@@ -11,7 +11,10 @@ public class AdditionalMaterials extends ModelsSuper implements Comparable<Addit
     public AdditionalMaterials() {
         super();
     }
-    public AdditionalMaterials(ResourceType resourceType) {this.resourceType = resourceType;}
+
+    public AdditionalMaterials(ResourceType resourceType) {
+        this.resourceType = resourceType;
+    }
 
     public AdditionalMaterials(String name, int lectureId, ResourceType resourceType) {
         this.name = name;
@@ -21,7 +24,7 @@ public class AdditionalMaterials extends ModelsSuper implements Comparable<Addit
 
     public AdditionalMaterials(String name, int lectureId) {
         this.name = name;
-        this.lectureId =lectureId;
+        this.lectureId = lectureId;
     }
 
     public String getName() {

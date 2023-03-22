@@ -5,13 +5,13 @@ import java.util.Scanner;
 public class ScannerThis {
 
 
-        private static Scanner instance;
+    private static Scanner instance;
 
 
-        public static Scanner getInstance() {
-            if (instance == null) {
-                instance = new Scanner(System.in);
-            }
-            return instance;
+    public static Scanner getInstance() {
+        if (instance == null) {
+            instance = new Scanner(System.in);
         }
+        return instance;
+    }
 }

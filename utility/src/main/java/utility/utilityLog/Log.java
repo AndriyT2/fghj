@@ -28,7 +28,8 @@ public class Log {
         if (stacktrace == null) {
             s = data + "/" + level + "/" + name + "/" + message;
         } else {
-            s = data + "/" + level + "/" + name + "/" + message + "/" + Arrays.toString(stacktrace);}
+            s = data + "/" + level + "/" + name + "/" + message + "/" + Arrays.toString(stacktrace);
+        }
         return s;
 
     }

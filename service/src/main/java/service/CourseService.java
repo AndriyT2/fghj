@@ -13,24 +13,24 @@ import utility.utilityLog.LogFactory;
 import java.io.Serializable;
 
 
-public class CourseService implements Serializable {
+public class CourseService {
     public Course createCourse() {
         return new Course();
     }
 
     public Course createCourse(String courseName) {
-       Course course = new Course(courseName);
-     CourseRepository.getInstance().getCourseList().add(course);
-     int index = CourseRepository.getInstance().getCourseList().indexOf(course);
-        LogFactory.debug(this.getClass().getName(),"Create course with name");
+        Course course = new Course(courseName);
+        CourseRepository.getInstance().getCourseList().add(course);
+        int index = CourseRepository.getInstance().getCourseList().indexOf(course);
+        LogFactory.debug(this.getClass().getName(), "Create course with name");
         return CourseRepository.getInstance().getCourseList().get(index);
     }
 
     public void createCourse(String courseName, String teacher, String student, String lecture) {
         Course course = new Course(courseName);
-        int  courseId = course.getId();
+        int courseId = course.getId();
         CourseRepository.getInstance().getCourseList().add(course);
-        if(teacher != null) {
+        if (teacher != null) {
             PersonRepository.getInstance().getPersonList().add(new Person(teacher, Role.TEACHER, courseId));
         }
         if (student != null) {
@@ -43,34 +43,28 @@ public class CourseService implements Serializable {
     }
 
 
-
     public void courseScanner(String courseName) {
         String answer = askCourseScanner(courseName);
 
         if (answer.contains(String.valueOf('#'))) {
-            System.out.println(answer);
             int pointOfFirstDelimiter = answer.indexOf('#');
             int pointOfSecondDelimiter = answer.lastIndexOf('#');
 
 
             String courseName1 = answer.substring(0, pointOfFirstDelimiter);
-            System.out.println(courseName1);
             String courseParameterNumber1 = answer.substring(pointOfFirstDelimiter + 1, pointOfSecondDelimiter);
-            System.out.println(courseParameterNumber1);
             String courseParameter1 = answer.substring(pointOfSecondDelimiter + 1);
-            System.out.println(courseParameter1);
 
 
             System.out.println("Ви створили курс:" + courseName1);
 
             if (courseParameterNumber1.equals("1")) {
-                System.out.println(courseParameter1);
-                 createCourse(courseName1, courseParameter1, null, null);
+                createCourse(courseName1, courseParameter1, null, null);
 
             } else if (courseParameterNumber1.equals("2")) {
-                 createCourse(courseName1, null, courseParameter1, null);
+                createCourse(courseName1, null, courseParameter1, null);
             } else {
-                 createCourse(courseName1, null, null, courseParameter1);
+                createCourse(courseName1, null, null, courseParameter1);
             }
 
         } else {
@@ -81,28 +75,6 @@ public class CourseService implements Serializable {
     }
 
     private String askCourseScanner(String courseName) {
-
-
-        System.out.println("Ви впевнені, що хочете назвати курсу наступним чином: " + courseName + " ?");
-        System.out.println("Якщо назва правильна, то введіть \"Так\" або \"Yes\", " +
-                "в противному випадку введіть \"Ні\" або \"No\"!");
-
-        String courseNameAnswer = ScannerThis.getInstance().nextLine();
-
-        if (courseNameAnswer.equals("Ні") | courseNameAnswer.equals("ні") |
-                courseNameAnswer.equals("No") | courseNameAnswer.equals("no")) {
-
-            System.out.println("Введіть нову назву курсу:");
-            courseName = ScannerThis.getInstance().nextLine();
-
-        } else if (courseNameAnswer.equals("Так") | courseNameAnswer.equals("так") |
-                courseNameAnswer.equals("Yes") | courseNameAnswer.equals("yes")) {
-
-//            Course name stay without changes (courseName = courseName;)
-
-        } else {
-            throw new RuntimeException("Ви ввели некоректну відповідь. Почніть з самого початку!");
-        }
 
         System.out.println("Чи бажаєте додати додаткові параметри для курсу?");
         System.out.println("Якщо бажаєте, то введіть \"Так\" або \"Yes\", " +
@@ -153,8 +125,6 @@ public class CourseService implements Serializable {
             throw new IllegalArgumentException();
         }
     }
-
-
 
 
 }

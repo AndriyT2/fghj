@@ -53,22 +53,24 @@ public class Lecture extends ModelsSuper {
         this.lectureDate = lectureDate;
     }
 
-    public Lecture () {
+    public Lecture() {
         super();
         creationDate = LocalDateTime.now();
 
     }
 
-    public Lecture (String name) {
+    public Lecture(String name) {
         this();
         this.name = name;
         creationDate = LocalDateTime.now();
 
     }
 
-    public String getName() { return name;}
+    public String getName() {
+        return name;
+    }
 
-    public Lecture (int idCourse) {
+    public Lecture(int idCourse) {
         this();
         this.idCourse = idCourse;
         creationDate = LocalDateTime.now();
@@ -84,13 +86,12 @@ public class Lecture extends ModelsSuper {
     }
 
 
-    public Lecture lectureWithTeacher (int personId) {
+    public Lecture lectureWithTeacher(int personId) {
         creationDate = LocalDateTime.now();
         Lecture lecture = new Lecture();
         lecture.setPersonId(personId);
         return lecture;
     }
-
 
 
     @Override

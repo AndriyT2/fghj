@@ -9,7 +9,7 @@ import utility.utilityLog.LogFactory;
 
 
 public class CourseRegex {
-    public static void setCourseName (int idCourse) throws EntityNotFoundException {
+    public static void setCourseName(int idCourse) throws EntityNotFoundException {
         final String rule = "^[A-Za-zА-ЯIЇҐЄа-яіїґє\\-'\\d\\s.]{1,200}$";
         System.out.println(CourseRepository.getInstance().getCourseList());
         System.out.println("Введіть назву курсу!");
@@ -31,7 +31,7 @@ public class CourseRegex {
         course.setCourseName(courseNameNorm);
     }
 
-    public static String setCourseNameMenu (String courseName){
+    public static String setCourseNameMenu(String courseName) {
         LogFactory.debug(Thread.currentThread().getStackTrace()[1].getClassName(), "Run regex course name.");
         final String rule = "^[A-Za-zА-ЯIЇҐЄа-яіїґє\\-'\\d\\s.]{1,200}$";
         String courseNameNorm = courseName.trim();
@@ -47,6 +47,6 @@ public class CourseRegex {
                 result = courseNameNorm.matches(rule);
             }
         }
-       return courseNameNorm;
+        return courseNameNorm;
     }
 }

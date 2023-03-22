@@ -17,7 +17,7 @@ public class PersonRepository implements Serializable {
         this.personList = new ArrayList<>();
     }
 
-        public static PersonRepository getInstance() {
+    public static PersonRepository getInstance() {
         if (instance == null) {
             instance = new PersonRepository();
         }
@@ -28,19 +28,22 @@ public class PersonRepository implements Serializable {
     public List<Person> getPersonList() {
         return personList;
     }
+
     public void getAll() {
 
         System.out.println(PersonRepository.getInstance().getPersonList());
         LogFactory.info(this.getClass().getName(), "Display PersonRepository");
 
     }
+
     public Person getById(int index) {
-        for (Person person : personList){
-            if (person.getId() == index) {return person;}
+        for (Person person : personList) {
+            if (person.getId() == index) {
+                return person;
+            }
         }
         throw new NoSuchElementException();
     }
-
 
 
 }

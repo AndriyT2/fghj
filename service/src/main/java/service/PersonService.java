@@ -4,32 +4,31 @@ import models.Person;
 import models.Role;
 import repository.PersonRepository;
 import utility.IntTrue;
-import utility.comparator.PersonLastnameComparator;
 import utility.ScannerThis;
+import utility.comparator.PersonLastnameComparator;
 import utility.utilityLog.LogFactory;
 
-import java.io.*;
-import java.nio.ByteBuffer;
-import java.nio.channels.FileChannel;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
-import java.util.*;
-import java.util.function.Consumer;
-import java.util.function.Predicate;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 
-public class PersonService implements Serializable {
+public class PersonService {
+
 
     public void addPerson(String lastname, String firstname, Role role) {
         LogFactory.debug(this.getClass().getName(), "Create new person");
         PersonRepository.getInstance().getPersonList().add(new Person(lastname, firstname, role));
     }
-    public void addPerson () {
+
+    public void addPerson() {
 
         while (true) {
 
@@ -74,25 +73,25 @@ public class PersonService implements Serializable {
     }
 
 
-    public void addPersonMenu () {
+    public void addPersonMenu() {
 
-                int ask1;
+        int ask1;
 
-                do {
-                    System.out.println("Введіть числове значення для вибору необхідного критерія: \n1 Студент;\n2 Вчитель.");
-                    ask1 = new IntTrue().intTrue();
-                } while (ask1 < 1 | ask1 > 2);
+        do {
+            System.out.println("Введіть числове значення для вибору необхідного критерія: \n1 Студент;\n2 Вчитель.");
+            ask1 = new IntTrue().intTrue();
+        } while (ask1 < 1 | ask1 > 2);
 
-                if (ask1 == 1) {
-                    System.out.println("Ви створили нового студента.");
-                    Person personS = new Person(Role.STUDENT);
-                    PersonRepository.getInstance().getPersonList().add(personS);
+        if (ask1 == 1) {
+            System.out.println("Ви створили нового студента.");
+            Person personS = new Person(Role.STUDENT);
+            PersonRepository.getInstance().getPersonList().add(personS);
 
-                } else {
-                    System.out.println("Ви створили нового вчителя.");
-                    Person personT = new Person(Role.TEACHER);
-                    PersonRepository.getInstance().getPersonList().add(personT);
-                }
+        } else {
+            System.out.println("Ви створили нового вчителя.");
+            Person personT = new Person(Role.TEACHER);
+            PersonRepository.getInstance().getPersonList().add(personT);
+        }
     }
 
     public void personSortByLastname() {
@@ -103,8 +102,10 @@ public class PersonService implements Serializable {
 
     public int countStudent() {
         int counter = 0;
-        for (Person person: PersonRepository.getInstance().getPersonList()) {
-          if (person.getRole() == Role.STUDENT) {++counter;}
+        for (Person person : PersonRepository.getInstance().getPersonList()) {
+            if (person.getRole() == Role.STUDENT) {
+                ++counter;
+            }
         }
         return counter;
     }
@@ -131,10 +132,10 @@ public class PersonService implements Serializable {
     }
 
 
-    public void getTeacherBeforeLetter(String letter){
+    public void getTeacherBeforeLetter(String letter) {
         List<Person> teacher = teacherList().stream()
                 .filter(person -> person.getLastname().substring(0, 1)
-                        .compareTo(letter) < 0 )
+                        .compareTo(letter) < 0)
                 .toList();
         System.out.println(teacher);
         LogFactory.info(this.getClass().getName(), "Display teacher list before letter");
@@ -142,13 +143,13 @@ public class PersonService implements Serializable {
 
     }
 
-    public void firstAndLastNameAndEmail(){
+    public void firstAndLastNameAndEmail() {
         System.out.println("Поштова скринька - Ім'я Фамілія");
-       Map<String, String> person = PersonRepository.getInstance().getPersonList().stream()
-               .filter(person1 -> person1.getEmail() != null )
-               .collect(Collectors.toMap(Person::getEmail, p1 ->(p1.getFirstname()+ " " + p1.getLastname())));
-       person.forEach((k,v) -> System.out.println(k + " - " + v));
-       LogFactory.info(this.getClass().getName(), "Display Firstname And LastName And Email");
+        Map<String, String> person = PersonRepository.getInstance().getPersonList().stream()
+                .filter(person1 -> person1.getEmail() != null)
+                .collect(Collectors.toMap(Person::getEmail, p1 -> (p1.getFirstname() + " " + p1.getLastname())));
+        person.forEach((k, v) -> System.out.println(k + " - " + v));
+        LogFactory.info(this.getClass().getName(), "Display Firstname And LastName And Email");
     }
 
     public void emailStudentToFile() throws IOException {
@@ -160,10 +161,9 @@ public class PersonService implements Serializable {
         writer.write(
 
                 PersonRepository.getInstance().getPersonList().stream()
-                .filter(p -> p.getRole() == Role.STUDENT)
-                .filter(p -> p.getEmail() != null)
-                .map(Person::getEmail)
-                .sorted(Comparator.naturalOrder()).toList().toString());
+                        .filter(p -> p.getRole() == Role.STUDENT && p.getEmail() != null)
+                        .map(Person::getEmail)
+                        .sorted(Comparator.naturalOrder()).toList().toString());
 
         writer.close();
         LogFactory.info(this.getClass().getName(), "Create new version of students e-mail");

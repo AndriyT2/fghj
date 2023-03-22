@@ -8,23 +8,24 @@ import utility.utilityLog.LogFactory;
 import java.io.Serializable;
 import java.util.NoSuchElementException;
 
-public class HomeworkService implements Serializable {
+public class HomeworkService {
 
     public Homework createHomework() {
         return new Homework();
     }
+
     public void createHomeworkWithLectureId(int lectureId) {
         HomeworkRepository.getInstance().getHomeworkList().add(new Homework(lectureId));
-        LogFactory.debug(this.getClass().getName(),"Create new homework with lectureId");
+        LogFactory.debug(this.getClass().getName(), "Create new homework with lectureId");
 
     }
 
 
-    public void createHomeworkWithLectureIdAndName (int lectureId, String task) {
+    public void createHomeworkWithLectureIdAndName(int lectureId, String task) {
         HomeworkRepository.getInstance().getHomeworkList().add(new Homework(lectureId, task));
     }
 
-    public Homework createHomeworkWithTask (String task) {
+    public Homework createHomeworkWithTask(String task) {
         return new Homework(task);
     }
 
@@ -32,19 +33,21 @@ public class HomeworkService implements Serializable {
     public void shoveHomeworkTreeMapWithOptions() {
         System.out.println(HomeworkRepository.getInstance().homeworkTreeMap());
         String answer;
-        do{
+        do {
             System.out.println("Do you want to add or remove  Homework? [Y/N]");
-            answer = ScannerThis.getInstance().nextLine();}
+            answer = ScannerThis.getInstance().nextLine();
+        }
         while (!answer.equalsIgnoreCase("y") && !answer.equalsIgnoreCase("n"));
         if (answer.equalsIgnoreCase("y")) {
             int answerDo;
-            do{
+            do {
                 System.out.println("""
-                                    Select the desired action number:
-                                    1 Add the new Homework;
-                                    2 Remove the exist Homework.""");
+                        Select the desired action number:
+                        1 Add the new Homework;
+                        2 Remove the exist Homework.""");
                 answerDo = ScannerThis.getInstance().nextInt();
-                ScannerThis.getInstance().nextLine();}
+                ScannerThis.getInstance().nextLine();
+            }
             while (answerDo < 1 | answerDo > 2);
             if (answerDo == 1) {
                 int freeId = HomeworkRepository.getInstance().homeworkTreeMap().lastKey() + 1;
@@ -63,16 +66,18 @@ public class HomeworkService implements Serializable {
                     if (homework.getLectureId() == lectureId) {
                         flag = true;
                         HomeworkRepository.getInstance().getHomeworkList().remove(homework);
-                        break;}
+                        break;
+                    }
                 }
-                if (!flag) { throw new NoSuchElementException();
+                if (!flag) {
+                    throw new NoSuchElementException();
                 }
 
                 System.out.println(HomeworkRepository.getInstance().homeworkTreeMap());
 
             }
 
-        }else {
+        } else {
             System.out.println("You refused to make changes!");
         }
 
@@ -81,23 +86,23 @@ public class HomeworkService implements Serializable {
     public void homeworkRemoveMenu(int lectureId) {
 
 
-                boolean flag = false;
-                for (Homework homework : HomeworkRepository.getInstance().getHomeworkList()) {
-                    if (homework.getLectureId() == lectureId) {
-                        flag = true;
-                        HomeworkRepository.getInstance().getHomeworkList().remove(homework);
-                        LogFactory.debug(this.getClass().getName(), "Remove the homework with lectureId = " + lectureId);
-                        break;}
-                }
-                if (!flag) {
+        boolean flag = false;
+        for (Homework homework : HomeworkRepository.getInstance().getHomeworkList()) {
+            if (homework.getLectureId() == lectureId) {
+                flag = true;
+                HomeworkRepository.getInstance().getHomeworkList().remove(homework);
+                LogFactory.debug(this.getClass().getName(), "Remove the homework with lectureId = " + lectureId);
+                break;
+            }
+        }
+        if (!flag) {
 
-                    NoSuchElementException e = new NoSuchElementException();
-                    LogFactory.warning(this.getClass().getName(), "Id don't exist", e.getStackTrace());
+            NoSuchElementException e = new NoSuchElementException();
+            LogFactory.warning(this.getClass().getName(), "Id don't exist", e.getStackTrace());
 
-                    throw e;
-                }
+            throw e;
+        }
     }
-
 
 
 }

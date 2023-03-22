@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 
 public class LectureRegex {
-    public static void setDescription (int idLecture) throws EntityNotFoundException {
+    public static void setDescription(int idLecture) throws EntityNotFoundException {
         final String rule = "^[A-Za-zА-ЯIЇҐЄа-яіїґє\\-'\\d\\s.]{1,400}$";
         LectureRepository.getInstance().getAll();
         System.out.println("Введіть опис лекції!");
@@ -32,7 +32,7 @@ public class LectureRegex {
         lecture.setDescription(descriptionNorm);
     }
 
-    public static void setName (int idLecture) throws EntityNotFoundException {
+    public static void setName(int idLecture) throws EntityNotFoundException {
         final String rule = "^[A-Za-zА-ЯIЇҐЄа-яіїґє\\-'\\d\\s.]{1,200}$";
         LectureRepository.getInstance().getAll();
         System.out.println("Введіть назву лекції!");
@@ -55,7 +55,6 @@ public class LectureRegex {
     }
 
 
-
     public static LocalDateTime DateLectureRegex() {
         final String rule1 = "^\\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$";
         final String rule2 = "^(?:[01]\\d|2[0123]):(?:[012345]\\d):(?:[012345]\\d)$";
@@ -65,11 +64,11 @@ public class LectureRegex {
         boolean result1 = lectureDateNorm.matches(rule1);
         while (!result1) {
 
-                System.err.println("Ви ввели некоректну дату!");
-                System.err.println("Введіть дату знову у правильному форматі!");
-                lectureDate = ScannerThis.getInstance().nextLine();
-                lectureDateNorm = lectureDate.trim();
-                result1 = lectureDateNorm.matches(rule1);
+            System.err.println("Ви ввели некоректну дату!");
+            System.err.println("Введіть дату знову у правильному форматі!");
+            lectureDate = ScannerThis.getInstance().nextLine();
+            lectureDateNorm = lectureDate.trim();
+            result1 = lectureDateNorm.matches(rule1);
 
         }
         System.out.println("Введіть час у наступному форматі: HH:mm:ss");

@@ -1,17 +1,11 @@
-import models.*;
-import repository.AdditionalMaterialsRepository;
-import repository.LectureRepository;
+import models.ResourceType;
+import models.Role;
 import service.*;
-import utility.exception.EntityNotFoundException;
-import utility.utilityLog.LogReader;
 
 import java.io.IOException;
 
 public class Main {
-    public static void main(String[] args) throws  IOException {
-
-
-
+    public static void main(String[] args) throws IOException {
 
 
         CourseService courseH18T1 = new CourseService();
@@ -20,8 +14,6 @@ public class Main {
         courseH18T2.createCourse("AAAAAAAA");
         CourseService courseH18T3 = new CourseService();
         courseH18T3.createCourse("BBBBBBBBB");
-
-
 
 
         PersonService personH18T1 = new PersonService();
@@ -35,8 +27,6 @@ public class Main {
         personH18T4.addPerson("nnnnnnnn", "mmmmmmmm", Role.STUDENT);
 
 
-
-
         AdditionalMaterialsService amH18T1 = new AdditionalMaterialsService();
         amH18T1.createAdditionalMaterialsService("CCCCCCC", 12, ResourceType.VIDEO);
         AdditionalMaterialsService amH18T2 = new AdditionalMaterialsService();
@@ -45,8 +35,6 @@ public class Main {
         amH18T3.createAdditionalMaterialsService("BBBBBBB", 14, ResourceType.URL);
         AdditionalMaterialsService amH18T4 = new AdditionalMaterialsService();
         amH18T4.createAdditionalMaterialsService("AAAAAAA", 12, ResourceType.BOOK);
-
-
 
 
         LectureService lectureH19T1 = new LectureService();
@@ -59,8 +47,6 @@ public class Main {
         lectureH19T1.createLectureWithTeacher(7);
 
 
-
-
         HomeworkService homeworkH19T1 = new HomeworkService();
         homeworkH19T1.createHomeworkWithLectureId(15);
         homeworkH19T1.createHomeworkWithLectureId(13);
@@ -69,12 +55,9 @@ public class Main {
         personH18T1.addPerson("ffffffff", "hhhhhhhh", Role.STUDENT);
 
 
-
         System.out.println("\n=====================  Menu  ===========================================================\n");
         Menu menu = new Menu();
         menu.menu();
-
-
 
 
     }

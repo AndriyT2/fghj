@@ -6,7 +6,6 @@ import utility.ScannerThis;
 import utility.comparator.LectureMaxCountOfAdditionalMaterialComparator;
 import utility.utilityLog.LogFactory;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
@@ -15,16 +14,14 @@ import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import static javax.swing.UIManager.get;
 import static utility.regex.LectureRegex.DateLectureRegex;
 
-public class LectureService implements Serializable {
-
+public class LectureService {
 
 
     public void createLecture() {
         LectureRepository.getInstance().getLecturesList().add(new Lecture());
-        LogFactory.debug(this.getClass().getName(),"Create new lecture");
+        LogFactory.debug(this.getClass().getName(), "Create new lecture");
 
     }
 
@@ -37,7 +34,7 @@ public class LectureService implements Serializable {
     public Lecture createLectureWithTeacher(int idPerson) {
         Lecture lecture = new Lecture().lectureWithTeacher(idPerson);
         LectureRepository.getInstance().getLecturesList().add(lecture);
-        return lecture ;
+        return lecture;
 
     }
 
@@ -95,7 +92,7 @@ public class LectureService implements Serializable {
         int maxValueIdCourse = 3;
         int minValueIdCourse = 1;
 
-        while (true){
+        while (true) {
 
             System.out.println("Чи бажаєте створити нову лекцію? [Y/N]");
             String lectureScannerLoopAsk1 = ScannerThis.getInstance().nextLine();
@@ -121,7 +118,7 @@ public class LectureService implements Serializable {
                     break;
                 }
 
-                System.out.println("Ви створили " + totalLecturesLoop +"-у лекцію з Id курсу = " + IdCourseLoop);
+                System.out.println("Ви створили " + totalLecturesLoop + "-у лекцію з Id курсу = " + IdCourseLoop);
 
             } else {
                 throw new IllegalArgumentException();
@@ -138,7 +135,7 @@ public class LectureService implements Serializable {
         }
     }
 
-    public void lecturesArrayCreator () {
+    public void lecturesArrayCreator() {
 
         CourseRepository courseRepository2 = CourseRepository.getInstance();
         System.out.println(CourseRepository.getInstance().getCourseList());
@@ -164,26 +161,26 @@ public class LectureService implements Serializable {
 
         while (true) {
 
-                System.out.println("Чи бажаєте створити новий елемент? [Y/N]");
-                String modelSuperAsk2 = ScannerThis.getInstance().nextLine();
+            System.out.println("Чи бажаєте створити новий елемент? [Y/N]");
+            String modelSuperAsk2 = ScannerThis.getInstance().nextLine();
 
-                if (modelSuperAsk2.equalsIgnoreCase("n")) {
-                    System.out.println("Ви відмовилися створювати новий елемент!");
-                    break;
+            if (modelSuperAsk2.equalsIgnoreCase("n")) {
+                System.out.println("Ви відмовилися створювати новий елемент!");
+                break;
 
-                } else if (modelSuperAsk2.equalsIgnoreCase("y")) {
+            } else if (modelSuperAsk2.equalsIgnoreCase("y")) {
 
-                    lectureRepository2.getLecturesList().add(new Lecture(idCourse1H9));
-                    lectureRepository2.getAll();
-                } else {
-                    throw new IllegalArgumentException();
-                }
-
+                lectureRepository2.getLecturesList().add(new Lecture(idCourse1H9));
+                lectureRepository2.getAll();
+            } else {
+                throw new IllegalArgumentException();
             }
+
+        }
         lectureRepository2.getAll();
     }
 
-    public void lecturesCreatorWithTeacher () {
+    public void lecturesCreatorWithTeacher() {
 
 
         while (true) {
@@ -197,76 +194,77 @@ public class LectureService implements Serializable {
 
             } else if (modelSuperAsk2.equalsIgnoreCase("y")) {
 
-                    System.out.println("Чи бажаєте додати вчителя з наступного списку? [Y/N]");
+                System.out.println("Чи бажаєте додати вчителя з наступного списку? [Y/N]");
 
-                    int maxTeacherId = 0;
-                    int totalTeacher = 0;
-                    for (Person person: PersonRepository.getInstance().getPersonList()) {
-                        if (person == null) { break;
-                        } else if (person.getRole().equals(Role.TEACHER)) {
-                            ++totalTeacher;
-                            System.out.print(person);
-                            System.out.println(" - маэ значкння ID = " + person.getId());
-                            if (maxTeacherId < person.getId()) {maxTeacherId = person.getId();}
+                int maxTeacherId = 0;
+                int totalTeacher = 0;
+                for (Person person : PersonRepository.getInstance().getPersonList()) {
+                    if (person == null) {
+                        break;
+                    } else if (person.getRole().equals(Role.TEACHER)) {
+                        ++totalTeacher;
+                        System.out.print(person);
+                        System.out.println(" - маэ значкння ID = " + person.getId());
+                        if (maxTeacherId < person.getId()) {
+                            maxTeacherId = person.getId();
                         }
                     }
+                }
 
                 if (totalTeacher == 0) {
                     System.out.println("Жодний вчитель ще не був доданий до списку!\nВставити код з пропозицією створення нового вчителя чи лекції без вчителя!");
                 }
 
-                    String modelSuperAsk3 = ScannerThis.getInstance().nextLine();
+                String modelSuperAsk3 = ScannerThis.getInstance().nextLine();
 
-                    if (modelSuperAsk3.equalsIgnoreCase("n")) {
+                if (modelSuperAsk3.equalsIgnoreCase("n")) {
 
-                        System.out.println("Чи бажаєте додати нового вчителя? [Y/N]");
+                    System.out.println("Чи бажаєте додати нового вчителя? [Y/N]");
 
-                        String modelSuperAsk4 = ScannerThis.getInstance().nextLine();
+                    String modelSuperAsk4 = ScannerThis.getInstance().nextLine();
 
-                        if (modelSuperAsk4.equalsIgnoreCase("n")) {
-                            System.out.println("Ви створили лекцію без вчителя!");
-                            LectureRepository.getInstance().getAll();
-                            LectureRepository.getInstance().getLecturesList().add(new Lecture());
-                            LectureRepository.getInstance().getAll();
-
-                        } else if (modelSuperAsk4.equalsIgnoreCase("y")) {
-                            System.out.println("Створена лекція з новим вчителем!");
-                            PersonRepository.getInstance().getAll();
-                            Person teacherH11 = new Person(Role.TEACHER);
-                            PersonRepository.getInstance().getPersonList().add(teacherH11);
-                            PersonRepository.getInstance().getAll();
-                            LectureRepository.getInstance().getAll();
-                            Lecture lectureH11 = new LectureService().createLectureWithTeacher(teacherH11.getId());
-                            LectureRepository.getInstance().getLecturesList().add(lectureH11);
-                            LectureRepository.getInstance().getAll();
-
-
-
-
-                        } else {
-                            throw new RuntimeException();
-                        }
-
-
-                     } else if (modelSuperAsk3.equalsIgnoreCase("y")) {
-
-                       int ask5;
-                        do {
-                            System.out.println("Введіть значення ID з представленного списку для вибраного вчителя!");
-                            int modelSuperAsk5 = ScannerThis.getInstance().nextInt();
-                            ScannerThis.getInstance().nextLine();
-                            ask5 = modelSuperAsk5;
-                        } while (ask5<0 || ask5>maxTeacherId);
-
+                    if (modelSuperAsk4.equalsIgnoreCase("n")) {
+                        System.out.println("Ви створили лекцію без вчителя!");
                         LectureRepository.getInstance().getAll();
-                        Lecture lectureH11 = new LectureService().createLectureWithTeacher(ask5);
+                        LectureRepository.getInstance().getLecturesList().add(new Lecture());
+                        LectureRepository.getInstance().getAll();
+
+                    } else if (modelSuperAsk4.equalsIgnoreCase("y")) {
+                        System.out.println("Створена лекція з новим вчителем!");
+                        PersonRepository.getInstance().getAll();
+                        Person teacherH11 = new Person(Role.TEACHER);
+                        PersonRepository.getInstance().getPersonList().add(teacherH11);
+                        PersonRepository.getInstance().getAll();
+                        LectureRepository.getInstance().getAll();
+                        Lecture lectureH11 = new LectureService().createLectureWithTeacher(teacherH11.getId());
                         LectureRepository.getInstance().getLecturesList().add(lectureH11);
                         LectureRepository.getInstance().getAll();
-                        System.out.println("ID створеної лекції - " + lectureH11.getId());
+
 
                     } else {
-                        throw new IllegalArgumentException();
+                        throw new RuntimeException();
                     }
+
+
+                } else if (modelSuperAsk3.equalsIgnoreCase("y")) {
+
+                    int ask5;
+                    do {
+                        System.out.println("Введіть значення ID з представленного списку для вибраного вчителя!");
+                        int modelSuperAsk5 = ScannerThis.getInstance().nextInt();
+                        ScannerThis.getInstance().nextLine();
+                        ask5 = modelSuperAsk5;
+                    } while (ask5 < 0 || ask5 > maxTeacherId);
+
+                    LectureRepository.getInstance().getAll();
+                    Lecture lectureH11 = new LectureService().createLectureWithTeacher(ask5);
+                    LectureRepository.getInstance().getLecturesList().add(lectureH11);
+                    LectureRepository.getInstance().getAll();
+                    System.out.println("ID створеної лекції - " + lectureH11.getId());
+
+                } else {
+                    throw new IllegalArgumentException();
+                }
 
 
             } else {
@@ -276,7 +274,7 @@ public class LectureService implements Serializable {
         }
     }
 
-    public void getAllInfoLecture () {
+    public void getAllInfoLecture() {
 
         int search = -1;
         Lecture lectureFromTask = null;
@@ -294,7 +292,7 @@ public class LectureService implements Serializable {
                     lectureFromTask = lecture;
                 }
             }
-        } while (search<0);
+        } while (search < 0);
 
         System.out.println("Значення ID для заданної лекції - " + lectureFromTask.getId());
         System.out.println("Значення IDCourse для заданної лекції - " + lectureFromTask.getIdCourse());
@@ -306,7 +304,7 @@ public class LectureService implements Serializable {
         LogFactory.debug(this.getClass().getName(), "Display homework and additional materials for by lecture id");
 
         Optional<Homework> homework = Optional.ofNullable(HomeworkRepository.getInstance().homeworkTreeMap().get(id));
-        Optional<AdditionalMaterials> additionalMaterials =Optional.ofNullable(AdditionalMaterialsRepository.getInstance().additionalMaterialsTreeMap().get(id));
+        Optional<AdditionalMaterials> additionalMaterials = Optional.ofNullable(AdditionalMaterialsRepository.getInstance().additionalMaterialsTreeMap().get(id));
 
         System.out.println("Lecture with Id = " + id + ": " + Optional.ofNullable(LectureRepository.getInstance().getById(id)));
         System.out.print("Homework for this lecture: ");
@@ -315,43 +313,44 @@ public class LectureService implements Serializable {
         additionalMaterials.ifPresent(System.out::println);
     }
 
-    public void setDate (int idLecture) {
+    public void setDate(int idLecture) {
         Lecture lecture = LectureRepository.getInstance().getById(idLecture);
         lecture.setLectureDate(DateLectureRegex());
     }
 
-    public void sortByDate(Predicate<LocalDateTime> predicate){
+    public void sortByDate(Predicate<LocalDateTime> predicate) {
 
-        for (Lecture lecture : LectureRepository.getInstance().getLecturesList()){
+        for (Lecture lecture : LectureRepository.getInstance().getLecturesList()) {
             LocalDateTime dateTime = lecture.getLectureDate();
-            if (dateTime == null){continue;}
-            if (predicate.test(dateTime)){
+            if (dateTime == null) {
+                continue;
+            }
+            if (predicate.test(dateTime)) {
                 System.out.println(lecture);
             }
         }
     }
 
 
-    public void findOldestLecture (){
+    public void findOldestLecture() {
 
-        LocalDateTime maxTime = LectureRepository.getInstance().getLecturesList().stream().min(Comparator.comparing(Lecture::getCreationDate)).get().getCreationDate();
-        System.out.println( LectureRepository.getInstance().getLecturesList().stream().filter(lecture -> lecture.getCreationDate().equals(maxTime)).max(new LectureMaxCountOfAdditionalMaterialComparator()));
+        LocalDateTime maxTime = LectureRepository.getInstance().getLecturesList().stream().min(Comparator.comparing(Lecture::getCreationDate)).orElseThrow().getCreationDate();
+        System.out.println(LectureRepository.getInstance().getLecturesList().stream().filter(lecture -> lecture.getCreationDate().equals(maxTime)).max(new LectureMaxCountOfAdditionalMaterialComparator()));
 
         LogFactory.info(this.getClass().getName(), "Display oldest lecture with Max AdditionalMaterials");
     }
 
-    public  void lecturesSortedByTeacher () {
-        Map<String, List<Lecture> > lecture1 = LectureRepository.getInstance().getLecturesList().stream()
+    public void lecturesSortedByTeacher() {
+        Map<String, List<Lecture>> lecture1 = LectureRepository.getInstance().getLecturesList().stream()
                 .filter(lecture -> lecture.getPersonId() != 0)
-                .filter(lecture ->PersonRepository.getInstance().getById(lecture.getPersonId()).getRole() == Role.TEACHER)
-                .collect(Collectors.groupingBy(lecture ->PersonRepository.getInstance().getById(lecture.getPersonId()).getLastname()));
+                .filter(lecture -> PersonRepository.getInstance().getById(lecture.getPersonId()).getRole() == Role.TEACHER)
+                .collect(Collectors.groupingBy(lecture -> PersonRepository.getInstance().getById(lecture.getPersonId()).getLastname()));
 
         System.out.println(lecture1);
         LogFactory.info(this.getClass().getName(), "Display lectures sorted by teacher");
 
 
     }
-
 
 
 }

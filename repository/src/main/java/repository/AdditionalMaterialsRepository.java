@@ -32,24 +32,26 @@ public class AdditionalMaterialsRepository implements Serializable {
     }
 
     public AdditionalMaterials getById(int index) {
-        for (AdditionalMaterials additionalMaterials : additionalMaterialsList){
-            if (additionalMaterials.getId() == index) {return additionalMaterials;}
+        for (AdditionalMaterials additionalMaterials : additionalMaterialsList) {
+            if (additionalMaterials.getId() == index) {
+                return additionalMaterials;
+            }
         }
         throw new NoSuchElementException();
     }
 
-    public void sortAdditionalMaterialsById(){
+    public void sortAdditionalMaterialsById() {
         TreeSet<AdditionalMaterials> additionalMaterialsTreeSet = new TreeSet<>(AdditionalMaterialsRepository.getInstance().getAdditionalMaterialsList());
         System.out.println(additionalMaterialsTreeSet);
     }
 
-    public void sortAdditionalMaterialsByLectureId(){
+    public void sortAdditionalMaterialsByLectureId() {
         List<AdditionalMaterials> tmp = new ArrayList<>(AdditionalMaterialsRepository.getInstance().getAdditionalMaterialsList());
         tmp.sort(new AdditionalMaterialsLectureIdComparator());
         System.out.println(tmp);
     }
 
-    public void sortAdditionalMaterialsByResourceType(){
+    public void sortAdditionalMaterialsByResourceType() {
         List<AdditionalMaterials> tmp = new ArrayList<>(AdditionalMaterialsRepository.getInstance().getAdditionalMaterialsList());
         tmp.sort(new AdditionalMaterialsResourceTypeComparator());
         System.out.println(tmp);
@@ -58,7 +60,7 @@ public class AdditionalMaterialsRepository implements Serializable {
     public TreeMap<Integer, AdditionalMaterials> additionalMaterialsTreeMap() {
         TreeMap<Integer, AdditionalMaterials> additionalMaterialsTreeMap = new TreeMap<>();
         for (AdditionalMaterials additionalMaterials : AdditionalMaterialsRepository.getInstance().getAdditionalMaterialsList()) {
-           additionalMaterialsTreeMap.put(additionalMaterials.getLectureId(), additionalMaterials);
+            additionalMaterialsTreeMap.put(additionalMaterials.getLectureId(), additionalMaterials);
         }
         return additionalMaterialsTreeMap;
     }

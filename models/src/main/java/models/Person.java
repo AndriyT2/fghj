@@ -1,7 +1,5 @@
 package models;
 
-import repository.PersonRepository;
-
 public class Person extends ModelsSuper implements Comparable<Person> {
 
     private int courseId;

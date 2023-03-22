@@ -14,14 +14,14 @@ public class SimpleIteration<E> implements SimpleIterationInterface<E> {
     }
 
 
-       @Override
+    @Override
     public boolean hasNext() {
 
-       return iterationArray[0] != null;
+        return iterationArray[0] != null;
     }
 
 
-        @Override
+    @Override
     public E next() {
         try {
 
@@ -40,20 +40,20 @@ public class SimpleIteration<E> implements SimpleIterationInterface<E> {
     @Override
     public void remove() {
         if (hasNext()) {
-                if (iterationArray[iterationArray.length - 1] != null) {
-                    iterationArray[iterationArray.length - 1] = null;
-                    System.out.println(Arrays.toString(iterationArray));
-                }else {
-                    for (int i = 0; i < iterationArray.length; i++) {
-                        if (iterationArray[i] == null) {
-                            iterationArray[i - 1] = null;
-                            System.out.println(Arrays.toString(iterationArray));
-                            break;
-                        }
+            if (iterationArray[iterationArray.length - 1] != null) {
+                iterationArray[iterationArray.length - 1] = null;
+                System.out.println(Arrays.toString(iterationArray));
+            } else {
+                for (int i = 0; i < iterationArray.length; i++) {
+                    if (iterationArray[i] == null) {
+                        iterationArray[i - 1] = null;
+                        System.out.println(Arrays.toString(iterationArray));
+                        break;
                     }
+                }
             }
-        }else {
-                    throw new IllegalStateException();
+        } else {
+            throw new IllegalStateException();
         }
 
     }

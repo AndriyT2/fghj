@@ -8,13 +8,12 @@ import repository.LectureRepository;
 import utility.ScannerThis;
 import utility.utilityLog.LogFactory;
 
-import java.io.Serializable;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class AdditionalMaterialsService implements Serializable {
+public class AdditionalMaterialsService {
     public AdditionalMaterialsService() {
     }
 
@@ -186,7 +185,7 @@ public class AdditionalMaterialsService implements Serializable {
 
     }
 
-    public <T, P> void allAdditionalMaterialsSortedBySMT(List<T> list1, List<P> list2, Consumer<T> consumer1, Consumer<P> consumer2,  Function<T, Integer> function1, Function<P, Integer> function2) {
+    public <T, P> void allAdditionalMaterialsSortedBySMT(List<T> list1, List<P> list2, Consumer<T> consumer1, Consumer<P> consumer2, Function<T, Integer> function1, Function<P, Integer> function2) {
         for (T t : list1) {
             System.out.print("\nДля лекції: ");
             consumer1.accept(t);
@@ -218,11 +217,11 @@ public class AdditionalMaterialsService implements Serializable {
     }
 
     public void additionalMaterialsSortedByLectureId() {
-       Map<Integer, List<AdditionalMaterials>> am = AdditionalMaterialsRepository.getInstance().getAdditionalMaterialsList().stream()
-               .filter(a -> a.getLectureId() != 0)
-               .collect(Collectors.groupingBy(AdditionalMaterials::getLectureId));
-       am.forEach((a,b) -> System.out.println("Лекції з Id " + a + " відповідають наступні додаткові матеріали: " +b) );
-    LogFactory.info(this.getClass().getName(), "AdditionalMaterials Sorted By LectureId");
+        Map<Integer, List<AdditionalMaterials>> am = AdditionalMaterialsRepository.getInstance().getAdditionalMaterialsList().stream()
+                .filter(a -> a.getLectureId() != 0)
+                .collect(Collectors.groupingBy(AdditionalMaterials::getLectureId));
+        am.forEach((a, b) -> System.out.println("Лекції з Id " + a + " відповідають наступні додаткові матеріали: " + b));
+        LogFactory.info(this.getClass().getName(), "AdditionalMaterials Sorted By LectureId");
 
     }
 

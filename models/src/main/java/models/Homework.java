@@ -6,13 +6,13 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Homework extends ModelsSuper {
- private int lectureId;
- private String task;
+    private int lectureId;
+    private String task;
 
- private String deadLine;
+    private String deadLine;
 
-    public Homework(){
-        if(lectureId != 0) {
+    public Homework() {
+        if (lectureId != 0) {
             if (LectureRepository.getInstance().getById(lectureId).getLectureDate() != null) {
                 LocalDate deadLineData = LectureRepository.getInstance().getById(lectureId).getLectureDate().toLocalDate().plusDays(1);
                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM d, 12:00");
@@ -23,7 +23,7 @@ public class Homework extends ModelsSuper {
 
     public Homework(int lectureId) {
         this.lectureId = lectureId;
-        if(lectureId != 0) {
+        if (lectureId != 0) {
             if (LectureRepository.getInstance().getById(lectureId).getLectureDate() != null) {
                 LocalDate deadLineData = LectureRepository.getInstance().getById(lectureId).getLectureDate().toLocalDate().plusDays(1);
                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM d, 12:00");
@@ -35,7 +35,7 @@ public class Homework extends ModelsSuper {
     public Homework(int lectureId, String task) {
         this.lectureId = lectureId;
         this.task = task;
-        if(lectureId != 0) {
+        if (lectureId != 0) {
             if (LectureRepository.getInstance().getById(lectureId).getLectureDate() != null) {
                 LocalDate deadLineData = LectureRepository.getInstance().getById(lectureId).getLectureDate().toLocalDate().plusDays(1);
                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM d, 12:00");
@@ -47,7 +47,7 @@ public class Homework extends ModelsSuper {
 
     public Homework(String task) {
         this.task = task;
-        if(lectureId != 0) {
+        if (lectureId != 0) {
             if (LectureRepository.getInstance().getById(lectureId).getLectureDate() != null) {
                 LocalDate deadLineData = LectureRepository.getInstance().getById(lectureId).getLectureDate().toLocalDate().plusDays(1);
                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM d, 12:00");

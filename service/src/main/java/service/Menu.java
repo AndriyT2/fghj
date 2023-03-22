@@ -5,12 +5,12 @@ import models.Course;
 import models.ModelsSuper;
 import models.Person;
 import repository.*;
-import service.ControlWork.ControlWork14;
+import service.controlWork.ControlWork14;
 import utility.IntTrue;
 import utility.ScannerThis;
-import utility.Server.ClientSocket;
-import utility.Server.SelectorServer;
 import utility.regex.CourseRegex;
+import utility.server.ClientSocket;
+import utility.server.SelectorServer;
 import utility.utilityLog.LogFactory;
 import utility.utilityLog.LogReader;
 import utility.utilityLog.LogWriter;
@@ -137,16 +137,16 @@ public class Menu {
                 }
 
                 case 4 -> {
-                    service.CourseBackup.CourseBackup backup = new service.CourseBackup.CourseBackup();
+                    service.courseBackup.CourseBackup backup = new service.courseBackup.CourseBackup();
                     try {
-                        new service.CourseBackup.WriteBackup(backup);
+                        new service.courseBackup.WriteBackup(backup);
                     } catch (FileNotFoundException e) {
                         LogFactory.error(this.getClass().getName(), "Course Backup menu", e.getStackTrace());
                     }
                 }
                 case 5 -> {
                     System.out.println("Вміст файлу backup:");
-                    service.CourseBackup.ReadBackup readBackup = new service.CourseBackup.ReadBackup();
+                    new service.courseBackup.ReadBackup();
                 }
 
                 case 6 -> {
@@ -227,17 +227,6 @@ public class Menu {
 
         while (!exit) {
 
-//                boolean rule = false;
-//                for(Lecture lecture : LectureRepository.getInstance().getLecturesList()){
-//                    if (lecture.getLectureDate() != null) {
-//                        rule = true;
-//                        break;
-//                    }
-//                }
-//                if (!rule){
-//                    System.out.println("\nЖодній лекції не було задано значення дати!\n");
-//                    exit = true;
-//                }
 
             do {
                 LogFactory.debug(this.getClass().getName(), "lectureDateSortMenu.List with options");

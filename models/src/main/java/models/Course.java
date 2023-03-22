@@ -2,7 +2,7 @@ package models;
 
 import java.util.Objects;
 
-public class Course extends ModelsSuper implements Comparable<Course>{
+public class Course extends ModelsSuper implements Comparable<Course> {
     private String courseName;
     private Person teacher;
     private Person student;
@@ -13,12 +13,13 @@ public class Course extends ModelsSuper implements Comparable<Course>{
     }
 
     public String getCourseName() {
-    return courseName;
+        return courseName;
     }
 
     public Course() {
         super();
-}
+    }
+
     public Course(String courseName) {
         this.courseName = courseName;
     }
@@ -43,7 +44,7 @@ public class Course extends ModelsSuper implements Comparable<Course>{
 
     @Override
     public int compareTo(Course name) {
-     return this.courseName.compareTo(name.getCourseName());
+        return this.courseName.compareTo(name.getCourseName());
     }
 
     @Override
