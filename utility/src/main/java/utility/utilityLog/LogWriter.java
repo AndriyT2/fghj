@@ -11,8 +11,8 @@ import java.util.UnknownFormatConversionException;
 
 public class LogWriter {
 
-    private static final String LOG_STORAGE_FILE = "LogFile.txt";
-    private static final String pathToFile = "LogLevel.txt";
+    private static final String LOG_STORAGE_FILE = "C:\\Users\\A2\\Desktop\\OnlineSchool - 22.03.23\\LogFile.txt";
+    private static final String pathToFile = "C:\\Users\\A2\\Desktop\\OnlineSchool - 22.03.23\\LogLevel.txt";
 
 
     Path path = Paths.get(pathToFile);
@@ -60,19 +60,19 @@ public class LogWriter {
                 writer.close();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            LogFactory.error(Thread.currentThread().getStackTrace()[1].getClassName(), "file don't exist", e.getStackTrace());
 
         }
     }
 
     private static String getLevel() throws IOException {
 
-        try (FileChannel inChannel = new FileInputStream(pathToFile).getChannel()){
-        int endOfWordBefore = 6;                 //6 - end of word "level=" in LogLevel.txt
-        inChannel.read(buffer);
-        String level = new String(buffer.array()).substring(endOfWordBefore, buffer.position()).strip();
-        buffer.clear();
-        return level;
+        try (FileChannel inChannel = new FileInputStream(pathToFile).getChannel()) {
+            int endOfWordBefore = 6;                 //6 - end of word "level=" in LogLevel.txt
+            inChannel.read(buffer);
+            String level = new String(buffer.array()).substring(endOfWordBefore, buffer.position()).strip();
+            buffer.clear();
+            return level;
         }
     }
 
@@ -143,7 +143,8 @@ public class LogWriter {
     private void enterLogLevel() throws IOException {
         LogFactory.debug(this.getClass().getName(), "Change the level of logs");
         String level = setLevel();
-        FileChannel inChannel = new RandomAccessFile(pathToFile, "rw").getChannel();
+        try (RandomAccessFile rf = new RandomAccessFile(pathToFile, "rw");
+             FileChannel inChannel = rf.getChannel()) {
             inChannel.position(6);
             buffer.put("        ".getBytes());//It is correct?
             buffer.flip();
@@ -154,8 +155,9 @@ public class LogWriter {
             buffer.flip();
             inChannel.write(buffer);
             buffer.clear();
-            inChannel.close();
-
+        } catch (FileNotFoundException e) {
+            LogFactory.error(this.getClass().getName(), "file LogLevel don't exist", e.getStackTrace());
+        }
     }
 }
 

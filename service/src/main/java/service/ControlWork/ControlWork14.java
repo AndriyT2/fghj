@@ -1,4 +1,4 @@
-package service.ControlWork;
+package service.controlWork;
 
 import service.PersonService;
 import utility.utilityLog.LogFactory;
@@ -15,7 +15,7 @@ public class ControlWork14 {
     PersonService pS = new PersonService();
 
 
-    private void createControlWork(){
+    private void createControlWork() {
         LogFactory.debug(this.getClass().getName(), "Run createControlWork");
         cW11.createPerson();
         for (int i = 0; i < cW11.getPersonTotal(); i++) {
@@ -35,7 +35,7 @@ public class ControlWork14 {
 
         for (Thread thread : cW13) {
             thread.start();
-            }
+        }
 
 
         try {

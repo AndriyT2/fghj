@@ -1,4 +1,4 @@
-package utility.Server;
+package utility.server;
 
 import utility.utilityLog.LogFactory;
 
@@ -13,11 +13,11 @@ public class ClientSocket {
     private static final String SERVER_ADDRESS = "127.0.0.1";
     private static final int SERVER_PORT = 8081;
 
-    public ClientSocket(){
+    public ClientSocket() {
         try {
             start();
         } catch (IOException e) {
-            LogFactory.warning(this.getClass().getName(),"Problems with client socket IO files", e.getStackTrace());
+            LogFactory.warning(this.getClass().getName(), "Problems with client socket IO files", e.getStackTrace());
         }
     }
 
@@ -54,6 +54,6 @@ public class ClientSocket {
         socket.close();
 
 
-   }
+    }
 }
 

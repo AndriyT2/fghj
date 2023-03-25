@@ -1,8 +1,8 @@
-package service.ControlWork;
+package service.controlWork;
 
 import utility.utilityLog.LogFactory;
 
-public class ControlWork12 extends Thread{
+public class ControlWork12 extends Thread {
     private final int task;
     private final int time;
 
@@ -18,7 +18,7 @@ public class ControlWork12 extends Thread{
     public void run() {
         System.out.println("Student " + name + " get task №" + task);
         try {
-            Thread.sleep(time* 1000L);
+            Thread.sleep(time * 1000L);
         } catch (InterruptedException e) {
             LogFactory.warning(this.getClass().getName(), "Sleep exception", e.getStackTrace());
         }

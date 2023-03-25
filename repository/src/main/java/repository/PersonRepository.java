@@ -21,6 +21,7 @@ public class PersonRepository implements Serializable {
         if (instance == null) {
             instance = new PersonRepository();
         }
+
         return instance;
     }
 

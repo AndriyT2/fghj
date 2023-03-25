@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.stream.Stream;
 
 public class LogReader {
-    private static final String LOG_STORAGE_FILE = "LogFile.txt";
+    private static final String LOG_STORAGE_FILE = "utility/utilityLog/LogFile.txt";
     Path path = Path.of(LOG_STORAGE_FILE);
 
     public void readDataFromFile() {

@@ -1,4 +1,4 @@
-package service.CourseBackup;
+package service.courseBackup;
 
 import utility.utilityLog.LogFactory;
 
@@ -9,11 +9,12 @@ import java.io.ObjectOutputStream;
 
 public class WriteBackup {
 
-    private static String backupFile = "src/main/java/service/courseBackup/Backup.bin";
-    public WriteBackup(service.CourseBackup.CourseBackup courseBackup) throws FileNotFoundException {
+    private static String backupFile = "service/src/main/java/service/courseBackup/Backup.bin";
 
-        try(FileOutputStream backupFOS = new FileOutputStream(backupFile);
-            ObjectOutputStream backupOOS = new ObjectOutputStream(backupFOS)){
+    public WriteBackup(service.courseBackup.CourseBackup courseBackup) throws FileNotFoundException {
+
+        try (FileOutputStream backupFOS = new FileOutputStream(backupFile);
+             ObjectOutputStream backupOOS = new ObjectOutputStream(backupFOS)) {
 
             backupOOS.writeObject(courseBackup);
             LogFactory.info(this.getClass().getName(), "Create  courseBackup");

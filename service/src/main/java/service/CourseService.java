@@ -10,8 +10,6 @@ import repository.PersonRepository;
 import utility.ScannerThis;
 import utility.utilityLog.LogFactory;
 
-import java.io.Serializable;
-
 
 public class CourseService {
     public Course createCourse() {

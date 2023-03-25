@@ -5,7 +5,6 @@ import repository.HomeworkRepository;
 import utility.ScannerThis;
 import utility.utilityLog.LogFactory;
 
-import java.io.Serializable;
 import java.util.NoSuchElementException;
 
 public class HomeworkService {

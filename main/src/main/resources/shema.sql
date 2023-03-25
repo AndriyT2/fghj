@@ -214,5 +214,15 @@ WHERE total = (SELECT MAX(total) FROM counts);
 
 
 
+====================================================================================================================
 
+
+CREATE DEFINER=`A`@`%` PROCEDURE `get_data_from_table`(IN table_name VARCHAR(50))
+BEGIN
+    SET @sql = CONCAT('SELECT * FROM ', table_name);
+
+    PREPARE stmt FROM @sql;
+    EXECUTE stmt;
+    DEALLOCATE PREPARE stmt;
+END
 
