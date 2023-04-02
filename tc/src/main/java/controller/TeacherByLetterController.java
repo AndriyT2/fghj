@@ -6,20 +6,16 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.AmySQLForServlet;
-import models.Person;
 
 import java.io.IOException;
-import java.util.List;
 
-@WebServlet("/person")
-public class PersonController extends HttpServlet {
-
-    AmySQLForServlet data = new AmySQLForServlet();
+@WebServlet("/teacher_by_letter")
+public class TeacherByLetterController extends HttpServlet {
+    AmySQLForServlet teachers = new AmySQLForServlet();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Person> personList = data.personGetAll();
-        req.setAttribute("persons", personList);
-        req.getRequestDispatcher("person.jsp").forward(req, resp);
+        req.setAttribute("teacher", teachers.teacherByLetter());
+        req.getRequestDispatcher("teacherByLetter.jsp").forward(req, resp);
     }
 }

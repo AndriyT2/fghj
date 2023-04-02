@@ -5,21 +5,15 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.AmySQLForServlet;
-import models.Person;
 
 import java.io.IOException;
-import java.util.List;
 
-@WebServlet("/person")
-public class PersonController extends HttpServlet {
-
-    AmySQLForServlet data = new AmySQLForServlet();
-
+@WebServlet("/")
+public class OnlineSchoolController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Person> personList = data.personGetAll();
-        req.setAttribute("persons", personList);
-        req.getRequestDispatcher("person.jsp").forward(req, resp);
+       req.getRequestDispatcher("index.jsp").forward(req, resp);
     }
+
+
 }

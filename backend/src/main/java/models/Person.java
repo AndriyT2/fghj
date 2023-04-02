@@ -1,10 +1,15 @@
 package models;
 
 public class Person extends ModelsSuper implements Comparable<Person> {
+    public Person(String firstname, String lastname) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+    }
 
     private int courseId;
     private String firstname;
     private String lastname;
+
 
     public Person( String firstname, String lastname, String phone, String email, int idSQL, Role role) {
         this.firstname = firstname;

@@ -10,6 +10,12 @@ public class Lecture extends ModelsSuper {
     private LocalDateTime lectureDate;
     private Homework[] homeworkArray;
 
+    public int getIdSQL() {
+        return IdSQL;
+    }
+
+    private int IdSQL;
+
     public void setName(String name) {
         this.name = name;
 
@@ -27,6 +33,13 @@ public class Lecture extends ModelsSuper {
     private AdditionalMaterials additionalMaterials;
     private int idCourse;
     private int personId;
+
+    public int getAm() {
+        return am;
+    }
+
+    public int am;
+
 
 
     public int getIdCourse() {
@@ -64,6 +77,16 @@ public class Lecture extends ModelsSuper {
         this.name = name;
         creationDate = LocalDateTime.now();
 
+    }
+
+
+
+    public Lecture(int IdSQL, String name, String description, LocalDateTime creationDate, LocalDateTime lectureDate) {
+        this.IdSQL = IdSQL;
+        this.name = name;
+        this.description = description;
+        this.creationDate = creationDate;
+        this.lectureDate = lectureDate;
     }
 
     public String getName() {
@@ -106,6 +129,8 @@ public class Lecture extends ModelsSuper {
                 ", additionalMaterials=" + additionalMaterials +
                 ", idCourse=" + idCourse +
                 ", personId=" + personId +
+                ", am=" +am +
+
                 '}';
     }
 }
