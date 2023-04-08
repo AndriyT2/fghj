@@ -1,5 +1,9 @@
 package utility.utilityLog;
 
+import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -7,7 +11,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.stream.Stream;
-
+@Component
+@Scope("prototype")
+@Lazy
 public class LogReader {
     private static final String LOG_STORAGE_FILE = "backend/src/main/resources/LogFile.txt";
     Path path = Path.of(LOG_STORAGE_FILE);

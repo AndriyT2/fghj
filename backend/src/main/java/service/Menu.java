@@ -1,11 +1,13 @@
 package service;
 
-import models.AdditionalMaterials;
-import models.Course;
-import models.ModelsSuper;
-import models.Person;
+
+import main.Main11;
+import models.*;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import repository.*;
 import service.controlWork.ControlWork14;
+import service.courseBackup.WriteBackup;
 import utility.IntTrue;
 import utility.ScannerThis;
 import utility.regex.CourseRegex;
@@ -17,13 +19,48 @@ import utility.utilityLog.LogFactory;
 import utility.utilityLog.LogReader;
 import utility.utilityLog.LogWriter;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
 
 public class Menu {
+    ApplicationContext ctx = new AnnotationConfigApplicationContext(Main11.class);
+
+
     public void menu() throws IOException {
+
+
+        ctx.getBean(CourseService.class).createCourse("CCCCCCCCC");
+        ctx.getBean(CourseService.class).createCourse("AAAAAAAA");
+        ctx.getBean(CourseService.class).createCourse("BBBBBBBBB");
+
+
+        ctx.getBean(PersonService.class).addPerson("CCCCCCCC", "BBBBBB", Role.TEACHER);
+        ctx.getBean(PersonService.class).addPerson("AAAAAAA", "BBBBB", Role.TEACHER);
+        ctx.getBean(PersonService.class).addPerson("AAAA", "aaaaaa", Role.TEACHER);
+        ctx.getBean(PersonService.class).addPerson("BBBBBBBBB", "BBBBBB", Role.TEACHER);
+        ctx.getBean(PersonService.class).addPerson("nnnnnnnn", "mmmmmmmm", Role.STUDENT);
+
+        ctx.getBean(AdditionalMaterialsService.class).createAdditionalMaterialsService("CCCCCCC", 12, ResourceType.VIDEO);
+        ctx.getBean(AdditionalMaterialsService.class).createAdditionalMaterialsService("AAAAAAA", 13, ResourceType.URL);
+        ctx.getBean(AdditionalMaterialsService.class).createAdditionalMaterialsService("BBBBBBB", 14, ResourceType.URL);
+        ctx.getBean(AdditionalMaterialsService.class).createAdditionalMaterialsService("AAAAAAA", 12, ResourceType.BOOK);
+
+
+        ctx.getBean(LectureService.class).createLecture(2);
+        ctx.getBean(LectureService.class).createLecture(3);
+        ctx.getBean(LectureService.class).createLecture(4);
+        ctx.getBean(LectureService.class).createLectureWithTeacher(5);
+        ctx.getBean(LectureService.class).createLectureWithTeacher(6);
+        ctx.getBean(LectureService.class).createLectureWithTeacher(7);
+        ctx.getBean(LectureService.class).createLectureWithTeacher(8);
+
+
+        ctx.getBean(HomeworkService.class).createHomeworkWithLectureId(16);
+        ctx.getBean(HomeworkService.class).createHomeworkWithLectureId(14);
+        ctx.getBean(HomeworkService.class).createHomeworkWithLectureId(15);
+
+
         LogFactory.debug(this.getClass().getName(), "CREATE NEW MENU");
         boolean exit = false;
         int answer;
@@ -95,7 +132,6 @@ public class Menu {
     }
 
     private void courseMenu() {
-        CourseService courseService = new CourseService();
         LogFactory.debug(this.getClass().getName(), "Create new courseMenu");
 
         boolean exit = false;
@@ -126,22 +162,17 @@ public class Menu {
                     System.out.println("Введіть назву нового курсу:");
                     String courseName = ScannerThis.getInstance().nextLine();
                     String afterRegex = CourseRegex.setCourseNameMenu(courseName);
-                    courseService.courseScanner(afterRegex);
+                    ctx.getBean(CourseService.class).courseScanner(afterRegex);
                 }
                 case 3 -> {
                     System.out.println("Введіть значення ID для курсу:");
-                    int courseId = new IntTrue().intTrue();
+                    int courseId = ctx.getBean(IntTrue.class).intTrue();
                     Course course = CourseRepository.getInstance().getById(courseId);
                     System.out.println(course);
                 }
 
                 case 4 -> {
-                    service.courseBackup.CourseBackup backup = new service.courseBackup.CourseBackup();
-                    try {
-                        new service.courseBackup.WriteBackup(backup);
-                    } catch (FileNotFoundException e) {
-                        LogFactory.error(this.getClass().getName(), "Course Backup menu", e.getStackTrace());
-                    }
+                    ctx.getBean(WriteBackup.class);
                 }
                 case 5 -> {
                     System.out.println("Вміст файлу backup:");
@@ -160,7 +191,6 @@ public class Menu {
 
     private void lectureMenu() {
         LogFactory.debug(this.getClass().getName(), "Create new lectureMenu");
-        LectureService lectureService = new LectureService();
         boolean exit = false;
         int answer;
         while (!exit) {
@@ -187,25 +217,25 @@ public class Menu {
                 }
                 case 2 -> {
 
-                    lectureService.createLecture();
+                    ctx.getBean(LectureService.class).createLecture();
                     System.out.println("Була створена нова лекція.");
 
                 }
                 case 3 -> {
                     System.out.println("Введіть значення ID для лекції:");
-                    int lectureId = new IntTrue().intTrue();
-                    lectureService.lectureWithHomeworkAndAMById(lectureId);
+                    int lectureId = ctx.getBean(IntTrue.class).intTrue();
+                    ctx.getBean(LectureService.class).lectureWithHomeworkAndAMById(lectureId);
                 }
                 case 4 -> {
                     System.out.println("Введіть значення ID для лекції:");
-                    int lectureId = new IntTrue().intTrue();
-                    lectureService.setDate(lectureId);
+                    int lectureId = ctx.getBean(IntTrue.class).intTrue();
+                    ctx.getBean(LectureService.class).setDate(lectureId);
                 }
                 case 5 -> {
                     lectureDateSortMenu();
                 }
                 case 6 -> {
-                    lectureService.lecturesSortedByTeacher();
+                    ctx.getBean(LectureService.class).lecturesSortedByTeacher();
                 }
 
                 case 7 -> {
@@ -220,7 +250,6 @@ public class Menu {
 
     private void lectureDateSortMenu() {
         LogFactory.debug(this.getClass().getName(), "Create new lectureDateSortMenu");
-        LectureService lectureService = new LectureService();
         boolean exit = false;
         int answer;
 
@@ -245,12 +274,12 @@ public class Menu {
             switch (answer) {
                 case 1 -> {
                     LocalDateTime data1 = LectureRegex.DateLectureRegex();
-                    lectureService.sortByDate(localDateTime -> localDateTime.isAfter(data1));
+                    ctx.getBean(LectureService.class).sortByDate(localDateTime -> localDateTime.isAfter(data1));
                     LogFactory.debug(this.getClass().getName(), "Lectures after date");
                 }
                 case 2 -> {
                     LocalDateTime data1 = LectureRegex.DateLectureRegex();
-                    lectureService.sortByDate(localDateTime -> localDateTime.isBefore(data1));
+                    ctx.getBean(LectureService.class).sortByDate(localDateTime -> localDateTime.isBefore(data1));
                     LogFactory.debug(this.getClass().getName(), "Lectures before date");
                 }
                 case 3 -> {
@@ -258,15 +287,15 @@ public class Menu {
                     System.out.println("Друга дата.");
                     LocalDateTime data2 = LectureRegex.DateLectureRegex();
                     if (data1.isBefore(data2)) {
-                        lectureService.sortByDate(localDateTime -> localDateTime.isAfter(data1) && localDateTime.isBefore(data2));
+                        ctx.getBean(LectureService.class).sortByDate(localDateTime -> localDateTime.isAfter(data1) && localDateTime.isBefore(data2));
                     } else {
-                        lectureService.sortByDate(localDateTime -> localDateTime.isAfter(data2) && localDateTime.isBefore(data1));
+                        ctx.getBean(LectureService.class).sortByDate(localDateTime -> localDateTime.isAfter(data2) && localDateTime.isBefore(data1));
                     }
                     LogFactory.debug(this.getClass().getName(), "Lectures between date");
 
                 }
                 case 4 -> {
-                    lectureService.findOldestLecture();
+                    ctx.getBean(LectureService.class).findOldestLecture();
 
                 }
 
@@ -283,7 +312,6 @@ public class Menu {
 
     private void homeworkMenu() {
         LogFactory.debug(this.getClass().getName(), "Create new homeworkMenu");
-        HomeworkService homeworkService = new HomeworkService();
         boolean exit = false;
         int answer;
         while (!exit) {
@@ -310,8 +338,8 @@ public class Menu {
                     System.out.println("Список існуючих лекцій:");
                     LectureRepository.getInstance().getAll();
                     System.out.println("Введіть ID лекції для нового домашнього завдання:");
-                    int lectureId = new IntTrue().intTrue();
-                    homeworkService.createHomeworkWithLectureId(lectureId);
+                    int lectureId = ctx.getBean(IntTrue.class).intTrue();
+                    ctx.getBean(HomeworkService.class).createHomeworkWithLectureId(lectureId);
                     System.out.println("Була створена нова домашня робота.");
 
                 }
@@ -320,8 +348,8 @@ public class Menu {
                     System.out.println(HomeworkRepository.getInstance().homeworkTreeMap());
                     System.out.println("Введіть значення ID для лекції:");
 //                    System.out.println("Enter a lectureId to remove Homework:");
-                    int lectureId = new IntTrue().intTrue();
-                    homeworkService.homeworkRemoveMenu(lectureId);
+                    int lectureId = ctx.getBean(IntTrue.class).intTrue();
+                    ctx.getBean(HomeworkService.class).homeworkRemoveMenu(lectureId);
                     System.out.println("Домашнє завдання для лекції з " + lectureId + " видалено!");
 
 
@@ -340,7 +368,6 @@ public class Menu {
 
     private void additionalMaterialsMenu() {
         LogFactory.debug(this.getClass().getName(), "Create new additionalMaterialsMenu");
-        AdditionalMaterialsService additionalMaterialsService = new AdditionalMaterialsService();
         boolean exit = false;
         int answer;
         while (!exit) {
@@ -371,8 +398,8 @@ public class Menu {
                     System.out.println("Введіть назву для нових додаткових матеріалів:");
                     String name = ScannerThis.getInstance().nextLine();
                     System.out.println("Введіть ID лекції для нових додаткових матеріалів:");
-                    int lectureId = new IntTrue().intTrue();
-                    additionalMaterialsService.createAdditionalMaterialsService(name, lectureId);
+                    int lectureId = ctx.getBean(IntTrue.class).intTrue();
+                    ctx.getBean(AdditionalMaterialsService.class).createAdditionalMaterialsService(name, lectureId);
                     System.out.println("Були створены новы домашні матеріали.");
 
                 }
@@ -381,19 +408,19 @@ public class Menu {
                     System.out.println(HomeworkRepository.getInstance().homeworkTreeMap());
                     System.out.println("Введіть значення ID для лекції:");
 //                    System.out.println("Enter a lectureId to remove AdditionalMaterials:");
-                    int lectureId = new IntTrue().intTrue();
-                    additionalMaterialsService.removeAdditionalMaterialsMenu(lectureId);
+                    int lectureId = ctx.getBean(IntTrue.class).intTrue();
+                    ctx.getBean(AdditionalMaterialsService.class).removeAdditionalMaterialsMenu(lectureId);
                     System.out.println("Додаткові матеріали для лекції з " + lectureId + " видалено!");
                 }
                 case 4 -> {
-                    additionalMaterialsService.allAdditionalMaterialsSortedBySMT(
+                    ctx.getBean(AdditionalMaterialsService.class).allAdditionalMaterialsSortedBySMT(
                             LectureRepository.getInstance().getLecturesList(),
                             AdditionalMaterialsRepository.getInstance().getAdditionalMaterialsList(),
                             System.out::println, System.out::println, ModelsSuper::getId, AdditionalMaterials::getLectureId);
 
                 }
                 case 5 -> {
-                    additionalMaterialsService.additionalMaterialsSortedByLectureId();
+                    ctx.getBean(AdditionalMaterialsService.class).additionalMaterialsSortedByLectureId();
 
                 }
 
@@ -409,7 +436,6 @@ public class Menu {
 
     private void personMenu() throws IOException {
         LogFactory.debug(this.getClass().getName(), "Create new  personMenu");
-        PersonService personService = new PersonService();
         boolean exit = false;
         int answer;
         while (!exit) {
@@ -437,23 +463,23 @@ public class Menu {
                     System.out.println(PersonRepository.getInstance().getPersonList());
                 }
                 case 2 -> {
-                    personService.addPersonMenu();
+                    ctx.getBean(PersonService.class).addPersonMenu();
                 }
                 case 3 -> {
                     System.out.println("Список існуючих осіб до сортування:");
                     PersonRepository.getInstance().getAll();
                     System.out.println("Список існуючих осіб після сортування:");
-                    personService.personSortByLastname();
+                    ctx.getBean(PersonService.class).personSortByLastname();
                 }
                 case 4 -> {
                     System.out.println("Введіть значення букви:");
                     String letter = ScannerThis.getInstance().nextLine().toUpperCase().trim().substring(0, 1);
-                    personService.getTeacherBeforeLetter(letter);
+                    ctx.getBean(PersonService.class).getTeacherBeforeLetter(letter);
 
                 }
                 case 5 -> {
                     System.out.println("Введіть значення ID особи для додавання поштової скриньки:");
-                    int personId = new IntTrue().intTrue();
+                    int personId = ctx.getBean(IntTrue.class).intTrue();
 
                     String finalEmailNorm = PersonRegex.setEmail();
 
@@ -468,10 +494,10 @@ public class Menu {
                     }
                 }
                 case 6 -> {
-                    personService.firstAndLastNameAndEmail();
+                    ctx.getBean(PersonService.class).firstAndLastNameAndEmail();
                 }
                 case 7 -> {
-                    personService.emailStudentToFile();
+                    ctx.getBean(PersonService.class).emailStudentToFile();
                 }
 
                 case 8 -> {
@@ -499,28 +525,24 @@ public class Menu {
                         4 - Вивести кількість логів з рівнем INFO починаючи з середини файлу;            
                         5 - Повернутися в головне меню.""");
 
-                answer = new IntTrue().intTrue();
+                answer = ctx.getBean(IntTrue.class).intTrue();
 
             } while (answer < 1 || answer > 5);
 
             switch (answer) {
                 case 1 -> {
                     System.out.println("Вміст LogFile:");
-                    LogReader logReader = new LogReader();
-                    logReader.readDataFromFile();
+                    ctx.getBean(LogReader.class).readDataFromFile();
                 }
                 case 2 -> {
-                    LogWriter log = new LogWriter();
-                    log.levelChange();
+                    ctx.getBean(LogWriter.class).levelChange();
                 }
                 case 3 -> {
-                    LogReader message = new LogReader();
-                    message.readMessageFromFile();
+                    ctx.getBean(LogReader.class).readMessageFromFile();
                 }
 
                 case 4 -> {
-                    LogReader log = new LogReader();
-                    log.logInfoCounter();
+                    ctx.getBean(LogReader.class).logInfoCounter();
                 }
 
                 case 5 -> {
@@ -546,7 +568,7 @@ public class Menu {
                         2 - Запустити ClientSocket;                    
                         3 - Повернутися в головне меню.""");
 
-                answer = new IntTrue().intTrue();
+                answer = ctx.getBean(IntTrue.class).intTrue();
 
             } while (answer < 1 || answer > 3);
 

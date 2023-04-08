@@ -1,6 +1,7 @@
 package service;
 
 import models.*;
+import org.springframework.stereotype.Component;
 import repository.*;
 import utility.ScannerThis;
 import utility.comparator.LectureMaxCountOfAdditionalMaterialComparator;
@@ -15,6 +16,7 @@ import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+@Component
 public class LectureService {
 
 

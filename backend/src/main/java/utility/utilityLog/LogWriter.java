@@ -1,5 +1,8 @@
 package utility.utilityLog;
 
+import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 import utility.IntTrue;
 
 import java.io.*;
@@ -8,7 +11,9 @@ import java.nio.channels.FileChannel;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.UnknownFormatConversionException;
-
+@Component
+@Scope("prototype")
+@Lazy
 public class LogWriter {
 
     private static final String LOG_STORAGE_FILE = "backend/src/main/resources/LogFile.txt";

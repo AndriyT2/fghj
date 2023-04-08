@@ -1,13 +1,18 @@
 package service.courseBackup;
 
+import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 import utility.utilityLog.LogFactory;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-
+@Component
+@Scope("prototype")
+@Lazy
 public class ReadBackup {
-    private static String backupFile = "service/src/main/java/service/courseBackup/Backup.bin";
+    private static String backupFile = "backend/src/main/resources/Backup.bin";
 
     public ReadBackup() {
 

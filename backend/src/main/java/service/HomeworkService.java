@@ -1,12 +1,13 @@
 package service;
 
 import models.Homework;
+import org.springframework.stereotype.Component;
 import repository.HomeworkRepository;
 import utility.ScannerThis;
 import utility.utilityLog.LogFactory;
 
 import java.util.NoSuchElementException;
-
+@Component
 public class HomeworkService {
 
     public Homework createHomework() {

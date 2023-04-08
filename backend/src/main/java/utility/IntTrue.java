@@ -1,14 +1,17 @@
 package utility;
 
+import org.springframework.stereotype.Component;
 import utility.utilityLog.LogFactory;
 
 import java.util.InputMismatchException;
 
+@Component
 public class IntTrue {
-    int number;
-    boolean rule = false;
+
 
     public int intTrue() {
+        int number = 0;
+        boolean rule = false;
         while (!rule) {
             try {
                 number = ScannerThis.getInstance().nextInt();

@@ -3,6 +3,7 @@ package service;
 import models.AdditionalMaterials;
 import models.Lecture;
 import models.ResourceType;
+import org.springframework.stereotype.Component;
 import repository.AdditionalMaterialsRepository;
 import repository.LectureRepository;
 import utility.ScannerThis;
@@ -13,6 +14,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+@Component
 public class AdditionalMaterialsService {
     public AdditionalMaterialsService() {
     }

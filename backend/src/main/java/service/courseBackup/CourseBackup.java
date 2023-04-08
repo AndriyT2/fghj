@@ -1,12 +1,20 @@
 package service.courseBackup;
 
 import models.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 import repository.*;
 import utility.IntTrue;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+@Component
+@Scope("prototype")
+@Lazy
 
 public class CourseBackup implements Serializable {
     Course course;
@@ -20,7 +28,7 @@ public class CourseBackup implements Serializable {
     List<Person> teacherList = new ArrayList<>();
     List<Person> studentList = new ArrayList<>();
 
-
+@Autowired
     public CourseBackup() {
         System.out.println("Введіть значення ID для курсу:");
         this.courseId = new IntTrue().intTrue();

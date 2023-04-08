@@ -2,6 +2,7 @@ package service;
 
 import models.Person;
 import models.Role;
+import org.springframework.stereotype.Component;
 import repository.PersonRepository;
 import utility.IntTrue;
 import utility.ScannerThis;
@@ -19,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-
+@Component
 public class PersonService {
 
 
