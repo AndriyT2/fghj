@@ -3,8 +3,12 @@ package model;
 import models.Lecture;
 import models.Person;
 import models.Role;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 import utility.IntTrue;
 import utility.utilityLog.LogFactory;
@@ -15,31 +19,43 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 @Component
+@ComponentScan({"model"})
 @Lazy
+@PropertySource("classpath:connection.properties")
 public class AmySQLForServlet {
+    ApplicationContext ctx = new AnnotationConfigApplicationContext(AmySQLForServlet.class);
 
-    private static final String BD_URL = "jdbc:mysql://localhost/online_school";
-    private static final String USER = "A";
-    private static final String PASSWORD = "ssss";
 
+    @Value("${bd_url}")
+    private String bd_url;
+
+    @Value("${user}")
+    private String user;
+
+    @Value("${password}")
+    private String password;
+
+    @Value("${driver}")
+    private String driver;
 
     public Connection getConnection() throws SQLException {
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName(driver);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
 
-        return DriverManager.getConnection(BD_URL, USER, PASSWORD);
+        return DriverManager.getConnection(bd_url, user, password);
     }
 
     public void addPersonSQLJSP(String lastname, String firstname, String phone, String email, String role) {
 //        LogFactory.debug(this.getClass().getName(), "Create new person JSP");
 
         String addPerson = "INSERT INTO `online_school`.`person` (`lastname`, `firstname`,`phone`,`email`,`role`) VALUES (?, ?,?,?, ?)";
-        try (Connection connection = getConnection()) {
+        try (Connection connection = ctx.getBean(AmySQLForServlet.class).getConnection()) {
             PreparedStatement statement = connection.prepareStatement(addPerson);
             statement.setString(1, lastname);
             statement.setString(2, firstname);
@@ -56,7 +72,7 @@ public class AmySQLForServlet {
 
     public void addPersonMenuSQL() {
 
-        try (Connection connection = DriverManager.getConnection(BD_URL, USER, PASSWORD)) {
+        try (Connection connection = ctx.getBean(AmySQLForServlet.class).getConnection()) {
             int ask1;
             String addPerson = "INSERT INTO `online_school`.`person` (`role`) VALUES (?)";
             PreparedStatement statement = connection.prepareStatement(addPerson);
@@ -83,7 +99,7 @@ public class AmySQLForServlet {
 
     public List<Person> personGetAll() {
         List<Person> personList = new ArrayList<>();
-        try (Connection connection = getConnection()) {
+        try (Connection connection = ctx.getBean(AmySQLForServlet.class).getConnection()) {
             String getAll = "{call get_data_from_table (?) }";
             CallableStatement statement = connection.prepareCall(getAll);
             statement.setString(1, "person");
@@ -110,7 +126,7 @@ public class AmySQLForServlet {
     public Person personById(int IdFromDB) {
         String person = "SELECT * FROM online_school.person where person_id = " + IdFromDB;
         Person person1 = null;
-        try (Connection connection = getConnection()) {
+        try (Connection connection = ctx.getBean(AmySQLForServlet.class).getConnection()) {
             PreparedStatement statement = connection.prepareStatement(person);
             ResultSet result = statement.executeQuery(person);
             while (result.next()) {
@@ -132,7 +148,7 @@ public class AmySQLForServlet {
 
     public List<Lecture> lectureBefore2023() {
         List<Lecture> lectureList = new ArrayList<>();
-        try (Connection connection = getConnection()) {
+        try (Connection connection = ctx.getBean(AmySQLForServlet.class).getConnection()) {
             String lectureSQL = "SELECT l.name, COUNT(am.additional_materials_id) AS am_count FROM lecture l LEFT JOIN additional_materials am ON l.lecture_id = am.lecture_id WHERE l.lecture_date < '2023-01-01 00:00:00' GROUP BY l.lecture_id ORDER BY l.lecture_date";
             CallableStatement statement = connection.prepareCall(lectureSQL);
             ResultSet result = statement.executeQuery();
@@ -151,7 +167,7 @@ public class AmySQLForServlet {
 
     public Lecture firstLecture() {
         Lecture lecture = null;
-        try (Connection connection = getConnection()) {
+        try (Connection connection = ctx.getBean(AmySQLForServlet.class).getConnection()) {
             String lectureSQL = "SELECT l.lecture_id, l.description, l.lecture_date, l.name, l.creation_date, COUNT(h.homework_id)  AS hw_count\nFROM lecture l\nLEFT JOIN homework h ON l.lecture_id = h.lecture_id\nWHERE l.creation_date = (SELECT MAX(creation_date) FROM lecture)\nGROUP BY l.lecture_id\nORDER BY hw_count DESC\nLIMIT 1".formatted();
             CallableStatement statement = connection.prepareCall(lectureSQL);
             ResultSet result = statement.executeQuery();
@@ -173,7 +189,7 @@ public class AmySQLForServlet {
 
     public List<Person> studentByLastname() {
         List<Person> studentList = new ArrayList<>();
-        try (Connection connection = getConnection()) {
+        try (Connection connection = ctx.getBean(AmySQLForServlet.class).getConnection()) {
             String student = "SELECT * FROM person where role = 'student' ORDER BY lastname";
             CallableStatement statement = connection.prepareCall(student);
             ResultSet result = statement.executeQuery();
@@ -197,7 +213,7 @@ public class AmySQLForServlet {
 
     public Map<String, Integer> amType() {
         Map<String, Integer> type = new HashMap<>();
-        try (Connection connection = getConnection()) {
+        try (Connection connection = ctx.getBean(AmySQLForServlet.class).getConnection()) {
             String amType = "SELECT resource_type, count(*) as type_total FROM online_school.additional_materials group by resource_type";
             CallableStatement statement = connection.prepareCall(amType);
             ResultSet result = statement.executeQuery();
@@ -216,7 +232,7 @@ public class AmySQLForServlet {
 
     public List<Person> teacherByLetter() {
         List<Person> personList = new ArrayList<>();
-        try (Connection connection = getConnection()) {
+        try (Connection connection = ctx.getBean(AmySQLForServlet.class).getConnection()) {
             String teacherSQL = "SELECT * FROM online_school.person where role = 'teacher' AND lastname REGEXP '^[A-N]|^[А-Н]'";
             CallableStatement statement = connection.prepareCall(teacherSQL);
             ResultSet result = statement.executeQuery();
@@ -241,7 +257,7 @@ public class AmySQLForServlet {
     public List<Person> studentOnCourse(int countCourse) {
         List<Person> personList = new ArrayList<>();
         String studentSQL;
-        try (Connection connection = getConnection()) {
+        try (Connection connection = ctx.getBean(AmySQLForServlet.class).getConnection()) {
             if (countCourse == 1) {
                 studentSQL = """
                         SELECT  p.lastname, p.firstname,  COUNT(cws.course_with_student_id) AS course_total_count

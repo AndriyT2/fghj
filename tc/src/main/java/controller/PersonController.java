@@ -13,6 +13,7 @@ import java.util.List;
 
 @WebServlet("/person")
 public class PersonController extends HttpServlet {
+   // AmySQLForServlet data = c;
 
     AmySQLForServlet data = new AmySQLForServlet();
 
