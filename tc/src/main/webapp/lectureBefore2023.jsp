@@ -18,8 +18,8 @@
     <tbody>
     <c:forEach var="lecture" items="${lectures}">
         <tr>
-            <td>${lecture.name}</td>
-            <td>${lecture.am}</td>
+            <td>${lecture.amCount}</td>
+<%--            <td>${}</td>--%>
           </tr>
     </c:forEach>
 
