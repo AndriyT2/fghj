@@ -2,6 +2,7 @@ package osHibernate;
 
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -26,6 +27,29 @@ public class PersonEntity {
     @Basic
     @Column(name = "role", nullable = false)
     private Object role;
+    @ManyToMany
+    @JoinTable(name = "course_with_student",
+            joinColumns = { @JoinColumn(name = "person_id") },
+            inverseJoinColumns = { @JoinColumn(name = "course_id") })
+    private List<CourseEntity> course;
+    @Transient
+    private int courseTotal;
+
+    public int getCourseTotal() {
+        return courseTotal;
+    }
+
+    public void setCourseTotal(int courseTotal) {
+        this.courseTotal = courseTotal;
+    }
+
+    public List<CourseEntity> getCourse() {
+        return course;
+    }
+
+    public void setCourse(List<CourseEntity> course) {
+        this.course = course;
+    }
 
     public int getPersonId() {
         return personId;
@@ -79,13 +103,13 @@ public class PersonEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PersonEntity that = (PersonEntity) o;
-        return personId == that.personId && Objects.equals(lastname, that.lastname) && Objects.equals(firstname, that.firstname) && Objects.equals(phone, that.phone) && Objects.equals(email, that.email) && Objects.equals(role, that.role);
+        PersonEntity person = (PersonEntity) o;
+        return personId == person.personId && courseTotal == person.courseTotal && Objects.equals(lastname, person.lastname) && Objects.equals(firstname, person.firstname) && Objects.equals(phone, person.phone) && Objects.equals(email, person.email) && Objects.equals(role, person.role) && Objects.equals(course, person.course);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(personId, lastname, firstname, phone, email, role);
+        return Objects.hash(personId, lastname, firstname, phone, email, role, course, courseTotal);
     }
 
     @Override
@@ -97,6 +121,8 @@ public class PersonEntity {
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +
                 ", role=" + role +
+                ", course=" + course +
+                ", courseTotal=" + courseTotal +
                 '}';
     }
 }
