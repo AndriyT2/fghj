@@ -1,20 +1,23 @@
 package main;
 
-import org.springframework.context.annotation.ComponentScan;
-import service.Menu;
+import config.AppConfig;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import service11.AdditionalMaterialsService;
+import service11.LectureService;
+import service11.PersonService;
 
 import java.io.IOException;
 
-@ComponentScan( {"models", "utility", "service"})
 public class Main11 {
 
 
     public static void main(String[] args) throws IOException {
 
-
-        Menu menu = new Menu();
-        menu.menu();
-
+        ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
+        PersonService as = ac.getBean(PersonService.class);
+//        System.out.println(as.studentOnCourses(2));
+        System.out.println(as.studentOnCourses());
 
 
     }

@@ -7,6 +7,26 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
+
+@NamedNativeQuery(name = "FirstLectureWithHW",
+        query = "SELECT l.lecture_id, l.description, l.lecture_date, l.name, l.creation_date, COUNT(h.homework_id)  AS hw_count FROM lecture l LEFT JOIN homework h ON l.lecture_id = h.lecture_id WHERE l.creation_date = (SELECT MIN(creation_date) FROM lecture)GROUP BY l.lecture_id ORDER BY hw_count LIMIT 1",
+        resultSetMapping = "FirstLectureWithHWMapping")
+
+@SqlResultSetMapping(name = "FirstLectureWithHWMapping",
+        entities = @EntityResult(
+                entityClass = LectureEntity.class,
+                fields = {
+                        @FieldResult(name = "lectureId", column = "lecture_id"),
+                        @FieldResult(name = "name", column = "name"),
+                        @FieldResult(name = "description", column = "description"),
+                        @FieldResult(name = "creationDate", column = "creation_date"),
+                        @FieldResult(name = "lectureDate", column = "lecture_date"),
+                }
+        )
+
+)
+
+
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Table(name = "lecture", schema = "online_school")
@@ -30,16 +50,7 @@ public class LectureEntity {
     @Basic
     @Column(name = "lecture_date", nullable = true)
     private Timestamp lectureDate;
-    @Transient
-    private int amCount;
 
-    public int getAmCount() {
-        return amCount;
-    }
-
-    public void setAmCount(int amCount) {
-        this.amCount = amCount;
-    }
 
     public int getLectureId() {
         return lectureId;

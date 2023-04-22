@@ -1,50 +1,22 @@
 package repository;
 
-import models.Person;
-import utility.utilityLog.LogFactory;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+import osHibernate.PersonEntity;
+import osHibernate.StudentOnCourse;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.Optional;
 
-public class PersonRepository implements Serializable {
-    private List<Person> personList;
+@Repository
+public interface PersonRepository extends JpaRepository<PersonEntity, Integer> {
 
-    private static PersonRepository instance;
+     List<PersonEntity> findAllByRoleOrderByLastname(Object role);
 
-    private PersonRepository() {
-        this.personList = new ArrayList<>();
-    }
+     @Query(value = "SELECT * FROM person where role = 'teacher' AND lastname REGEXP '^[A-N]|^[А-Г]'", nativeQuery = true) //|^[А-Н]and lastname like '^[A-N]'
+     List<PersonEntity> teacherByLetter();
 
-    public static PersonRepository getInstance() {
-        if (instance == null) {
-            instance = new PersonRepository();
-        }
-
-        return instance;
-    }
-
-
-    public List<Person> getPersonList() {
-        return personList;
-    }
-
-    public void getAll() {
-
-        System.out.println(PersonRepository.getInstance().getPersonList());
-        LogFactory.info(this.getClass().getName(), "Display PersonRepository");
-
-    }
-
-    public Person getById(int index) {
-        for (Person person : personList) {
-            if (person.getId() == index) {
-                return person;
-            }
-        }
-        throw new NoSuchElementException();
-    }
-
-
+     @Query(name = "StudentOnCourse", nativeQuery = true)
+     List<StudentOnCourse> StudentOnCourse();
 }

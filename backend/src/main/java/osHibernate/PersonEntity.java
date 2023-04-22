@@ -6,6 +6,29 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
+
+@NamedNativeQuery(name = "StudentOnCourse",
+        query = """
+                SELECT  p.lastname, p.firstname,  COUNT(cws.course_with_student_id) AS courseTotalCount
+                FROM person p  LEFT  JOIN course_with_student cws ON p.person_id = cws.person_id
+                WHERE p.role = 'student'
+                    GROUP BY p.person_id
+                ORDER BY lastname;
+                """,
+        resultSetMapping = "StudentOnCourseMapping")
+@SqlResultSetMapping(name = "StudentOnCourseMapping",
+        classes = {
+                @ConstructorResult(
+                        columns = {
+                                @ColumnResult(name = "lastname"),
+                                @ColumnResult(name = "firstname"),
+                                @ColumnResult(name = "courseTotalCount", type = int.class),
+                        },
+                        targetClass = StudentOnCourse.class
+                )}
+)
+
+
 @Table(name = "person", schema = "online_school")
 public class PersonEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,8 +52,8 @@ public class PersonEntity {
     private Object role;
     @ManyToMany
     @JoinTable(name = "course_with_student",
-            joinColumns = { @JoinColumn(name = "person_id") },
-            inverseJoinColumns = { @JoinColumn(name = "course_id") })
+            joinColumns = {@JoinColumn(name = "person_id")},
+            inverseJoinColumns = {@JoinColumn(name = "course_id")})
     private List<CourseEntity> course;
     @Transient
     private int courseTotal;
@@ -121,8 +144,7 @@ public class PersonEntity {
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +
                 ", role=" + role +
-                ", course=" + course +
-                ", courseTotal=" + courseTotal +
+
                 '}';
     }
 }

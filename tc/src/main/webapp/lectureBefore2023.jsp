@@ -11,15 +11,15 @@
 <table border="1">
     <thead>
     <tr>
-        <th>Name</th>
+        <th>Lecture</th>
         <th>AM count</th>
     </tr>
     </thead>
     <tbody>
     <c:forEach var="lecture" items="${lectures}">
         <tr>
+            <td>${lecture.name}</td>
             <td>${lecture.amCount}</td>
-<%--            <td>${}</td>--%>
           </tr>
     </c:forEach>
 

@@ -21,7 +21,7 @@
         <tr>
             <td>${person.personId}</td>
             <td>
-                <a href="${pageContext.request.contextPath}/concretePerson?personIdSQL=${person.personId}">${person.lastname}</a>
+                <a href="${pageContext.request.contextPath}/concretePerson?personId=${person.personId}">${person.lastname}</a>
             </td>
             <td>${person.role}</td>
         </tr>

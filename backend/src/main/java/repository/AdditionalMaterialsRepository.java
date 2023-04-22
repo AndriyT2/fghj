@@ -1,68 +1,28 @@
 package repository;
 
-import models.AdditionalMaterials;
-import utility.comparator.AdditionalMaterialsLectureIdComparator;
-import utility.comparator.AdditionalMaterialsResourceTypeComparator;
+import jakarta.persistence.Tuple;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+import osHibernate.AdditionalMaterialsEntity;
+import osHibernate.AdditionalMaterialsWithLectures;
 
-import java.io.Serializable;
-import java.util.*;
+import java.util.List;
 
-public class AdditionalMaterialsRepository implements Serializable {
-    private final List<AdditionalMaterials> additionalMaterialsList;
+@Repository
+public interface AdditionalMaterialsRepository extends JpaRepository<AdditionalMaterialsEntity, Integer> {
 
-    public List<AdditionalMaterials> getAdditionalMaterialsList() {
-        return additionalMaterialsList;
-    }
+    //    @Query(value = "SELECT l.name, COUNT(am.additional_materials_id) AS am_count " +
+//            "FROM lecture l LEFT JOIN additional_materials am ON l.lecture_id = am.lecture_id \n" +
+//            "WHERE l.lecture_date < '2023-01-01 00:00:00' \n" +
+//            "GROUP BY l.lecture_id ORDER BY l.lecture_date", nativeQuery = true)
+//    List<Object[]> findLecture();
+//
+    @Query(name = "TotalAdditionalMaterialsByLectures", nativeQuery = true)
+    List<AdditionalMaterialsWithLectures> lectureBefore2023();
 
-    private static AdditionalMaterialsRepository instance;
+    @Query(name = "AdditionalMaterialsCountType", nativeQuery = true)
+    List<Object[]> amType();
 
-    private AdditionalMaterialsRepository() {
-        this.additionalMaterialsList = new ArrayList<>();
-    }
-
-    public static AdditionalMaterialsRepository getInstance() {
-        if (instance == null) {
-            instance = new AdditionalMaterialsRepository();
-        }
-        return instance;
-    }
-
-    public void getAll() {
-        System.out.println(AdditionalMaterialsRepository.getInstance().getAdditionalMaterialsList());
-    }
-
-    public AdditionalMaterials getById(int index) {
-        for (AdditionalMaterials additionalMaterials : additionalMaterialsList) {
-            if (additionalMaterials.getId() == index) {
-                return additionalMaterials;
-            }
-        }
-        throw new NoSuchElementException();
-    }
-
-    public void sortAdditionalMaterialsById() {
-        TreeSet<AdditionalMaterials> additionalMaterialsTreeSet = new TreeSet<>(AdditionalMaterialsRepository.getInstance().getAdditionalMaterialsList());
-        System.out.println(additionalMaterialsTreeSet);
-    }
-
-    public void sortAdditionalMaterialsByLectureId() {
-        List<AdditionalMaterials> tmp = new ArrayList<>(AdditionalMaterialsRepository.getInstance().getAdditionalMaterialsList());
-        tmp.sort(new AdditionalMaterialsLectureIdComparator());
-        System.out.println(tmp);
-    }
-
-    public void sortAdditionalMaterialsByResourceType() {
-        List<AdditionalMaterials> tmp = new ArrayList<>(AdditionalMaterialsRepository.getInstance().getAdditionalMaterialsList());
-        tmp.sort(new AdditionalMaterialsResourceTypeComparator());
-        System.out.println(tmp);
-    }
-
-    public TreeMap<Integer, AdditionalMaterials> additionalMaterialsTreeMap() {
-        TreeMap<Integer, AdditionalMaterials> additionalMaterialsTreeMap = new TreeMap<>();
-        for (AdditionalMaterials additionalMaterials : AdditionalMaterialsRepository.getInstance().getAdditionalMaterialsList()) {
-            additionalMaterialsTreeMap.put(additionalMaterials.getLectureId(), additionalMaterials);
-        }
-        return additionalMaterialsTreeMap;
-    }
 
 }
