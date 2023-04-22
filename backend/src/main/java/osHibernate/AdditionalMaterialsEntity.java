@@ -1,10 +1,13 @@
 package osHibernate;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import java.util.Objects;
 
 @Entity
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Table(name = "additional_materials", schema = "online_school")
 public class AdditionalMaterialsEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,16 +24,6 @@ public class AdditionalMaterialsEntity {
     @JoinColumn(name = "lecture_id", nullable = true)
     private  LectureEntity lecture;
 
-//    @Transient
-    private String lectureName;
-
-    public String getLectureName() {
-        return lecture.getName();
-    }
-
-    public void setLectureName(String lectureName) {
-        this.lectureName = lectureName;
-    }
 
     @Transient
     private int amCount;
@@ -96,7 +89,6 @@ public class AdditionalMaterialsEntity {
                 ", name='" + name + '\'' +
                 ", resourceType=" + resourceType +
                 ", lecture=" + lecture +
-                ", lectureName='" + lectureName + '\'' +
                 ", amCount=" + amCount +
                 '}';
     }

@@ -1,11 +1,14 @@
 package osHibernate;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Table(name = "lecture", schema = "online_school")
 public class LectureEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,7 +30,7 @@ public class LectureEntity {
     @Basic
     @Column(name = "lecture_date", nullable = true)
     private Timestamp lectureDate;
-     @Transient
+    @Transient
     private int amCount;
 
     public int getAmCount() {
@@ -110,7 +113,6 @@ public class LectureEntity {
                 ", lectureDate=" + lectureDate +
                 '}';
     }
-
 
 
 }

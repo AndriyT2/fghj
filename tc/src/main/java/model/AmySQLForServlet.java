@@ -21,12 +21,15 @@ public class AmySQLForServlet {
         person.setPhone(phone);
         person.setEmail(email);
         person.setRole(role);
-        Session session = HibernateUtil.getSession();
-        Transaction transaction = session.beginTransaction();
-        session.persist(person);
-        transaction.commit();
-        HibernateUtil.shutdown();
-
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSession()) {
+            transaction = session.beginTransaction();
+            session.persist(person);
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction!=null){transaction.rollback();}
+        }
     }
 
     public List<PersonEntity> personGetAll() {
@@ -115,6 +118,7 @@ public class AmySQLForServlet {
         System.out.println(personList);
         return personList;
     }
+
 }
 
 

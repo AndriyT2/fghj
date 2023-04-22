@@ -1,10 +1,13 @@
 package osHibernate;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import java.util.Objects;
 
 @Entity
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Table(name = "homework", schema = "online_school")
 public class HomeworkEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,7 +20,6 @@ public class HomeworkEntity {
     @ManyToOne
     @JoinColumn(name = "lecture_id", nullable = true)
     private LectureEntity lecture;
-
 
 
     public int getHomeworkId() {

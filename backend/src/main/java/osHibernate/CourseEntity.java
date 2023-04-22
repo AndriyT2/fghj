@@ -1,10 +1,13 @@
 package osHibernate;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import java.util.Objects;
 
 @Entity
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Table(name = "course", schema = "online_school")
 public class CourseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,7 +17,6 @@ public class CourseEntity {
     @Basic
     @Column(name = "name", nullable = false, length = 200)
     private String name;
-
 
 
     public int getCourseId() {
