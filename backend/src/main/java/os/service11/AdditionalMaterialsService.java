@@ -1,10 +1,9 @@
-package service11;
+package os.service11;
 
-import jakarta.persistence.Tuple;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import osHibernate.AdditionalMaterialsWithLectures;
-import repository.AdditionalMaterialsRepository;
+import os.osHibernate.AdditionalMaterialsWithLectures;
+import os.repository.AdditionalMaterialsRepository;
 
 import java.util.List;
 

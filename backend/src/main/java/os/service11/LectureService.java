@@ -1,9 +1,9 @@
-package service11;
+package os.service11;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import osHibernate.LectureEntity;
-import repository.LectureRepository;
+import os.osHibernate.LectureEntity;
+import os.repository.LectureRepository;
 
 @Service
 public class LectureService {

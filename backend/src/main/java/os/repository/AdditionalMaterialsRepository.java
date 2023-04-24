@@ -1,11 +1,10 @@
-package repository;
+package os.repository;
 
-import jakarta.persistence.Tuple;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import osHibernate.AdditionalMaterialsEntity;
-import osHibernate.AdditionalMaterialsWithLectures;
+import os.osHibernate.AdditionalMaterialsEntity;
+import os.osHibernate.AdditionalMaterialsWithLectures;
 
 import java.util.List;
 

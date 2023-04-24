@@ -1,4 +1,4 @@
-package osHibernate;
+package os.osHibernate;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.CacheConcurrencyStrategy;

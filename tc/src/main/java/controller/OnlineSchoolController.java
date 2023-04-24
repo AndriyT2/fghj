@@ -12,7 +12,7 @@ import java.io.IOException;
 public class OnlineSchoolController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-       req.getRequestDispatcher("index.jsp").forward(req, resp);
+       req.getRequestDispatcher("jsp/index.jsp").forward(req, resp);
     }
 
 

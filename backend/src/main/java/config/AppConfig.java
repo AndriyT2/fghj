@@ -56,6 +56,13 @@
 //
 //        return transactionManager;
 //    }
-//
-//
+// @Bean
+//    public InternalResourceViewResolver resolver() {
+//        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+//        resolver.setPrefix("/WEB-INF/views/");
+//        resolver.setSuffix(".jsp");
+//        return resolver;
+//    }
+//#spring.mvc.view.prefix=/WEB-INF/jsp/
+//#spring.mvc.view.suffix = .jsp
 //}

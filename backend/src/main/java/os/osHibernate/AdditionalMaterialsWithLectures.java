@@ -1,4 +1,4 @@
-package osHibernate;
+package os.osHibernate;
 
 import java.util.Objects;
 

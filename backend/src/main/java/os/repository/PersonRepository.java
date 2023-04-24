@@ -1,13 +1,12 @@
-package repository;
+package os.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import osHibernate.PersonEntity;
-import osHibernate.StudentOnCourse;
+import os.osHibernate.PersonEntity;
+import os.osHibernate.StudentOnCourse;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface PersonRepository extends JpaRepository<PersonEntity, Integer> {

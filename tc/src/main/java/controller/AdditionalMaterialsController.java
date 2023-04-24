@@ -7,11 +7,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.AmySQLForServlet;
 import org.springframework.context.annotation.ComponentScan;
-import osHibernate.AdditionalMaterialsEntity;
+import os.osHibernate.AdditionalMaterialsEntity;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
+
 @ComponentScan("model")
 @WebServlet("/additional_materials")
 public class AdditionalMaterialsController extends HttpServlet {

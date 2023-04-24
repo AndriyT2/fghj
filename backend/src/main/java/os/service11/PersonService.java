@@ -1,11 +1,11 @@
-package service11;
+package os.service11;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import osHibernate.PersonEntity;
-import osHibernate.StudentOnCourse;
-import repository.PersonRepository;
+import os.osHibernate.PersonEntity;
+import os.osHibernate.StudentOnCourse;
+import os.repository.PersonRepository;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ import java.util.List;
 public class PersonService {
     @Autowired
     private PersonRepository pr;
-
+    @Autowired
     public List<PersonEntity> personGetAll() {
         return pr.findAll();
     }

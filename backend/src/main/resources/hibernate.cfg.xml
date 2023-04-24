@@ -47,11 +47,11 @@
         <property name="hibernate.cache.region.factory_class">jcache</property>
         <property name="hibernate.javax.cache.provider">org.ehcache.jsr107.EhcacheCachingProvider</property>
 
-        <mapping class = "osHibernate.AdditionalMaterialsEntity"/>
-        <mapping class = "osHibernate.PersonEntity"/>
-        <mapping class = "osHibernate.LectureEntity"/>
-        <mapping class = "osHibernate.CourseEntity"/>
-        <mapping class = "osHibernate.HomeworkEntity"/>
+        <mapping class = "os.osHibernate.AdditionalMaterialsEntity"/>
+        <mapping class = "os.osHibernate.PersonEntity"/>
+        <mapping class = "os.osHibernate.LectureEntity"/>
+        <mapping class = "os.osHibernate.CourseEntity"/>
+        <mapping class = "os.osHibernate.HomeworkEntity"/>
 
 
 

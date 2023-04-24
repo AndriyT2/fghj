@@ -3,9 +3,8 @@ package model;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
-import osHibernate.AdditionalMaterialsEntity;
-import osHibernate.LectureEntity;
-import osHibernate.PersonEntity;
+import os.osHibernate.AdditionalMaterialsEntity;
+import os.osHibernate.PersonEntity;
 import utility.hibernate.HibernateUtil;
 
 import java.util.List;
